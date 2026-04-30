@@ -1,0 +1,167 @@
+<Window x:Class="FundForest.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:FundForest.ViewModels"
+        xmlns:views="clr-namespace:FundForest.Views"
+        Title="FundForest" Width="1280" Height="780"
+        MinWidth="1100" MinHeight="650"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" AllowsTransparency="True">
+
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+
+    <!-- DataTemplates to map ViewModels → Views -->
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
+            <views:DashboardView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:BeneficiariesViewModel}">
+            <views:BeneficiariesView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DonorsViewModel}">
+            <views:DonorsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DonationsViewModel}">
+            <views:DonationsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ProgramsViewModel}">
+            <views:ProgramsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:DistributionViewModel}">
+            <views:DistributionView/>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Border CornerRadius="12" ClipToBounds="True"
+            BorderBrush="{StaticResource BorderMediumBrush}" BorderThickness="1">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ============================================================
+                 SIDEBAR
+                 ============================================================ -->
+            <Border Grid.Column="0" Background="{StaticResource SidebarBrush}">
+                <DockPanel>
+                    <!-- Logo -->
+                    <Border DockPanel.Dock="Top" Padding="20,24,20,20">
+                        <StackPanel Orientation="Horizontal">
+                            <Border Width="38" Height="38" CornerRadius="10"
+                                    Background="{StaticResource AccentGreenBrush}">
+                                <TextBlock Text="🌿" FontSize="20" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+                            </Border>
+                            <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
+                                <TextBlock Text="FundForest" FontSize="16" FontWeight="Bold"
+                                           Foreground="White"/>
+                                <TextBlock Text="Admin Panel" FontSize="10"
+                                           Foreground="{StaticResource TextOnDarkMutedBrush}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <Separator DockPanel.Dock="Top" Background="{StaticResource SidebarActiveBrush}"
+                               Margin="16,0"/>
+
+                    <!-- Navigation items -->
+                    <StackPanel DockPanel.Dock="Top" Margin="0,12,0,0">
+                        <RadioButton Style="{StaticResource NavButtonStyle}"
+                                     Content="Dashboard" Tag="&#xE80F;"
+                                     GroupName="Nav" IsChecked="True"
+                                     Command="{Binding NavDashboardCommand}"/>
+                        <RadioButton Style="{StaticResource NavButtonStyle}"
+                                     Content="Beneficiaries" Tag="&#xE716;"
+                                     GroupName="Nav"
+                                     Command="{Binding NavBeneficiariesCommand}"/>
+                        <RadioButton Style="{StaticResource NavButtonStyle}"
+                                     Content="Programs" Tag="&#xE8F1;"
+                                     GroupName="Nav"
+                                     Command="{Binding NavProgramsCommand}"/>
+                        <RadioButton Style="{StaticResource NavButtonStyle}"
+                                     Content="Donors" Tag="&#xE77B;"
+                                     GroupName="Nav"
+                                     Command="{Binding NavDonorsCommand}"/>
+                        <RadioButton Style="{StaticResource NavButtonStyle}"
+                                     Content="Donations" Tag="&#xE8C7;"
+                                     GroupName="Nav"
+                                     Command="{Binding NavDonationsCommand}"/>
+                        <RadioButton Style="{StaticResource NavButtonStyle}"
+                                     Content="Distribution" Tag="&#xE72C;"
+                                     GroupName="Nav"
+                                     Command="{Binding NavDistributionCommand}"/>
+                    </StackPanel>
+
+                    <!-- Bottom: user info + logout -->
+                    <Border DockPanel.Dock="Bottom" Padding="16,12" Margin="8,8"
+                            Background="{StaticResource SidebarActiveBrush}" CornerRadius="10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="{Binding AdminName}" FontWeight="SemiBold"
+                                           Foreground="White" FontSize="13"
+                                           TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="Administrator" FontSize="11"
+                                           Foreground="{StaticResource TextOnDarkMutedBrush}"/>
+                            </StackPanel>
+                            <Button Grid.Column="1" Content="&#xE748;"
+                                    FontFamily="Segoe MDL2 Assets" FontSize="16"
+                                    Background="Transparent" BorderThickness="0"
+                                    Foreground="{StaticResource TextOnDarkMutedBrush}"
+                                    Cursor="Hand" ToolTip="Logout"
+                                    Command="{Binding LogoutCommand}"/>
+                        </Grid>
+                    </Border>
+                </DockPanel>
+            </Border>
+
+            <!-- ============================================================
+                 MAIN CONTENT
+                 ============================================================ -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="52"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Top Header Bar -->
+                <Border Grid.Row="0" Background="{StaticResource SurfaceBrush}"
+                        BorderBrush="{StaticResource BorderLightBrush}" BorderThickness="0,0,0,1">
+                    <Grid Margin="24,0">
+                        <TextBlock Text="{Binding CurrentPageName}" VerticalAlignment="Center"
+                                   Style="{StaticResource SectionHeaderStyle}" FontSize="16"/>
+
+                        <!-- Drag handle for window -->
+                        <Border Background="Transparent" MouseLeftButtonDown="Header_MouseDown"
+                                Cursor="SizeAll"/>
+
+                        <!-- Window Controls -->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Content="&#xE921;" FontFamily="Segoe MDL2 Assets"
+                                    Style="{StaticResource IconButtonStyle}" FontSize="14"
+                                    Click="Minimize_Click" ToolTip="Minimize"/>
+                            <Button Content="&#xE923;" FontFamily="Segoe MDL2 Assets"
+                                    Style="{StaticResource IconButtonStyle}" FontSize="14"
+                                    Click="Maximize_Click" ToolTip="Maximize" Margin="4,0"/>
+                            <Button Content="&#xE8BB;" FontFamily="Segoe MDL2 Assets"
+                                    Style="{StaticResource IconButtonStyle}" FontSize="14"
+                                    Click="Close_Click" ToolTip="Close"
+                                    Foreground="{StaticResource DangerBrush}"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- Page Content -->
+                <ContentControl Grid.Row="1"
+                                Content="{Binding CurrentPage}"
+                                Margin="0"/>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>
