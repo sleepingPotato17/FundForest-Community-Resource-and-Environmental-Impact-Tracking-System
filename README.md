@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🌿 FundForest — Donation Management System
 
 A complete WPF desktop application built with **MVVM**, **C# / .NET 8**, and **MySQL (MariaDB)** for managing donations, beneficiaries, programs, and distributions.
@@ -193,3 +194,6 @@ All SQL is in `DatabaseService`. ViewModels call service methods — no raw SQL 
 ---
 
 *Built with ❤️ for community-driven donation management.*
+=======
+# FundForest
+>>>>>>> b92ec1fd59c2ce8fe970e69dd6438ae448e0858e
