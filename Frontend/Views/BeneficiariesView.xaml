@@ -1,0 +1,490 @@
+<UserControl x:Class="FundForest.Views.BeneficiariesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:h="clr-namespace:FundForest.Helpers"
+             Background="{StaticResource BackgroundBrush}">
+
+    <UserControl.Resources>
+        <h:BoolToVisibilityConverter x:Key="BoolVis"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <!-- Overlay when form is open -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Main content -->
+        <Grid Margin="40,28,28,28">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <Grid Grid.Row="0" Margin="0,0,0,20">
+                <StackPanel>
+                    <TextBlock Text="Manage Beneficiaries" Style="{StaticResource PageTitleStyle}"/>
+                    <TextBlock Text="Add, edit and manage person and group beneficiaries."
+                               FontSize="13" Foreground="{StaticResource TextMutedBrush}" Margin="0,4,0,0"/>
+                </StackPanel>
+                <Button HorizontalAlignment="Right" Content="+ Add Beneficiary"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Command="{Binding AddCommand}"/>
+            </Grid>
+
+            <!-- Search bar -->
+            <Border Grid.Row="1" Style="{StaticResource CardStyle}" Margin="0,0,0,16" Padding="12">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
+                                Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="🔍  Search by name, contact..."
+                                Foreground="#A8C5B0"
+                                FontSize="13"
+                                IsHitTestVisible="False"
+                                VerticalAlignment="Center"
+                                Margin="16,0,0,0">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SearchText}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding SearchText}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <Button Grid.Column="1" Content="Search" Margin="8,0,0,0"
+                            Style="{StaticResource OutlineButtonStyle}"
+                            Command="{Binding SearchCommand}"/>
+                </Grid>
+            </Border>
+
+            <!-- DataGrid -->
+            <Border Grid.Row="2" Style="{StaticResource CardStyle}" Padding="0">
+                <DataGrid ItemsSource="{Binding Beneficiaries}"
+                          SelectedItem="{Binding SelectedBeneficiary}"
+                          Style="{StaticResource ModernDataGridStyle}"
+                          ColumnHeaderStyle="{StaticResource ModernDataGridColumnHeaderStyle}"
+                          CellStyle="{StaticResource ModernDataGridCellStyle}"
+                          RowStyle="{StaticResource ModernDataGridRowStyle}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name/Group" Binding="{Binding DisplayName}" Width="2*"/>
+                        <DataGridTextColumn Header="Type" Binding="{Binding BeneficiaryType}" Width="90"/>
+                        <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" Width="80"/>
+                        <DataGridTextColumn Header="Vulnerability" Binding="{Binding VulnerabilityType}" Width="120"/>
+                        <DataGridTextColumn Header="Contact" Binding="{Binding ContactInfo}" Width="140"/>
+                        <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="160"/>
+                        <DataGridTemplateColumn Header="Actions" Width="110">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Content="✏" ToolTip="Edit"
+                                                Style="{StaticResource IconButtonStyle}"
+                                                Command="{Binding DataContext.EditCommand,
+                                                    RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"
+                                                Foreground="{StaticResource PrimaryGreenBrush}"/>
+                                        <Button Content="🗑" ToolTip="Delete" Margin="4,0,0,0"
+                                                Style="{StaticResource IconButtonStyle}"
+                                                Command="{Binding DataContext.DeleteCommand,
+                                                    RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                CommandParameter="{Binding}"
+                                                Foreground="{StaticResource DangerBrush}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+        </Grid>
+
+        <!-- SIDE FORM PANEL -->
+        <Border Grid.Column="1" Width="420"
+                Background="{StaticResource SurfaceBrush}"
+                BorderBrush="{StaticResource BorderLightBrush}"
+                BorderThickness="1,0,0,0"
+                Visibility="{Binding IsFormVisible, Converter={StaticResource BoolVis}}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Form header -->
+                <Border Grid.Row="0" Padding="24,16"
+                        BorderBrush="{StaticResource BorderLightBrush}" BorderThickness="0,0,0,1">
+                    <Grid>
+                        <TextBlock Text="{Binding FormTitle}" Style="{StaticResource SectionHeaderStyle}"/>
+                        <Button HorizontalAlignment="Right" Content="✕"
+                                Style="{StaticResource IconButtonStyle}"
+                                Command="{Binding CancelCommand}"/>
+                    </Grid>
+                </Border>
+
+                <!-- Form fields -->
+                <ScrollViewer Grid.Row="1" Padding="24,16,24,0"
+                            VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <!-- Type toggle -->
+                        <TextBlock Text="BENEFICIARY TYPE" Style="{StaticResource FormLabelStyle}"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                            <RadioButton Content="Person" GroupName="BType"
+                                        IsChecked="{Binding EditingBeneficiary.BeneficiaryType,
+                                            Converter={h:EnumToBoolConverter}, ConverterParameter=Person}"
+                                        Margin="0,0,16,0"/>
+                            <RadioButton Content="Group" GroupName="BType"
+                                        IsChecked="{Binding EditingBeneficiary.BeneficiaryType,
+                                            Converter={h:EnumToBoolConverter}, ConverterParameter=Group}"/>
+                        </StackPanel>
+
+                        <!-- PERSON FIELDS -->
+                        <StackPanel Visibility="{Binding IsPersonType, Converter={StaticResource BoolVis}}">
+                            <TextBlock Text="FULL NAME *" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Style="{StaticResource ModernTextBoxStyle}"
+                                    Height="42" Width="Auto"
+                                    HorizontalAlignment="Stretch"
+                                    Text="{Binding EditingBeneficiary.FullName, UpdateSourceTrigger=PropertyChanged}"
+                                    Margin="0,0,0,14"/>
+
+                            <TextBlock Text="GENDER" Style="{StaticResource FormLabelStyle}"/>
+                            <WrapPanel Margin="0,4,0,14">
+                                <RadioButton Content="♂  Male" GroupName="Gender" Margin="0,0,8,8"
+                                            IsChecked="{Binding EditingBeneficiary.Gender,
+                                                Converter={h:EnumToBoolConverter}, ConverterParameter=Male}">
+                                    <RadioButton.Template>
+                                        <ControlTemplate TargetType="RadioButton">
+                                            <Border x:Name="Bd" CornerRadius="20" Padding="14,7"
+                                                    BorderThickness="1.5" Cursor="Hand">
+                                                <Border.BorderBrush><SolidColorBrush Color="#B7E4C7"/></Border.BorderBrush>
+                                                <Border.Background><SolidColorBrush Color="White"/></Border.Background>
+                                                <TextBlock x:Name="Txt" Text="{TemplateBinding Content}"
+                                                        FontSize="12" Foreground="#40916C" FontWeight="SemiBold"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter TargetName="Bd" Property="Background">
+                                                        <Setter.Value><LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                            <GradientStop Color="#2D6A4F" Offset="0"/>
+                                                            <GradientStop Color="#52B788" Offset="1"/>
+                                                        </LinearGradientBrush></Setter.Value>
+                                                    </Setter>
+                                                    <Setter TargetName="Bd" Property="BorderBrush">
+                                                        <Setter.Value><SolidColorBrush Color="#2D6A4F"/></Setter.Value>
+                                                    </Setter>
+                                                    <Setter TargetName="Bd" Property="Effect">
+                                                        <Setter.Value><DropShadowEffect Color="#2D6A4F" BlurRadius="8" ShadowDepth="0" Opacity="0.3"/></Setter.Value>
+                                                    </Setter>
+                                                    <Setter TargetName="Txt" Property="Foreground" Value="White"/>
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Bd" Property="Background">
+                                                        <Setter.Value><SolidColorBrush Color="#D8F3DC"/></Setter.Value>
+                                                    </Setter>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </RadioButton.Template>
+                                </RadioButton>
+                                <RadioButton Content="♀  Female" GroupName="Gender" Margin="0,0,8,8"
+                                            IsChecked="{Binding EditingBeneficiary.Gender,
+                                                Converter={h:EnumToBoolConverter}, ConverterParameter=Female}">
+                                    <RadioButton.Template>
+                                        <ControlTemplate TargetType="RadioButton">
+                                            <Border x:Name="Bd" CornerRadius="20" Padding="14,7"
+                                                    BorderThickness="1.5" Cursor="Hand">
+                                                <Border.BorderBrush><SolidColorBrush Color="#B7E4C7"/></Border.BorderBrush>
+                                                <Border.Background><SolidColorBrush Color="White"/></Border.Background>
+                                                <TextBlock x:Name="Txt" Text="{TemplateBinding Content}"
+                                                        FontSize="12" Foreground="#40916C" FontWeight="SemiBold"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter TargetName="Bd" Property="Background">
+                                                        <Setter.Value><LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                            <GradientStop Color="#2D6A4F" Offset="0"/>
+                                                            <GradientStop Color="#52B788" Offset="1"/>
+                                                        </LinearGradientBrush></Setter.Value>
+                                                    </Setter>
+                                                    <Setter TargetName="Bd" Property="BorderBrush">
+                                                        <Setter.Value><SolidColorBrush Color="#2D6A4F"/></Setter.Value>
+                                                    </Setter>
+                                                    <Setter TargetName="Bd" Property="Effect">
+                                                        <Setter.Value><DropShadowEffect Color="#2D6A4F" BlurRadius="8" ShadowDepth="0" Opacity="0.3"/></Setter.Value>
+                                                    </Setter>
+                                                    <Setter TargetName="Txt" Property="Foreground" Value="White"/>
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Bd" Property="Background">
+                                                        <Setter.Value><SolidColorBrush Color="#D8F3DC"/></Setter.Value>
+                                                    </Setter>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </RadioButton.Template>
+                                </RadioButton>
+                                <RadioButton Content="⚧  Other" GroupName="Gender" Margin="0,0,8,8"
+                                            IsChecked="{Binding EditingBeneficiary.Gender,
+                                                Converter={h:EnumToBoolConverter}, ConverterParameter=Other}">
+                                    <RadioButton.Template>
+                                        <ControlTemplate TargetType="RadioButton">
+                                            <Border x:Name="Bd" CornerRadius="20" Padding="14,7"
+                                                    BorderThickness="1.5" Cursor="Hand">
+                                                <Border.BorderBrush><SolidColorBrush Color="#B7E4C7"/></Border.BorderBrush>
+                                                <Border.Background><SolidColorBrush Color="White"/></Border.Background>
+                                                <TextBlock x:Name="Txt" Text="{TemplateBinding Content}"
+                                                        FontSize="12" Foreground="#40916C" FontWeight="SemiBold"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter TargetName="Bd" Property="Background">
+                                                        <Setter.Value><LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                            <GradientStop Color="#2D6A4F" Offset="0"/>
+                                                            <GradientStop Color="#52B788" Offset="1"/>
+                                                        </LinearGradientBrush></Setter.Value>
+                                                    </Setter>
+                                                    <Setter TargetName="Bd" Property="BorderBrush">
+                                                        <Setter.Value><SolidColorBrush Color="#2D6A4F"/></Setter.Value>
+                                                    </Setter>
+                                                    <Setter TargetName="Bd" Property="Effect">
+                                                        <Setter.Value><DropShadowEffect Color="#2D6A4F" BlurRadius="8" ShadowDepth="0" Opacity="0.3"/></Setter.Value>
+                                                    </Setter>
+                                                    <Setter TargetName="Txt" Property="Foreground" Value="White"/>
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Bd" Property="Background">
+                                                        <Setter.Value><SolidColorBrush Color="#D8F3DC"/></Setter.Value>
+                                                    </Setter>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </RadioButton.Template>
+                                </RadioButton>
+                            </WrapPanel>
+
+                            <TextBlock Text="AGE" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Style="{StaticResource ModernTextBoxStyle}"
+                                    Height="42" HorizontalAlignment="Stretch"
+                                    Text="{Binding EditingBeneficiary.Age, UpdateSourceTrigger=PropertyChanged}"
+                                    Margin="0,0,0,14"/>
+                        </StackPanel>
+
+                        <!-- GROUP FIELDS -->
+                        <StackPanel Visibility="{Binding IsGroupType, Converter={StaticResource BoolVis}}">
+                            <TextBlock Text="GROUP NAME *" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Style="{StaticResource ModernTextBoxStyle}"
+                                    Height="42" HorizontalAlignment="Stretch"
+                                    Text="{Binding EditingBeneficiary.GroupName, UpdateSourceTrigger=PropertyChanged}"
+                                    Margin="0,0,0,14"/>
+
+                            <TextBlock Text="NUMBER OF MEMBERS" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Style="{StaticResource ModernTextBoxStyle}"
+                                    Height="42" HorizontalAlignment="Stretch"
+                                    Text="{Binding EditingBeneficiary.NumberOfMembers, UpdateSourceTrigger=PropertyChanged}"
+                                    Margin="0,0,0,14"/>
+
+                            <TextBlock Text="GROUP REPRESENTATIVE" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Style="{StaticResource ModernTextBoxStyle}"
+                                    Height="42" HorizontalAlignment="Stretch"
+                                    Text="{Binding EditingBeneficiary.GroupRepresentative, UpdateSourceTrigger=PropertyChanged}"
+                                    Margin="0,0,0,14"/>
+                        </StackPanel>
+
+                        <!-- SHARED FIELDS -->
+                        <TextBlock Text="VULNERABILITY TYPE" Style="{StaticResource FormLabelStyle}"/>
+                        <WrapPanel Margin="0,4,0,14">
+                            <RadioButton Content="None" GroupName="Vuln" Margin="0,0,8,8"
+                                        IsChecked="{Binding EditingBeneficiary.VulnerabilityType,
+                                            Converter={h:EnumToBoolConverter}, ConverterParameter=None}">
+                                <RadioButton.Template>
+                                    <ControlTemplate TargetType="RadioButton">
+                                        <Border x:Name="Bd" CornerRadius="20" Padding="14,7" BorderThickness="1.5" Cursor="Hand">
+                                            <Border.BorderBrush><SolidColorBrush Color="#B7E4C7"/></Border.BorderBrush>
+                                            <Border.Background><SolidColorBrush Color="White"/></Border.Background>
+                                            <TextBlock x:Name="Txt" Text="{TemplateBinding Content}" FontSize="12" Foreground="#40916C" FontWeight="SemiBold"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter TargetName="Bd" Property="Background"><Setter.Value><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="#2D6A4F" Offset="0"/><GradientStop Color="#52B788" Offset="1"/></LinearGradientBrush></Setter.Value></Setter>
+                                                <Setter TargetName="Bd" Property="BorderBrush"><Setter.Value><SolidColorBrush Color="#2D6A4F"/></Setter.Value></Setter>
+                                                <Setter TargetName="Txt" Property="Foreground" Value="White"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Bd" Property="Background"><Setter.Value><SolidColorBrush Color="#D8F3DC"/></Setter.Value></Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </RadioButton.Template>
+                            </RadioButton>
+                            <RadioButton Content="👴 Elderly" GroupName="Vuln" Margin="0,0,8,8"
+                                        IsChecked="{Binding EditingBeneficiary.VulnerabilityType,
+                                            Converter={h:EnumToBoolConverter}, ConverterParameter=Elderly}">
+                                <RadioButton.Template>
+                                    <ControlTemplate TargetType="RadioButton">
+                                        <Border x:Name="Bd" CornerRadius="20" Padding="14,7" BorderThickness="1.5" Cursor="Hand">
+                                            <Border.BorderBrush><SolidColorBrush Color="#B7E4C7"/></Border.BorderBrush>
+                                            <Border.Background><SolidColorBrush Color="White"/></Border.Background>
+                                            <TextBlock x:Name="Txt" Text="{TemplateBinding Content}" FontSize="12" Foreground="#40916C" FontWeight="SemiBold"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter TargetName="Bd" Property="Background"><Setter.Value><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="#2D6A4F" Offset="0"/><GradientStop Color="#52B788" Offset="1"/></LinearGradientBrush></Setter.Value></Setter>
+                                                <Setter TargetName="Bd" Property="BorderBrush"><Setter.Value><SolidColorBrush Color="#2D6A4F"/></Setter.Value></Setter>
+                                                <Setter TargetName="Txt" Property="Foreground" Value="White"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Bd" Property="Background"><Setter.Value><SolidColorBrush Color="#D8F3DC"/></Setter.Value></Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </RadioButton.Template>
+                            </RadioButton>
+                            <RadioButton Content="♿ PWD" GroupName="Vuln" Margin="0,0,8,8"
+                                        IsChecked="{Binding EditingBeneficiary.VulnerabilityType,
+                                            Converter={h:EnumToBoolConverter}, ConverterParameter=PWD}">
+                                <RadioButton.Template>
+                                    <ControlTemplate TargetType="RadioButton">
+                                        <Border x:Name="Bd" CornerRadius="20" Padding="14,7" BorderThickness="1.5" Cursor="Hand">
+                                            <Border.BorderBrush><SolidColorBrush Color="#B7E4C7"/></Border.BorderBrush>
+                                            <Border.Background><SolidColorBrush Color="White"/></Border.Background>
+                                            <TextBlock x:Name="Txt" Text="{TemplateBinding Content}" FontSize="12" Foreground="#40916C" FontWeight="SemiBold"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter TargetName="Bd" Property="Background"><Setter.Value><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="#2D6A4F" Offset="0"/><GradientStop Color="#52B788" Offset="1"/></LinearGradientBrush></Setter.Value></Setter>
+                                                <Setter TargetName="Bd" Property="BorderBrush"><Setter.Value><SolidColorBrush Color="#2D6A4F"/></Setter.Value></Setter>
+                                                <Setter TargetName="Txt" Property="Foreground" Value="White"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Bd" Property="Background"><Setter.Value><SolidColorBrush Color="#D8F3DC"/></Setter.Value></Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </RadioButton.Template>
+                            </RadioButton>
+                            <RadioButton Content="🏠 Indigent" GroupName="Vuln" Margin="0,0,8,8"
+                                        IsChecked="{Binding EditingBeneficiary.VulnerabilityType,
+                                            Converter={h:EnumToBoolConverter}, ConverterParameter=Indigent}">
+                                <RadioButton.Template>
+                                    <ControlTemplate TargetType="RadioButton">
+                                        <Border x:Name="Bd" CornerRadius="20" Padding="14,7" BorderThickness="1.5" Cursor="Hand">
+                                            <Border.BorderBrush><SolidColorBrush Color="#B7E4C7"/></Border.BorderBrush>
+                                            <Border.Background><SolidColorBrush Color="White"/></Border.Background>
+                                            <TextBlock x:Name="Txt" Text="{TemplateBinding Content}" FontSize="12" Foreground="#40916C" FontWeight="SemiBold"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter TargetName="Bd" Property="Background"><Setter.Value><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="#2D6A4F" Offset="0"/><GradientStop Color="#52B788" Offset="1"/></LinearGradientBrush></Setter.Value></Setter>
+                                                <Setter TargetName="Bd" Property="BorderBrush"><Setter.Value><SolidColorBrush Color="#2D6A4F"/></Setter.Value></Setter>
+                                                <Setter TargetName="Txt" Property="Foreground" Value="White"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Bd" Property="Background"><Setter.Value><SolidColorBrush Color="#D8F3DC"/></Setter.Value></Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </RadioButton.Template>
+                            </RadioButton>
+                            <RadioButton Content="👨‍👩‍👧 Solo Parent" GroupName="Vuln" Margin="0,0,8,8"
+                                        IsChecked="{Binding EditingBeneficiary.VulnerabilityType,
+                                            Converter={h:EnumToBoolConverter}, ConverterParameter=Solo Parent}">
+                                <RadioButton.Template>
+                                    <ControlTemplate TargetType="RadioButton">
+                                        <Border x:Name="Bd" CornerRadius="20" Padding="14,7" BorderThickness="1.5" Cursor="Hand">
+                                            <Border.BorderBrush><SolidColorBrush Color="#B7E4C7"/></Border.BorderBrush>
+                                            <Border.Background><SolidColorBrush Color="White"/></Border.Background>
+                                            <TextBlock x:Name="Txt" Text="{TemplateBinding Content}" FontSize="12" Foreground="#40916C" FontWeight="SemiBold"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter TargetName="Bd" Property="Background"><Setter.Value><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="#2D6A4F" Offset="0"/><GradientStop Color="#52B788" Offset="1"/></LinearGradientBrush></Setter.Value></Setter>
+                                                <Setter TargetName="Bd" Property="BorderBrush"><Setter.Value><SolidColorBrush Color="#2D6A4F"/></Setter.Value></Setter>
+                                                <Setter TargetName="Txt" Property="Foreground" Value="White"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Bd" Property="Background"><Setter.Value><SolidColorBrush Color="#D8F3DC"/></Setter.Value></Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </RadioButton.Template>
+                            </RadioButton>
+                            <RadioButton Content="🏷 4Ps" GroupName="Vuln" Margin="0,0,8,8"
+                                        IsChecked="{Binding EditingBeneficiary.VulnerabilityType,
+                                            Converter={h:EnumToBoolConverter}, ConverterParameter=4Ps}">
+                                <RadioButton.Template>
+                                    <ControlTemplate TargetType="RadioButton">
+                                        <Border x:Name="Bd" CornerRadius="20" Padding="14,7" BorderThickness="1.5" Cursor="Hand">
+                                            <Border.BorderBrush><SolidColorBrush Color="#B7E4C7"/></Border.BorderBrush>
+                                            <Border.Background><SolidColorBrush Color="White"/></Border.Background>
+                                            <TextBlock x:Name="Txt" Text="{TemplateBinding Content}" FontSize="12" Foreground="#40916C" FontWeight="SemiBold"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter TargetName="Bd" Property="Background"><Setter.Value><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="#2D6A4F" Offset="0"/><GradientStop Color="#52B788" Offset="1"/></LinearGradientBrush></Setter.Value></Setter>
+                                                <Setter TargetName="Bd" Property="BorderBrush"><Setter.Value><SolidColorBrush Color="#2D6A4F"/></Setter.Value></Setter>
+                                                <Setter TargetName="Txt" Property="Foreground" Value="White"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Bd" Property="Background"><Setter.Value><SolidColorBrush Color="#D8F3DC"/></Setter.Value></Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </RadioButton.Template>
+                            </RadioButton>
+                        </WrapPanel>
+
+                        <TextBlock Text="ADDRESS" Style="{StaticResource FormLabelStyle}"/>
+                        <TextBox Style="{StaticResource ModernTextBoxStyle}"
+                                Height="80" HorizontalAlignment="Stretch"
+                                TextWrapping="Wrap" AcceptsReturn="True"
+                                Text="{Binding EditingBeneficiary.Address, UpdateSourceTrigger=PropertyChanged}"
+                                Margin="0,0,0,14"/>
+
+                        <TextBlock Text="CONTACT INFO" Style="{StaticResource FormLabelStyle}"/>
+                        <TextBox Style="{StaticResource ModernTextBoxStyle}"
+                                Height="42" HorizontalAlignment="Stretch"
+                                Text="{Binding EditingBeneficiary.ContactInfo, UpdateSourceTrigger=PropertyChanged}"
+                                Margin="0,0,0,14"/>
+
+                        <TextBlock Text="CONTACT DATE" Style="{StaticResource FormLabelStyle}"/>
+                        <DatePicker Style="{StaticResource ModernDatePickerStyle}"
+                                    HorizontalAlignment="Stretch"
+                                    SelectedDate="{Binding EditingBeneficiary.ContactDate}"
+                                    Margin="0,0,0,14"/>
+
+                        <!-- Error -->
+                        <TextBlock Text="{Binding ErrorMessage}"
+                                Foreground="{StaticResource DangerBrush}"
+                                FontSize="12" TextWrapping="Wrap"
+                                Margin="0,4,0,12"/>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- Footer buttons -->
+                <Border Grid.Row="2" Padding="24,12"
+                        BorderBrush="{StaticResource BorderLightBrush}" BorderThickness="0,1,0,0">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="Cancel" Style="{StaticResource OutlineButtonStyle}"
+                                Command="{Binding CancelCommand}" Margin="0,0,8,0"/>
+                        <Button Content="Save" Style="{StaticResource PrimaryButtonStyle}"
+                                Command="{Binding SaveCommand}"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
