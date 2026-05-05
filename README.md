@@ -196,7 +196,7 @@ All SQL is in `DatabaseService`. ViewModels call service methods — no raw SQL 
   # 👥 Authors / Contributors
 | Name | GitHub Username |
 | :--- | :--- |
-| **John Joseph S. Dimatulac** | [@Youuusoff](https://github.com/Youuusoff) |
+| **John Joseph S. Dimatulac** | [@Youuusoff](https://github.com/JayDimatulac) |
 | **Jiselle** |  |
 | **Lance Kert O. Mendoza** | [@sleepingPotato17](https://github.com/sleepingPotato17) |
 
