@@ -1,6 +1,6 @@
-# 🌿FundForest \n _Community Resource and Environmental Impact Tracking System_
-
-A complete WPF desktop application built with **MVVM**, **C# / .NET 8**, and **MySQL (MariaDB)** for managing donations, beneficiaries, programs, and distributions.
+# 🌿FundForest
+## _Community Resource and Environmental Impact Tracking System_
+Community projects and donation drives often struggle with a lack of transparency and proper monitoring. There is no clear way to track where donations go, how resources are being used, or whether the help actually reached the people who needed it. Volunteer efforts are also uncoordinated, and without a central system, data gets lost, duplicated, or mismanaged. This leads to reduced public trust, wasted resources, and little to no measurable impact — making it hard for organizations to prove that their work is making a real difference.
 
 ---
 
