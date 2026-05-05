@@ -7,10 +7,10 @@ Many organizations struggle with tracking where donations go, how resources are 
 
 The purpose of this system is to:
 
-Provide real-time tracking of funds and resources
-Ensure accurate and reliable data management
-Improve trust between donors, administrators, and beneficiaries
-Enable organizations to measure their impact effectively
+*Provide real-time tracking of funds and resources
+*Ensure accurate and reliable data management
+*Improve trust between donors, administrators, and beneficiaries
+*Enable organizations to measure their impact effectively
 </p>
 
 ## 📁 Project Structure
