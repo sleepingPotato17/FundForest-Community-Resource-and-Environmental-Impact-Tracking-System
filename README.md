@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-# 🌿 FundForest — Donation Management System
+# 🌿FundForest 
+## Community Resource and Environmental Impact Tracking System
 
 A complete WPF desktop application built with **MVVM**, **C# / .NET 8**, and **MySQL (MariaDB)** for managing donations, beneficiaries, programs, and distributions.
 
