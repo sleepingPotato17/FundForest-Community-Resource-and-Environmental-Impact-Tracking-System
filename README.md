@@ -1,9 +1,16 @@
 # 🌿FundForest
 ## _Community Resource and Environmental Impact Tracking System_
 <p align="justify">
-FundForest is a centralized platform designed to improve transparency, accountability, and efficiency in community projects and donation drives. It allows administrators, donors, and volunteers to monitor the flow of funds and resources in real time.
+FundForest is a centralized system designed to improve transparency, accountability, and efficiency in managing community projects and donation drives.
 
-This system addresses the common issue of mismanaged data, lack of tracking, and low public trust by replacing manual processes with a structured and reliable digital solution.
+Many organizations struggle with tracking where donations go, how resources are used, and whether aid reaches the intended beneficiaries. FundForest addresses this issue by replacing manual processes (such as spreadsheets and paper records) with a structured digital platform.
+
+The purpose of this system is to:
+
+Provide real-time tracking of funds and resources
+Ensure accurate and reliable data management
+Improve trust between donors, administrators, and beneficiaries
+Enable organizations to measure their impact effectively
 </p>
 
 ## 📁 Project Structure
