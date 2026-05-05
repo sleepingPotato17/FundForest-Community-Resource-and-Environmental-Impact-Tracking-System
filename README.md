@@ -16,15 +16,16 @@ The purpose of this system is to:
 
 ## ⚙️ Features and Functionalities of the System
 
-## Flow Chart
+## 🔄 Flow Chart
 
-## How the Program Works
+## ⚙️ How the Program Works
 
-## Implementation of OOP Principles
+## 🧱 Implementation of OOP Principles
 
-## How to Run the Program
+## ▶️ How to Run the Program
 
-## Developers / Contributors
+## 👨‍💻 Developers / Contributors
+
 ## 📁 Project Structure
 
 ```
