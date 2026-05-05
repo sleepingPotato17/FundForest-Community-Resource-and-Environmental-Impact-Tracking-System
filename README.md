@@ -5,7 +5,6 @@ FundForest is a centralized platform designed to improve transparency, accountab
 
 This system addresses the common issue of mismanaged data, lack of tracking, and low public trust by replacing manual processes with a structured and reliable digital solution.
 </p>
----
 
 ## 📁 Project Structure
 
