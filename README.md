@@ -31,6 +31,8 @@ The purpose of this system is to:
 | **Jiselle Mae M. Silla** | [@ellemrsgn27](https://github.com/ellemrsgn27) |
 | **Lance Kert O. Mendoza** | [@sleepingPotato17](https://github.com/sleepingPotato17) |
 
+<p align="center"><i>🌱 FundForest: Transparency that Roots, Impact that Grows</i></p>
+
 ## 📁 Project Structure
 
 ```
