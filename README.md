@@ -4,14 +4,14 @@
 FundForest is a centralized system designed to improve transparency, accountability, and efficiency in managing community projects and donation drives.
 
 Many organizations struggle with tracking where donations go, how resources are used, and whether aid reaches the intended beneficiaries. FundForest addresses this issue by replacing manual processes (such as spreadsheets and paper records) with a structured digital platform.
-
+</p>
 The purpose of this system is to:
 
 *Provide real-time tracking of funds and resources
 *Ensure accurate and reliable data management
 *Improve trust between donors, administrators, and beneficiaries
 *Enable organizations to measure their impact effectively
-</p>
+
 
 ## 📁 Project Structure
 
