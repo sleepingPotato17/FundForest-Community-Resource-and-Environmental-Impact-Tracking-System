@@ -12,7 +12,19 @@ The purpose of this system is to:
 - Improve trust between donors, administrators, and beneficiaries
 - Enable organizations to measure their impact effectively
 
+## 🧩 UML Diagram
 
+## ⚙️ Features and Functionalities of the System
+
+## Flow Chart
+
+## How the Program Works
+
+## Implementation of OOP Principles
+
+## How to Run the Program
+
+## Developers / Contributors
 ## 📁 Project Structure
 
 ```
