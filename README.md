@@ -1,5 +1,4 @@
-# 🌿FundForest 
-_Community Resource and Environmental Impact Tracking System_
+# 🌿FundForest \n _Community Resource and Environmental Impact Tracking System_
 
 A complete WPF desktop application built with **MVVM**, **C# / .NET 8**, and **MySQL (MariaDB)** for managing donations, beneficiaries, programs, and distributions.
 
