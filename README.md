@@ -24,7 +24,7 @@ The purpose of this system is to:
 
 ## ▶️ How to Run the Program
 
-## 👨‍💻 Developers / Contributors
+## 👥 Developers / Contributors
 | Name | GitHub Username |
 | :--- | :--- |
 | **John Joseph S. Dimatulac** | [@Youuusoff](https://github.com/JayDimatulac) |
