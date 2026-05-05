@@ -14,7 +14,7 @@ The purpose of this system is to:
 
 ## 🧩 UML Diagram
 
-## ⚙️ Features and Functionalities of the System
+## 🛠️ Features and Functionalities of the System
 
 ## 🔄 Flow Chart
 
@@ -25,6 +25,11 @@ The purpose of this system is to:
 ## ▶️ How to Run the Program
 
 ## 👨‍💻 Developers / Contributors
+| Name | GitHub Username |
+| :--- | :--- |
+| **John Joseph S. Dimatulac** | [@Youuusoff](https://github.com/JayDimatulac) |
+| **Jiselle Mae M. Silla** | [@ellemrsgn27](https://github.com/ellemrsgn27) |
+| **Lance Kert O. Mendoza** | [@sleepingPotato17](https://github.com/sleepingPotato17) |
 
 ## 📁 Project Structure
 
