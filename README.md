@@ -222,17 +222,3 @@ All SQL is in `DatabaseService`. ViewModels call service methods — no raw SQL 
 5. Add `DataTemplate` in `MainWindow.xaml`
 6. Add navigation command in `MainViewModel.cs`
 7. Add sidebar button in `MainWindow.xaml`
-
----
-
-  # 👥 Authors / Contributors
-| Name | GitHub Username |
-| :--- | :--- |
-| **John Joseph S. Dimatulac** | [@Youuusoff](https://github.com/JayDimatulac) |
-| **Jiselle Mae M. Silla** | [@ellemrsgn27](https://github.com/ellemrsgn27) |
-| **Lance Kert O. Mendoza** | [@sleepingPotato17](https://github.com/sleepingPotato17) |
-
-*Built with ❤️ for community-driven donation management.*
-=======
-# FundForest
->>>>>>> b92ec1fd59c2ce8fe970e69dd6438ae448e0858e
