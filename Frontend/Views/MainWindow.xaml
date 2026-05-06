@@ -3,16 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:FundForest.ViewModels"
         xmlns:views="clr-namespace:FundForest.Views"
+        xmlns:h="clr-namespace:FundForest.Helpers"
         Title="FundForest" Width="1280" Height="780"
         MinWidth="1100" MinHeight="650"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None" AllowsTransparency="True">
 
-    <Window.DataContext>
-        <vm:MainViewModel/>
-    </Window.DataContext>
-
     <Window.Resources>
+        <h:BoolToVisibilityConverter x:Key="BoolVis"/>
+
         <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
             <views:DashboardView/>
         </DataTemplate>
@@ -30,6 +29,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:DistributionViewModel}">
             <views:DistributionView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ManageUsersViewModel}">
+            <views:ManageUsersView/>
         </DataTemplate>
     </Window.Resources>
 
@@ -151,8 +153,7 @@
                                 <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
                                     <TextBlock Text="FundForest" FontSize="15" FontWeight="Bold"
                                                Foreground="#1B4332"/>
-                                    <TextBlock Text="v1.0  •  Admin" FontSize="9"
-                                               Foreground="#52B788"/>
+                                    <TextBlock Text="v1.0" FontSize="9" Foreground="#52B788"/>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
@@ -172,7 +173,7 @@
                         <Border DockPanel.Dock="Bottom" Margin="10,0,10,12">
                             <StackPanel>
 
-                                <!-- Glass Stats Card -->
+                                <!-- Stats Card -->
                                 <Border CornerRadius="12" Padding="12,10" Margin="0,0,0,8">
                                     <Border.Background>
                                         <SolidColorBrush Color="#B7E4C7" Opacity="0.3"/>
@@ -236,8 +237,8 @@
                                                        FontWeight="SemiBold" FontSize="12"
                                                        Foreground="#1B4332"
                                                        TextTrimming="CharacterEllipsis"/>
-                                            <TextBlock Text="Administrator" FontSize="9"
-                                                       Foreground="#52B788"/>
+                                            <TextBlock Text="{Binding AdminRole}"
+                                                       FontSize="9" Foreground="#52B788"/>
                                         </StackPanel>
                                     </Grid>
                                 </Border>
@@ -248,30 +249,18 @@
                                     <Button.Template>
                                         <ControlTemplate TargetType="Button">
                                             <Border x:Name="LogoutBd" CornerRadius="8"
-                                                    BorderThickness="1">
-                                                <Border.BorderBrush>
-                                                    <SolidColorBrush Color="#B7E4C7"/>
-                                                </Border.BorderBrush>
-                                                <Border.Background>
-                                                    <SolidColorBrush Color="Transparent"/>
-                                                </Border.Background>
-                                                <TextBlock Text="⎋  Log Out" FontSize="12"
+                                                    BorderThickness="1"
+                                                    BorderBrush="#B7E4C7"
+                                                    Background="Transparent">
+                                                <TextBlock Text="Log Out" FontSize="12"
                                                            Foreground="#40916C"
                                                            HorizontalAlignment="Center"
                                                            VerticalAlignment="Center"/>
                                             </Border>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="LogoutBd" Property="Background">
-                                                        <Setter.Value>
-                                                            <SolidColorBrush Color="#E63946"/>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                    <Setter TargetName="LogoutBd" Property="BorderBrush">
-                                                        <Setter.Value>
-                                                            <SolidColorBrush Color="#E63946"/>
-                                                        </Setter.Value>
-                                                    </Setter>
+                                                    <Setter TargetName="LogoutBd" Property="Background" Value="#E63946"/>
+                                                    <Setter TargetName="LogoutBd" Property="BorderBrush" Value="#E63946"/>
                                                 </Trigger>
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>
@@ -281,34 +270,40 @@
                             </StackPanel>
                         </Border>
 
-        
                         <!-- Nav Items -->
-                        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
                             <StackPanel Margin="10,8,10,0">
                                 <RadioButton Style="{StaticResource NavButtonStyle}"
-                                            Content="Dashboard" Tag="&#xE80F;"
-                                            GroupName="Nav" IsChecked="True"
-                                            Command="{Binding NavDashboardCommand}"/>
+                                             Content="Dashboard" Tag="&#xE80F;"
+                                             GroupName="Nav" IsChecked="True"
+                                             Command="{Binding NavDashboardCommand}"/>
                                 <RadioButton Style="{StaticResource NavButtonStyle}"
-                                            Content="Beneficiaries" Tag="&#xE716;"
-                                            GroupName="Nav"
-                                            Command="{Binding NavBeneficiariesCommand}"/>
+                                             Content="Beneficiaries" Tag="&#xE716;"
+                                             GroupName="Nav"
+                                             Command="{Binding NavBeneficiariesCommand}"/>
                                 <RadioButton Style="{StaticResource NavButtonStyle}"
-                                            Content="Programs" Tag="&#xE8F1;"
-                                            GroupName="Nav"
-                                            Command="{Binding NavProgramsCommand}"/>
+                                             Content="Programs" Tag="&#xE8F1;"
+                                             GroupName="Nav"
+                                             Command="{Binding NavProgramsCommand}"/>
                                 <RadioButton Style="{StaticResource NavButtonStyle}"
-                                            Content="Donors" Tag="&#xE77B;"
-                                            GroupName="Nav"
-                                            Command="{Binding NavDonorsCommand}"/>
+                                             Content="Donors" Tag="&#xE77B;"
+                                             GroupName="Nav"
+                                             Command="{Binding NavDonorsCommand}"/>
                                 <RadioButton Style="{StaticResource NavButtonStyle}"
-                                            Content="Donations" Tag="&#xE8C7;"
-                                            GroupName="Nav"
-                                            Command="{Binding NavDonationsCommand}"/>
+                                             Content="Donations" Tag="&#xE8C7;"
+                                             GroupName="Nav"
+                                             Command="{Binding NavDonationsCommand}"/>
                                 <RadioButton Style="{StaticResource NavButtonStyle}"
-                                            Content="Distribution" Tag="&#xE72C;"
-                                            GroupName="Nav"
-                                            Command="{Binding NavDistributionCommand}"/>
+                                             Content="Distribution" Tag="&#xE72C;"
+                                             GroupName="Nav"
+                                             Command="{Binding NavDistributionCommand}"/>
+
+                                <!-- ✅ Manage Users — Admin only -->
+                                <RadioButton Style="{StaticResource NavButtonStyle}"
+                                             Content="Manage Users" Tag="&#xE716;"
+                                             GroupName="Nav"
+                                             Command="{Binding NavManageUsersCommand}"
+                                             Visibility="{Binding IsAdmin, Converter={StaticResource BoolVis}}"/>
                             </StackPanel>
                         </ScrollViewer>
 
@@ -329,11 +324,9 @@
                     <Grid Margin="24,0">
                         <TextBlock Text="{Binding CurrentPageName}" VerticalAlignment="Center"
                                    Style="{StaticResource SectionHeaderStyle}" FontSize="16"/>
-
                         <Border Background="Transparent"
                                 MouseLeftButtonDown="Header_MouseDown"
                                 Cursor="SizeAll"/>
-
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <Button Content="&#xE921;" FontFamily="Segoe MDL2 Assets"
                                     Style="{StaticResource IconButtonStyle}" FontSize="14"
@@ -350,9 +343,7 @@
                 </Border>
 
                 <!-- Page Content -->
-                <ContentControl Grid.Row="1"
-                                Content="{Binding CurrentPage}"
-                                Margin="0"/>
+                <ContentControl Grid.Row="1" Content="{Binding CurrentPage}" Margin="0"/>
             </Grid>
 
         </Grid>

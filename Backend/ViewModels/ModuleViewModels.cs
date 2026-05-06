@@ -34,6 +34,13 @@ namespace FundForest.ViewModels
         public string ErrorMessage  { get => _errorMessage;  set => SetProperty(ref _errorMessage, value); }
         public string[] TypeOptions = { "Individual", "Group" };
 
+        
+
+        // ✅ ROLE PERMISSIONS
+        public bool CanEdit   => SessionService.Instance.CanEdit;
+        public bool CanDelete => SessionService.Instance.CanDelete;
+        public bool CanAdd    => SessionService.Instance.CanEdit;
+
         public RelayCommand AddCommand    { get; }
         public RelayCommand EditCommand   { get; }
         public RelayCommand DeleteCommand { get; }
@@ -56,11 +63,16 @@ namespace FundForest.ViewModels
             catch (Exception ex) { ErrorMessage = ex.Message; }
         }
 
-        private void OpenAdd(object? _) { EditingDonor = new Donor(); IsEditMode = false; IsFormVisible = true; ErrorMessage = ""; }
+        private void OpenAdd(object? _)
+        {
+            if (!SessionService.Instance.CanEdit) return;
+            EditingDonor = new Donor(); IsEditMode = false; IsFormVisible = true; ErrorMessage = "";
+        }
 
         private void OpenEdit(object? _)
         {
             if (SelectedDonor == null) return;
+            if (!SessionService.Instance.CanEdit) return;
             EditingDonor = new Donor { DonorID = SelectedDonor.DonorID, DonorName = SelectedDonor.DonorName,
                 DonationType = SelectedDonor.DonationType, ContactInfo = SelectedDonor.ContactInfo, Address = SelectedDonor.Address };
             IsEditMode = true; IsFormVisible = true; ErrorMessage = "";
@@ -69,6 +81,7 @@ namespace FundForest.ViewModels
         private void DeleteSelected(object? _)
         {
             if (SelectedDonor == null) return;
+            if (!SessionService.Instance.CanDelete) return;
             if (MessageBox.Show($"Delete donor '{SelectedDonor.DonorName}'?", "Confirm",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
             try { _db.DeleteDonor(SelectedDonor.DonorID); LoadData(); }
@@ -119,6 +132,11 @@ namespace FundForest.ViewModels
         public bool IsGoods => EditingDonation.DonationType == "Goods";
         public string[] TypeOptions = { "Cash", "Goods" };
 
+        // ✅ ROLE PERMISSIONS
+        public bool CanEdit   => SessionService.Instance.CanEdit;
+        public bool CanDelete => SessionService.Instance.CanDelete;
+        public bool CanAdd    => SessionService.Instance.CanEdit;
+
         public RelayCommand AddCommand      { get; }
         public RelayCommand EditCommand     { get; }
         public RelayCommand DeleteCommand   { get; }
@@ -153,11 +171,16 @@ namespace FundForest.ViewModels
             catch { }
         }
 
-        private void OpenAdd(object? _) { EditingDonation = new Donation { DonationDate = DateTime.Today }; IsEditMode = false; IsFormVisible = true; ErrorMessage = ""; }
+        private void OpenAdd(object? _)
+        {
+            if (!SessionService.Instance.CanEdit) return;
+            EditingDonation = new Donation { DonationDate = DateTime.Today }; IsEditMode = false; IsFormVisible = true; ErrorMessage = "";
+        }
 
         private void OpenEdit(object? _)
         {
             if (SelectedDonation == null) return;
+            if (!SessionService.Instance.CanEdit) return;
             EditingDonation = new Donation
             {
                 DonationID = SelectedDonation.DonationID, DonorID = SelectedDonation.DonorID,
@@ -171,6 +194,7 @@ namespace FundForest.ViewModels
         private void DeleteSelected(object? _)
         {
             if (SelectedDonation == null) return;
+            if (!SessionService.Instance.CanDelete) return;
             if (MessageBox.Show("Delete this donation record?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
             try { _db.DeleteDonation(SelectedDonation.DonationID); LoadData(); }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error"); }
@@ -226,6 +250,11 @@ namespace FundForest.ViewModels
         public string[] AudienceOptions = { "Group", "Barangay" };
         public string[] StatusOptions   = { "Active", "Archived" };
 
+        // ✅ ROLE PERMISSIONS
+        public bool CanEdit   => SessionService.Instance.CanEdit;
+        public bool CanDelete => SessionService.Instance.CanDelete;
+        public bool CanAdd    => SessionService.Instance.CanEdit;
+
         public RelayCommand AddCommand     { get; }
         public RelayCommand EditCommand    { get; }
         public RelayCommand DeleteCommand  { get; }
@@ -250,11 +279,16 @@ namespace FundForest.ViewModels
             catch (Exception ex) { ErrorMessage = ex.Message; }
         }
 
-        private void OpenAdd(object? _) { EditingProgram = new Models.Program(); IsEditMode = false; IsFormVisible = true; ErrorMessage = ""; }
+        private void OpenAdd(object? _)
+        {
+            if (!SessionService.Instance.CanEdit) return;
+            EditingProgram = new Models.Program(); IsEditMode = false; IsFormVisible = true; ErrorMessage = "";
+        }
 
         private void OpenEdit(object? _)
         {
             if (SelectedProgram == null) return;
+            if (!SessionService.Instance.CanEdit) return;
             EditingProgram = new Models.Program
             {
                 ProgramID = SelectedProgram.ProgramID, ProgramName = SelectedProgram.ProgramName,
@@ -268,6 +302,7 @@ namespace FundForest.ViewModels
         private void DeleteSelected(object? _)
         {
             if (SelectedProgram == null) return;
+            if (!SessionService.Instance.CanDelete) return;
             if (MessageBox.Show($"Delete program '{SelectedProgram.ProgramName}'?", "Confirm",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
             try { _db.DeleteProgram(SelectedProgram.ProgramID); LoadData(); }
@@ -277,6 +312,7 @@ namespace FundForest.ViewModels
         private void Archive(object? _)
         {
             if (SelectedProgram == null) return;
+            if (!SessionService.Instance.CanEdit) return;
             SelectedProgram.Status = "Archived";
             try { _db.UpdateProgram(SelectedProgram); LoadData(); }
             catch (Exception ex) { ErrorMessage = ex.Message; }
@@ -323,6 +359,11 @@ namespace FundForest.ViewModels
         public string ErrorMessage  { get => _errorMessage;  set => SetProperty(ref _errorMessage, value); }
         public string[] StatusOptions = { "Pending", "Completed" };
 
+        // ✅ ROLE PERMISSIONS
+        public bool CanEdit   => SessionService.Instance.CanEdit;
+        public bool CanDelete => SessionService.Instance.CanDelete;
+        public bool CanAdd    => SessionService.Instance.CanEdit;
+
         public RelayCommand AddCommand    { get; }
         public RelayCommand EditCommand   { get; }
         public RelayCommand DeleteCommand { get; }
@@ -355,11 +396,16 @@ namespace FundForest.ViewModels
             catch { }
         }
 
-        private void OpenAdd(object? _) { EditingDistribution = new Distribution { DistributionDate = DateTime.Today, Quantity = 1 }; IsEditMode = false; IsFormVisible = true; ErrorMessage = ""; }
+        private void OpenAdd(object? _)
+        {
+            if (!SessionService.Instance.CanEdit) return;
+            EditingDistribution = new Distribution { DistributionDate = DateTime.Today, Quantity = 1 }; IsEditMode = false; IsFormVisible = true; ErrorMessage = "";
+        }
 
         private void OpenEdit(object? _)
         {
             if (SelectedDistribution == null) return;
+            if (!SessionService.Instance.CanEdit) return;
             EditingDistribution = new Distribution
             {
                 DistributionID = SelectedDistribution.DistributionID, BeneficiaryID = SelectedDistribution.BeneficiaryID,
@@ -373,6 +419,7 @@ namespace FundForest.ViewModels
         private void DeleteSelected(object? _)
         {
             if (SelectedDistribution == null) return;
+            if (!SessionService.Instance.CanDelete) return;
             if (MessageBox.Show("Delete this distribution record?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
             try { _db.DeleteDistribution(SelectedDistribution.DistributionID); LoadData(); }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error"); }

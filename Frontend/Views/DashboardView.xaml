@@ -18,7 +18,7 @@
                 <StackPanel>
                     <TextBlock Text="Dashboard Overview" Style="{StaticResource PageTitleStyle}"/>
                     <TextBlock Text="Welcome back! Here's what's happening in FundForest."
-                               FontSize="13" Foreground="{StaticResource TextMutedBrush}" Margin="0,4,0,0"/>
+                               FontSize="13" Foreground="#52B788" Margin="0,4,0,0"/>
                 </StackPanel>
                 <Button HorizontalAlignment="Right" Content="↻  Refresh"
                         Style="{StaticResource OutlineButtonStyle}"

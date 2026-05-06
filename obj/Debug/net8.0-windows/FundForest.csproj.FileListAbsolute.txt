@@ -81,8 +81,8 @@ C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\bin\Debug\net8.0-wind
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\bin\Debug\net8.0-windows\runtimes\win-x64\native\libSkiaSharp.dll
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\bin\Debug\net8.0-windows\runtimes\win-x86\native\libSkiaSharp.dll
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\FundForest.csproj.AssemblyReference.cache
-C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Resources\Colors.baml
-C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Resources\Styles.baml
+C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Resources\colors.baml
+C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Resources\styles.baml
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Views\DashboardView.baml
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\App.baml
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Views\BeneficiariesView.g.cs
@@ -92,7 +92,9 @@ C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-wind
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Views\DonorsView.g.cs
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Views\LoginWindow.g.cs
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Views\MainWindow.g.cs
+C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Views\ManageUsersView.g.cs
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Views\ProgramsView.g.cs
+C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Views\RegisterWindow.g.cs
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\App.g.cs
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\FundForest_MarkupCompile.cache
@@ -103,12 +105,15 @@ C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-wind
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Views\DonorsView.baml
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Views\LoginWindow.baml
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Views\MainWindow.baml
+C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Views\ManageUsersView.baml
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Views\ProgramsView.baml
+C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\Frontend\Views\RegisterWindow.baml
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\FundForest.g.resources
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\FundForest.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\FundForest.AssemblyInfoInputs.cache
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\FundForest.AssemblyInfo.cs
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\FundForest.csproj.CoreCompileInputs.cache
+C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\FundForest.sourcelink.json
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\FundForest.csproj.Up2Date
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\FundForest.dll
 C:\Users\Acer\Downloads\FundForest_WPF_Complete\FundForest\obj\Debug\net8.0-windows\refint\FundForest.dll

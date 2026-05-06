@@ -172,6 +172,109 @@
         </Setter>
     </Style>
 
+    <!-- Dark Glass TextBox -->
+        <Style x:Key="GlassTextBoxDarkStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="#1A3322"/>
+            <Setter Property="Foreground" Value="#D8F3DC"/>
+            <Setter Property="BorderBrush" Value="#2D5E40"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="CaretBrush" Value="#52B788"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="12">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="44"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                        Text="{TemplateBinding Tag}"
+                                        FontFamily="Segoe MDL2 Assets"
+                                        FontSize="16" Foreground="#3D7A58"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                            Grid.Column="1"
+                                            Margin="0,0,12,0"
+                                            VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#52B788"/>
+                                <Setter TargetName="Bd" Property="Background" Value="#1F3D2A"/>
+                                <Setter TargetName="Bd" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#52B788" BlurRadius="14"
+                                                        ShadowDepth="0" Opacity="0.25"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Dark Glass PasswordBox -->
+        <Style x:Key="GlassPasswordBoxDarkStyle" TargetType="PasswordBox">
+            <Setter Property="Background" Value="#1A3322"/>
+            <Setter Property="Foreground" Value="#D8F3DC"/>
+            <Setter Property="BorderBrush" Value="#2D5E40"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="CaretBrush" Value="#52B788"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="12">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="44"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="&#xE72E;"
+                                        FontFamily="Segoe MDL2 Assets"
+                                        FontSize="16" Foreground="#3D7A58"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                            Grid.Column="1"
+                                            Margin="0,0,12,0"
+                                            VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#52B788"/>
+                                <Setter TargetName="Bd" Property="Background" Value="#1F3D2A"/>
+                                <Setter TargetName="Bd" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#52B788" BlurRadius="14"
+                                                        ShadowDepth="0" Opacity="0.25"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     <!-- ===== PASSWORD BOX ===== -->
     <Style x:Key="ModernPasswordBoxStyle" TargetType="PasswordBox">
         <Setter Property="Background" Value="{StaticResource SurfaceBrush}"/>

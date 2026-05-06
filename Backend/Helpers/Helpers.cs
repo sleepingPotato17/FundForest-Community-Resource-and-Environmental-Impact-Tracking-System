@@ -7,6 +7,7 @@ using System.Windows.Data;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Media;
+using System.Windows.Controls;
 
 namespace FundForest.Helpers
 {
@@ -167,4 +168,21 @@ namespace FundForest.Helpers
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
             => Binding.DoNothing;
     }
+    
+    [ValueConversion(typeof(DataGridRow), typeof(int))]
+public class RowNumberConverter : MarkupExtension, IValueConverter
+{
+    private static RowNumberConverter? _instance;
+    public override object ProvideValue(IServiceProvider sp) => _instance ??= new();
+
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is DataGridRow row)
+            return row.GetIndex() + 1;
+        return string.Empty;
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        => throw new NotImplementedException();
+}
 }

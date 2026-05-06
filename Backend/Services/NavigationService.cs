@@ -13,17 +13,4 @@ namespace FundForest.Services
 
         public void NavigateTo(string pageName) => NavigationRequested?.Invoke(pageName);
     }
-
-    /// <summary>
-    /// Singleton session – holds logged-in admin info.
-    /// </summary>
-    public class SessionService
-    {
-        private static SessionService? _instance;
-        public static SessionService Instance => _instance ??= new SessionService();
-
-        public Models.Admin? CurrentAdmin { get; set; }
-        public bool IsLoggedIn => CurrentAdmin != null;
-        public bool IsAdmin    => CurrentAdmin?.Role == "Admin";
-    }
 }

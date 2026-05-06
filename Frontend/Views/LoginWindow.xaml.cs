@@ -43,12 +43,8 @@ namespace FundForest.Views
 
         private void CreateAccount_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(
-                "Account creation is restricted to administrators only.\n\n" +
-                "Please contact your system administrator to create a new account.",
-                "Create Account",
-                MessageBoxButton.OK,
-                MessageBoxImage.Information);
+            var registerWindow = new RegisterWindow();
+            registerWindow.Show();
         }
 
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)

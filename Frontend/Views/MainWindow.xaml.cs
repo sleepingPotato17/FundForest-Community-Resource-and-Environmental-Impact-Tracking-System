@@ -1,11 +1,17 @@
 using System.Windows;
 using System.Windows.Input;
+using FundForest.ViewModels;
 
 namespace FundForest.Views
 {
     public partial class MainWindow : Window
     {
-        public MainWindow() => InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
+            // Set DataContext AFTER session is already set by LoginViewModel
+            DataContext = new MainViewModel();
+        }
 
         private void Header_MouseDown(object sender, MouseButtonEventArgs e)
         {

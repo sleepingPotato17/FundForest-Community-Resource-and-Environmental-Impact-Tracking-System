@@ -1,5 +1,4 @@
 using System.Windows;
-using System.Windows.Controls;
 using FundForest.Helpers;
 using FundForest.Services;
 using FundForest.Views;
@@ -10,7 +9,7 @@ namespace FundForest.ViewModels
     {
         private readonly DatabaseService _db = new();
 
-        private string _username    = string.Empty;
+        private string _username     = string.Empty;
         private string _errorMessage = string.Empty;
         private bool   _isLoading;
 
@@ -19,13 +18,11 @@ namespace FundForest.ViewModels
             get => _username;
             set => SetProperty(ref _username, value);
         }
-
         public string ErrorMessage
         {
             get => _errorMessage;
             set => SetProperty(ref _errorMessage, value);
         }
-
         public bool IsLoading
         {
             get => _isLoading;
@@ -44,40 +41,38 @@ namespace FundForest.ViewModels
             ErrorMessage = string.Empty;
 
             if (string.IsNullOrWhiteSpace(Username))
-            {
-                ErrorMessage = "Please enter your username.";
-                return;
-            }
+            { ErrorMessage = "Please enter your username."; return; }
 
-            // PasswordBox is passed as CommandParameter since it can't be bound directly
             var passwordBox = param as System.Windows.Controls.PasswordBox;
             string password = passwordBox?.Password ?? string.Empty;
 
             if (string.IsNullOrWhiteSpace(password))
-            {
-                ErrorMessage = "Please enter your password.";
-                return;
-            }
+            { ErrorMessage = "Please enter your password."; return; }
 
             IsLoading = true;
-
             try
             {
                 var admin = _db.ValidateLogin(Username.Trim(), password);
                 if (admin == null)
+                { ErrorMessage = "Invalid username or password."; return; }
+
+                // Block pending accounts ONLY after correct credentials are verified
+                if (!admin.IsApproved)
                 {
-                    ErrorMessage = "Invalid username or password.";
+                    ErrorMessage = "Your account is awaiting admin approval. Please try again later.";
                     return;
                 }
 
+                // Set session FIRST
                 SessionService.Instance.CurrentAdmin = admin;
 
+                // THEN create MainWindow — so IsAdmin is already true when DataContext is set
                 var mainWindow = new MainWindow();
                 mainWindow.Show();
 
                 // Close login window
                 foreach (System.Windows.Window w in Application.Current.Windows)
-                    if (w is Views.LoginWindow) { w.Close(); break; }
+                    if (w is LoginWindow) { w.Close(); break; }
             }
             catch (System.Exception ex)
             {

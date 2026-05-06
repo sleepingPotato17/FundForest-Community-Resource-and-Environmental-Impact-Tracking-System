@@ -1,28 +1,23 @@
--- FundForest Database Schema (MySQL / MariaDB)
--- Run this script to initialize the database
-
 CREATE DATABASE IF NOT EXISTS fundforest CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE fundforest;
 
--- =============================================
--- TABLE: Admins
--- =============================================
+-- Fix the Role column to include Staff and Local
+ALTER TABLE Admins MODIFY COLUMN Role ENUM('Admin','Staff','Local') NOT NULL DEFAULT 'Local';
+
 CREATE TABLE IF NOT EXISTS Admins (
     AdminID     INT AUTO_INCREMENT PRIMARY KEY,
     Username    VARCHAR(100) NOT NULL UNIQUE,
-    Password    VARCHAR(255) NOT NULL,  -- store bcrypt hash
+    Password    VARCHAR(255) NOT NULL,
     FullName    VARCHAR(200),
-    Role        ENUM('Admin','User') DEFAULT 'User',
+    Role        ENUM('Admin','Staff','Local') NOT NULL DEFAULT 'Local',
     CreatedAt   DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- Default admin (password: admin123 — change in production)
+-- Only one Admin, seeded here. Password = admin123
+-- Replace the hash below using BCrypt.Net.BCrypt.HashPassword("admin123")
 INSERT IGNORE INTO Admins (Username, Password, FullName, Role)
-VALUES ('admin', '$2b$12$defaultHashChangeMe', 'System Administrator', 'Admin');
+VALUES ('admin', '$2a$11$hashed_value_here', 'System Administrator', 'Admin');
 
--- =============================================
--- TABLE: Programs
--- =============================================
 CREATE TABLE IF NOT EXISTS Programs (
     ProgramID       INT AUTO_INCREMENT PRIMARY KEY,
     ProgramName     VARCHAR(200) NOT NULL,
@@ -35,21 +30,15 @@ CREATE TABLE IF NOT EXISTS Programs (
     CreatedAt       DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- =============================================
--- TABLE: Beneficiaries
--- =============================================
 CREATE TABLE IF NOT EXISTS Beneficiaries (
     BeneficiaryID       INT AUTO_INCREMENT PRIMARY KEY,
     BeneficiaryType     ENUM('Person','Group') NOT NULL DEFAULT 'Person',
-    -- Person fields
     FullName            VARCHAR(200),
     Gender              ENUM('Male','Female','Other'),
     Age                 INT,
-    -- Group fields
     GroupName           VARCHAR(200),
     NumberOfMembers     INT,
     GroupRepresentative VARCHAR(200),
-    -- Shared
     VulnerabilityType   VARCHAR(100),
     Address             TEXT,
     ContactInfo         VARCHAR(200),
@@ -57,9 +46,6 @@ CREATE TABLE IF NOT EXISTS Beneficiaries (
     CreatedAt           DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- =============================================
--- TABLE: Donors
--- =============================================
 CREATE TABLE IF NOT EXISTS Donors (
     DonorID         INT AUTO_INCREMENT PRIMARY KEY,
     DonorName       VARCHAR(200) NOT NULL,
@@ -69,9 +55,6 @@ CREATE TABLE IF NOT EXISTS Donors (
     CreatedAt       DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- =============================================
--- TABLE: Donations
--- =============================================
 CREATE TABLE IF NOT EXISTS Donations (
     DonationID          INT AUTO_INCREMENT PRIMARY KEY,
     DonorID             INT NOT NULL,
@@ -84,9 +67,6 @@ CREATE TABLE IF NOT EXISTS Donations (
     FOREIGN KEY (DonorID) REFERENCES Donors(DonorID) ON DELETE RESTRICT
 );
 
--- =============================================
--- TABLE: Distributions
--- =============================================
 CREATE TABLE IF NOT EXISTS Distributions (
     DistributionID      INT AUTO_INCREMENT PRIMARY KEY,
     BeneficiaryID       INT NOT NULL,
@@ -102,9 +82,6 @@ CREATE TABLE IF NOT EXISTS Distributions (
     FOREIGN KEY (ProgramID)     REFERENCES Programs(ProgramID) ON DELETE SET NULL
 );
 
--- =============================================
--- Sample seed data
--- =============================================
 INSERT IGNORE INTO Programs (ProgramName, StartDate, EndDate, TargetAudience, Description, Status)
 VALUES
 ('Livelihood Support', '2024-01-01', '2024-12-31', 'Group', 'Financial assistance for livelihood programs', 'Active'),
