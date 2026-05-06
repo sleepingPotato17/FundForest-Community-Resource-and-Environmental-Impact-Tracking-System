@@ -22,6 +22,10 @@ The purpose of this system is to:
 
 ## 🧱 Implementation of OOP Principles
 
+## 📋 Understanding the Code
+
+## 📁 Documentation
+
 ## ▶️ How to Run the Program
 
 ## 👥 Developers / Contributors
