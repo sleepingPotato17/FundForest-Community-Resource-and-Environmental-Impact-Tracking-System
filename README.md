@@ -1,5 +1,21 @@
-# 🌿FundForest
-## _Community Resource and Environmental Impact Tracking System_
+<div align="center">
+
+# FundForest
+
+### Community Resource and Environmental Impact Tracking System
+
+> A structured desktop application for managing donations, beneficiaries, programs, and distributions within community organizations — built for transparency, accountability, and operational efficiency.
+
+![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat-square&logo=dotnet)
+![C#](https://img.shields.io/badge/C%23-WPF-239120?style=flat-square&logo=csharp)
+![MariaDB](https://img.shields.io/badge/MariaDB-Database-003545?style=flat-square&logo=mariadb)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square)
+
+</div>
+
+<br>
+
 <p align="justify">
 FundForest is a centralized system designed to improve transparency, accountability, and efficiency in managing community projects and donation drives.
 
