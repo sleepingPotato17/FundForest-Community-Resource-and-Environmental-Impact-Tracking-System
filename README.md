@@ -788,4 +788,4 @@ If this project was useful to you or served as a reference for your own work, pl
 
 </div>
 
-## <p align="justify"><i>🌱 FundForest: Transparency that Roots, Impact that Grows</i></p>
+## <p align="center"><i>🌱 FundForest: Transparency that Roots, Impact that Grows</i></p>
