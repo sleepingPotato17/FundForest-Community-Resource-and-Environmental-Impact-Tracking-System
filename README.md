@@ -695,7 +695,7 @@ The following enhancements are planned or recommended for future development cyc
 
 ## Developers
 
-<div align="center">
+<div align="justify">
 
 | Name | GitHub |
 |------|--------|
