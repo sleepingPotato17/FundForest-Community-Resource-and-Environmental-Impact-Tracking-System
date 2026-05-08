@@ -324,6 +324,427 @@ The `BaseViewModel` class is itself an abstract class — it cannot be instantia
 
 ## System Architecture
 
+FundForest is built on the **MVVM (Model-View-ViewModel)** architectural pattern, which enforces a clean separation between three distinct layers of the application.
+
+``` bash
++-----------------------------------------------+
+|                 VIEW LAYER                    |
+|   XAML UserControls, Windows, Data Bindings   |
+|   BeneficiariesView, DonorsView, etc.         |
++--------------------+--------------------------+
+|
+Data Binding
+Commands
+|
++--------------------v--------------------------+
+|              VIEWMODEL LAYER                  |
+|   Business Logic, State Management           |
+|   ObservableProperties, RelayCommands        |
+|   BeneficiariesViewModel, DonorsViewModel    |
++--------------------+--------------------------+
+|
+Method Calls
+|
++--------------------v--------------------------+
+|              SERVICE LAYER                    |
+|   DatabaseService                            |
+|   All SQL queries, connection management     |
++--------------------+--------------------------+
+|
+ADO.NET / MySql.Data
+|
++--------------------v--------------------------+
+|              DATABASE LAYER                   |
+|   MariaDB                                    |
+|   Users, Donors, Beneficiaries,              |
+|   Donations, Programs, Distributions         |
++-----------------------------------------------+
+
+
+```
+### Layer Responsibilities
+
+**View Layer** — XAML files that define the visual structure and layout. Views bind to ViewModel properties and commands. They contain no business logic. All UI decisions (what to show, what to hide) are driven by ViewModel state through data binding and value converters.
+
+**ViewModel Layer** — C# classes that manage application state and respond to user actions through commands. ViewModels call the service layer to retrieve and persist data, then expose it to the View through observable properties. They are fully testable without a UI.
+
+**Service Layer** — The `DatabaseService` class is the single point of contact with the database. It opens connections, executes parameterized queries, maps result sets to model objects, and closes connections. No SQL exists outside this class.
+
+**Database Layer** — A MariaDB relational database with normalized tables. Each entity (donors, beneficiaries, donations, programs, distributions, users) has its own table with appropriate foreign key relationships.
+
+### Authentication Flow
+```bash 
+User enters credentials
+|
+v
+LoginViewModel.LoginCommand executes
+|
+v
+DatabaseService.ValidateLogin(username, password)
+|
+v
+Query Users table by username
+|
+v
+BCrypt.Verify(inputPassword, storedHash)
+|
++----+----+
+|         |
+False      True
+|         |
+Block      Check IsApproved
+login         |
++----+----+
+|         |
+False      True
+|         |
+Show          Load user role
+pending       Open MainWindow
+message       with role-filtered
+navigation
+```
+
+<br>
+
+---
+
+## Project Structure
+```bash
+FundForest/
+├── Frontend/
+│   ├── Views/
+│   │   ├── LoginWindow.xaml
+│   │   ├── LoginWindow.xaml.cs
+│   │   ├── RegisterWindow.xaml
+│   │   ├── RegisterWindow.xaml.cs
+│   │   ├── MainWindow.xaml
+│   │   ├── MainWindow.xaml.cs
+│   │   ├── DashboardView.xaml
+│   │   ├── DashboardView.xaml.cs
+│   │   ├── BeneficiariesView.xaml
+│   │   ├── BeneficiariesView.xaml.cs
+│   │   ├── DonorsView.xaml
+│   │   ├── DonorsView.xaml.cs
+│   │   ├── DonationsView.xaml
+│   │   ├── DonationsView.xaml.cs
+│   │   ├── ProgramsView.xaml
+│   │   ├── ProgramsView.xaml.cs
+│   │   ├── DistributionView.xaml
+│   │   ├── DistributionView.xaml.cs
+│   │   ├── ManageUsersView.xaml
+│   │   └── ManageUsersView.xaml.cs
+│   └── ViewModels/
+│       ├── LoginViewModel.cs
+│       ├── RegisterViewModel.cs
+│       ├── DashboardViewModel.cs
+│       ├── BeneficiariesViewModel.cs
+│       ├── DonorsViewModel.cs
+│       ├── DonationsViewModel.cs
+│       ├── ProgramsViewModel.cs
+│       ├── DistributionViewModel.cs
+│       └── ManageUsersViewModel.cs
+├── Models/
+│   ├── User.cs
+│   ├── Donor.cs
+│   ├── Beneficiary.cs
+│   ├── Donation.cs
+│   ├── Program.cs
+│   └── Distribution.cs
+├── Services/
+│   └── DatabaseService.cs
+├── Helpers/
+│   ├── RelayCommand.cs
+│   ├── BaseViewModel.cs
+│   ├── BoolToVisibilityConverter.cs
+│   ├── EnumToBoolConverter.cs
+│   ├── NullToVisibilityConverter.cs
+│   ├── PesoConverter.cs
+│   ├── RowNumberConverter.cs
+│   ├── StatusToColorConverter.cs
+│   └── StringNotEmptyToVisibilityConverter.cs
+├── Resources/
+│   └── Styles/
+│       └── GlobalStyles.xaml
+├── App.xaml
+├── App.xaml.cs
+├── FundForest.csproj
+└── README.md
+
+```
+<br>
+
+---
+
+## Installation Guide
+
+### Prerequisites
+
+Before running FundForest, ensure the following are installed on your machine:
+
+| Requirement | Version | Download |
+|-------------|---------|----------|
+| .NET SDK | 8.0 or later | https://dotnet.microsoft.com/download |
+| MariaDB | 10.6 or later | https://mariadb.org/download |
+| Git | Latest | https://git-scm.com |
+| Windows OS | 10 or later | Required for WPF |
+
+<br>
+
+### Step 1 — Clone the Repository
+
+```bash
+git clone https://github.com/sleepingPotato17/FundForest-Community-Resource-and-Environmental-Impact-Tracking-System.git
+cd FundForest-Community-Resource-and-Environmental-Impact-Tracking-System
+```
+
+### Step 2 — Restore NuGet Packages
+
+```bash
+dotnet restore
+```
+
+This will automatically install all required dependencies declared in `FundForest.csproj`:
+
+- MySql.Data
+- BCrypt.Net-Next
+- CommunityToolkit.Mvvm
+- LiveChartsCore.SkiaSharpView.WPF
+- FastReport.OpenSource
+
+### Step 3 — Set Up the Database
+
+Start your MariaDB server and create the database:
+
+```sql
+CREATE DATABASE FUNDFOREST;
+```
+
+Import the provided SQL schema and seed file:
+
+```bash
+mysql -u root -p FUNDFOREST < fundforest.sql
+```
+
+### Step 4 — Configure the Connection String
+
+Open `Services/DatabaseService.cs` and update the connection string to match your local MariaDB credentials:
+
+```csharp
+private readonly string _connectionString =
+    "Server=localhost;Port=3306;Database=FUNDFOREST;Uid=root;Pwd=yourpassword;";
+```
+
+### Step 5 — Build and Run
+
+```bash
+dotnet build
+dotnet run
+```
+
+The application window will launch. Log in using the default Admin credentials seeded in the SQL file, or register a new account and approve it through the Admin panel.
+
+<br>
+
+---
+
+## Database Setup
+
+### Schema Overview
+
+FundForest uses a normalized relational schema with six primary tables. All tables use integer primary keys with auto-increment, and foreign key constraints ensure referential integrity between related records.
+
+| Table | Primary Key | Description |
+|-------|-------------|-------------|
+| `Users` | `UserID` | System accounts with role and approval status |
+| `Donors` | `DonorID` | Registered donation contributors |
+| `Beneficiaries` | `BeneficiaryID` | Community members receiving aid |
+| `Donations` | `DonationID` | Incoming donation records linked to donors |
+| `Programs` | `ProgramID` | Community aid programs and campaigns |
+| `Distributions` | `DistributionID` | Aid delivery records linked to beneficiaries and programs |
+
+### Relationships
+```bash
+Donors (1) --------< Donations (many)
+Programs (1) -------< Distributions (many)
+Beneficiaries (1) --< Distributions (many)
+```
+### ENUM Definitions
+
+```sql
+-- Users.Role
+ENUM('Admin', 'Staff', 'Local')
+
+-- Beneficiaries.Gender
+ENUM('Male', 'Female', 'Other', 'None')
+
+-- Beneficiaries.VulnerabilityType
+ENUM('None', 'Elderly', 'Senior Citizen', 'PWD', 'Indigent', 'Solo Parent', '4Ps')
+
+-- Beneficiaries.BeneficiaryType
+ENUM('Person', 'Group')
+
+-- Donors.DonationType
+ENUM('Individual', 'Group')
+
+-- Donations.DonationType
+ENUM('Cash', 'Goods')
+
+-- Programs.Status
+ENUM('Active', 'Archived')
+
+-- Programs.TargetAudience
+ENUM('Group', 'Barangay')
+
+-- Distributions.Status
+ENUM('Completed', 'Pending')
+```
+
+<br>
+
+---
+
+## Authentication and Security
+
+### Password Hashing
+
+All user passwords are hashed using **BCrypt** before being stored in the database. The plain-text password is never written to disk at any point. During login, the entered password is verified against the stored hash using `BCrypt.Net.BCrypt.Verify()`.
+
+```csharp
+// Registration
+string hashed = BCrypt.Net.BCrypt.HashPassword(plainTextPassword);
+
+// Login verification
+bool isValid = BCrypt.Net.BCrypt.Verify(inputPassword, storedHash);
+```
+
+BCrypt includes a built-in salt and work factor, making the stored hashes resistant to rainbow table attacks and brute force attempts.
+
+### Role-Based Access Control
+
+The system enforces three distinct access levels:
+
+| Role | Permissions |
+|------|-------------|
+| Admin | Full access to all modules including User Management. Can approve, reject, and delete user accounts. |
+| Staff | Can perform CRUD operations on Donors, Beneficiaries, Donations, Programs, and Distributions. Cannot access User Management. |
+| Local | Read-only access. Can view records but cannot add, edit, or delete any data. |
+
+Role enforcement occurs at two levels:
+1. **Navigation** — Menu items and tabs are shown or hidden based on the authenticated user's role
+2. **UI Controls** — Add, Edit, and Delete buttons are conditionally rendered using `Visibility` bindings tied to role-aware boolean properties in each ViewModel
+
+### Account Approval System
+
+New accounts registered through the Create Account screen are set to `IsApproved = false` by default. They are blocked from logging in until an Admin explicitly approves them through the Manage Users panel. This prevents unauthorized users from gaining access to the system simply by registering.
+
+### SQL Injection Prevention
+
+All database queries in `DatabaseService` use ADO.NET's `MySqlCommand` with named parameters. No string concatenation is used to build SQL queries.
+
+```csharp
+var cmd = new MySqlCommand(
+    "INSERT INTO Donors (DonorName, ContactInfo) VALUES (@name, @contact)", conn);
+cmd.Parameters.AddWithValue("@name", donor.DonorName);
+cmd.Parameters.AddWithValue("@contact", donor.ContactInfo);
+```
+
+<br>
+
+---
+
+## User Interface Preview
+
+> The following table lists the primary screens of FundForest. Replace the image paths with actual screenshots from the running application before final submission.
+
+| Screen | Description | Preview |
+|--------|-------------|---------|
+| Login | Credential entry with role-aware error messaging | ![Login](screenshots/login.png) |
+| Register | Account creation with role information panel | ![Register](screenshots/register.png) |
+| Dashboard | Summary statistics and quick navigation | ![Dashboard](screenshots/dashboard.png) |
+| Beneficiaries | Beneficiary list with search and side-panel form | ![Beneficiaries](screenshots/beneficiaries.png) |
+| Donors | Donor registry with CRUD operations | ![Donors](screenshots/donors.png) |
+| Donations | Donation records with date filtering and CSV export | ![Donations](screenshots/donations.png) |
+| Programs | Program list with archive functionality | ![Programs](screenshots/programs.png) |
+| Distribution | Distribution tracking linked to programs and beneficiaries | ![Distribution](screenshots/distribution.png) |
+| Manage Users | Admin-only user approval and management panel | ![Users](screenshots/users.png) |
+
+<br>
+
+---
+
+## Future Improvements
+
+The following enhancements are planned or recommended for future development cycles:
+
+| Enhancement | Description |
+|-------------|-------------|
+| Cloud Database | Host MariaDB on a cloud provider (AWS RDS, Azure Database, PlanetScale) to allow multi-location access |
+| PDF Report Export | Generate formatted PDF reports for donations, beneficiary lists, and distribution summaries using FastReport |
+| Analytics Dashboard | Extend the dashboard with trend charts showing monthly donation volume, program activity, and distribution rates |
+| Email Notifications | Send automated email alerts for pending account approvals, new donations, and upcoming program deadlines |
+| Audit Log | Record every Create, Update, and Delete action with the user who performed it and the timestamp |
+| Mobile Companion App | A read-only mobile interface for administrators to review key metrics remotely |
+| Multi-language Support | Toggle between Filipino and English for broader accessibility |
+| Backup and Restore | Built-in database backup scheduling and one-click restore functionality |
+| AI-Assisted Insights | Pattern recognition to suggest optimal distribution timing and flag unusual donation activity |
+| Unit Testing | Formal test coverage for ViewModel logic and DatabaseService methods using xUnit or NUnit |
+
+<br>
+
+---
+
+## Developers
+
+<div align="center">
+
+| Name | GitHub |
+|------|--------|
+| John Joseph S. Dimatulac | [@Youuusoff](https://github.com/Youuusoff) |
+| Jiselle Mae M. Silla | [@ellemrsgn27](https://github.com/ellemrsgn27) |
+| Lance Kert O. Mendoza | [@sleepingPotato17](https://github.com/sleepingPotato17) |
+
+</div>
+
+<br>
+
+---
+
+## Lessons Learned
+
+### Technical Challenges
+
+**WPF Data Binding Complexity**
+WPF's binding system is powerful but unforgiving. Early in development, binding errors were silent — properties would simply not update in the UI without any runtime exception. We learned to use `INotifyPropertyChanged` correctly through `BaseViewModel`, and to always set `UpdateSourceTrigger=PropertyChanged` on two-way bound TextBox controls.
+
+**Custom ComboBox Templating**
+Replacing the default WPF ComboBox style proved unexpectedly difficult. The built-in template uses a `ToggleButton` internally, and our custom visual `Border` was intercepting all mouse events, making the dropdown unresponsive. The solution was to set `IsHitTestVisible="False"` on the visual layer and place a transparent `ToggleButton` with its own minimal `ControlTemplate` on top of it as a full-area click target.
+
+**Sequential Row Numbering**
+The initial approach of binding the `#` column directly to the database primary key produced gaps whenever records were deleted (e.g., IDs 1, 2, 5, 8 instead of 1, 2, 3, 4). We resolved this by implementing a custom `RowNumberConverter` that retrieves the row's current index within the `DataGrid` using `DataGridRow.GetIndex() + 1`, producing gapless sequential numbers that update automatically as records are added or removed.
+
+**XAML Tag Nesting Errors**
+Several build errors were caused by mismatched or missing closing tags in deeply nested XAML. The WPF XAML compiler error messages often pointed to a symptom line rather than the actual cause. We learned to work methodically from the outermost containers inward when debugging structural XAML issues.
+
+**Role-Based UI Without Code-Behind Logic**
+Enforcing role-based visibility purely through XAML bindings — without writing conditional logic in code-behind — required careful use of `BoolToVisibilityConverter` and ViewModel boolean properties like `CanAdd`, `CanEdit`, and `CanDelete`. This kept the Views clean and the logic testable.
+
+### Architectural Insights
+
+Adopting MVVM from the beginning of the project was a deliberate decision that paid significant dividends during development. Because Views contain no business logic, it was straightforward to redesign or replace UI components without touching the underlying data or command logic. The strict separation also made it easier for team members to work on different layers simultaneously without causing merge conflicts.
+
+Centralizing all database operations in `DatabaseService` meant that schema changes only required updates in one file. When the `Beneficiaries` table's `Gender` ENUM was extended to include `'None'`, the change was isolated to the database and the service class — no Views or ViewModels required modification.
+
+### Team and Process
+
+Version control through GitHub was essential for parallel development. Each team member worked on separate feature branches, and pull requests were used to review changes before merging into the main branch. This workflow prevented several potential conflicts and gave us a clean history of what changed and why.
+
+Code review sessions, even informal ones, consistently caught issues before they became embedded in the codebase — particularly around XAML structure and ViewModel property naming conventions.
+
+<br>
+
+---
+
+
 ## 🧩 UML Diagram
 
 ## 🛠️ Features and Functionalities of the System
