@@ -15,6 +15,7 @@
 </div>
 
 <br>
+
 ---
 
 ## Table of Contents
@@ -36,6 +37,7 @@
 15. [Acknowledgements](#acknowledgements)
 
 ---
+
 <br>
 
 ## Project Overview
@@ -56,6 +58,67 @@ The system covers the full lifecycle of community resource management: from reco
 FundForest does not simply store records — it enforces accountability. Every action in the system is tied to a role, every distribution is linked to a beneficiary and program, and every donation is attributed to a donor. This creates a complete, traceable audit trail that can be reviewed at any time.
 
 <br>
+
+---
+
+## Features
+
+### User Authentication and Authorization
+- Secure login system with BCrypt-hashed password verification
+- Three-tier role system: Admin, Staff, and Local
+- New account registration with mandatory Admin approval before access is granted
+- Role-based UI rendering — navigation items, action buttons, and form panels are shown or hidden based on the authenticated user's role
+- Accounts pending approval are blocked from login with a descriptive error message
+
+### Dashboard
+- Real-time summary statistics: total donations, programs, beneficiaries, and distributions
+- Quick-glance counts with module navigation shortcuts
+- Visual branding consistent with the application's green-themed identity
+
+### Beneficiary Management
+- Register and manage both individual persons and community groups as beneficiaries
+- Capture demographic data including full name, age, gender, vulnerability classification, contact information, and address
+- Vulnerability categories: None, Elderly, Senior Citizen, PWD, Indigent, Solo Parent, 4Ps
+- Gender options: Male, Female, Other, None (for groups)
+- Search beneficiaries by name, contact number, or address
+- Edit and delete existing records through a slide-in side panel form
+- Row numbers displayed sequentially based on current list position, not database ID
+
+### Donor Management
+- Maintain a complete registry of donors categorized as Individual or Group
+- Store contact information and address per donor entry
+- Full Create, Read, Update, and Delete (CRUD) operations
+- Live search filtering
+
+### Donation Recording
+- Record incoming donations of type Cash or Goods
+- Link each donation to a registered donor
+- Capture donation date, amount, goods description (for in-kind donations), and notes
+- Filter donations by donor name and date range
+- Export donation records to CSV format for external reporting
+
+### Program Management
+- Create community programs with defined start and end dates
+- Assign target audience (Group or Barangay) and a specific location/barangay
+- Set and update program status (Active or Archived)
+- Archive programs directly from the main list view
+- Full-text search across program names
+
+### Distribution Tracking
+- Record distributions linking a beneficiary to a program
+- Capture distributed item name, quantity, monetary amount, distribution date, and notes
+- Set distribution status: Completed or Pending
+- Full CRUD operations with a structured side panel form
+- Search distributions by beneficiary name or program
+
+### User Management (Admin Only)
+- View all registered system users with their role, registration date, and approval status
+- Approve or reject pending user accounts
+- Delete user accounts from the system
+- Real-time display of the number of accounts awaiting approval
+
+<br>
+
 ---
 
 ## 🧩 UML Diagram
