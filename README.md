@@ -744,28 +744,48 @@ Code review sessions, even informal ones, consistently caught issues before they
 
 ---
 
+## License
+MIT License
+Copyright (c) 2026 FundForest Development Team
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+<br>
 
-## 🧩 UML Diagram
+---
 
-## 🛠️ Features and Functionalities of the System
+## Acknowledgements
 
-## 🔄 Flow Chart
+We extend our sincere gratitude to the following:
 
-## ⚙️ How the Program Works
+- **Our Project Adviser** — for the consistent technical guidance, constructive feedback, and patience throughout every phase of this project
+- **The Open-Source Community** — for the libraries that made FundForest possible: BCrypt.Net-Next, LiveChartsCore, FastReport.OpenSource, CommunityToolkit.Mvvm, and MySql.Data
+- **Our Families** — for the understanding and encouragement during the long hours of development and documentation
 
-## 🧱 Implementation of OOP Principles
+<br>
 
-## 📋 Understanding the Code
+---
 
-## 📁 Documentation
+<div align="center">
 
-## ▶️ How to Run the Program
+FundForest was built with the intention of making a real difference in how community organizations manage the resources entrusted to them.
 
-## 👥 Developers / Contributors
-| Name | GitHub Username |
-| :--- | :--- |
-| **John Joseph S. Dimatulac** | [@Youuusoff](https://github.com/JayDimatulac) |
-| **Jiselle Mae M. Silla** | [@ellemrsgn27](https://github.com/ellemrsgn27) |
-| **Lance Kert O. Mendoza** | [@sleepingPotato17](https://github.com/sleepingPotato17) |
+If this project was useful to you or served as a reference for your own work, please consider leaving a star on the repository.
+
+**FundForest — 2026**
+
+</div>
 
 ## <p align="justify"><i>🌱 FundForest: Transparency that Roots, Impact that Grows</i></p>
