@@ -16,6 +16,30 @@
 
 <br>
 
+---
+
+## Table of Contents
+
+1. [Project Overview](#project-overview)
+2. [Features](#features)
+3. [Tech Stack](#tech-stack)
+4. [Object-Oriented Programming Principles](#object-oriented-programming-principles)
+5. [System Architecture](#system-architecture)
+6. [Project Structure](#project-structure)
+7. [Installation Guide](#installation-guide)
+8. [Database Setup](#database-setup)
+9. [Authentication and Security](#authentication-and-security)
+10. [User Interface Preview](#user-interface-preview)
+11. [Future Improvements](#future-improvements)
+12. [Developers](#developers)
+13. [Lessons Learned](#lessons-learned)
+14. [License](#license)
+15. [Acknowledgements](#acknowledgements)
+
+---
+
+<br>
+
 <p align="justify">
 FundForest is a centralized system designed to improve transparency, accountability, and efficiency in managing community projects and donation drives.
 
