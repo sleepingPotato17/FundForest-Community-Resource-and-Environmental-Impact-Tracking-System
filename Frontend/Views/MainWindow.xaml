@@ -180,15 +180,13 @@
                                     </Border.Background>
                                     <Border.Effect>
                                         <DropShadowEffect Color="#52B788" BlurRadius="8"
-                                                          ShadowDepth="0" Opacity="0.15"/>
+                                                        ShadowDepth="0" Opacity="0.15"/>
                                     </Border.Effect>
                                     <StackPanel>
-                                        <TextBlock Text="🌱 Every donation" FontSize="10"
-                                                   Foreground="#2D6A4F" FontWeight="SemiBold"/>
-                                        <TextBlock Text="grows a future." FontSize="10"
-                                                   Foreground="#40916C"/>
-                                        <Rectangle Height="1" Margin="0,6,0,6"
-                                                   Opacity="0.3" Fill="#52B788"/>
+                                        <TextBlock FontSize="10" Foreground="#2D6A4F" FontWeight="SemiBold">
+                                            <Run Text="🌱 Every donation grows a future."/>
+                                        </TextBlock>
+                                        <Rectangle Height="1" Margin="0,6,0,6" Opacity="0.3" Fill="#52B788"/>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
@@ -196,23 +194,19 @@
                                             </Grid.ColumnDefinitions>
                                             <StackPanel>
                                                 <TextBlock Text="{Binding TotalDonations}"
-                                                           FontSize="16" FontWeight="Bold"
-                                                           Foreground="#2D6A4F"/>
-                                                <TextBlock Text="Donations" FontSize="9"
-                                                           Foreground="#74C69D"/>
+                                                        FontSize="16" FontWeight="Bold"
+                                                        Foreground="#2D6A4F"/>
+                                                <TextBlock Text="Donations" FontSize="9" Foreground="#74C69D"/>
                                             </StackPanel>
                                             <StackPanel Grid.Column="1">
                                                 <TextBlock Text="{Binding TotalPrograms}"
-                                                           FontSize="16" FontWeight="Bold"
-                                                           Foreground="#2D6A4F"/>
-                                                <TextBlock Text="Programs" FontSize="9"
-                                                           Foreground="#74C69D"/>
+                                                        FontSize="16" FontWeight="Bold"
+                                                        Foreground="#2D6A4F"/>
+                                                <TextBlock Text="Programs" FontSize="9" Foreground="#74C69D"/>
                                             </StackPanel>
                                         </Grid>
                                     </StackPanel>
-                                </Border>
-
-                                <!-- User Card -->
+                                </Border>                                <!-- User Card -->
                                 <Border CornerRadius="10" Padding="10,8" Margin="0,0,0,8">
                                     <Border.Background>
                                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">

@@ -653,42 +653,37 @@
             <!-- ================================================
                  RIGHT PANEL — Login Form
                  ================================================ -->
-            <!-- ================================================
-     RIGHT PANEL — Dark Forest (matches left panel theme)
-     ================================================ -->
             <Border Grid.Column="1" ClipToBounds="True">
                 <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="0.8,1">
-                        <GradientStop Color="#040D08" Offset="0"/>
-                        <GradientStop Color="#0A2318" Offset="0.4"/>
-                        <GradientStop Color="#1B4332" Offset="1"/>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#EEF7F1" Offset="0"/>
+                        <GradientStop Color="#E0F0E8" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
 
                 <Grid>
                     <!-- Background decorative blobs -->
-                    <Ellipse Width="320" Height="320"
-                            HorizontalAlignment="Right" VerticalAlignment="Top"
-                            Margin="0,-100,-100,0" Opacity="0.12">
+                    <Ellipse Width="280" Height="280"
+                             HorizontalAlignment="Right" VerticalAlignment="Top"
+                             Margin="0,-80,-80,0" Opacity="0.13">
                         <Ellipse.Fill>
                             <RadialGradientBrush>
                                 <GradientStop Color="#52B788" Offset="0"/>
                                 <GradientStop Color="Transparent" Offset="1"/>
                             </RadialGradientBrush>
                         </Ellipse.Fill>
-                        <Ellipse.Effect><BlurEffect Radius="50"/></Ellipse.Effect>
+                        <Ellipse.Effect><BlurEffect Radius="40"/></Ellipse.Effect>
                     </Ellipse>
-
-                    <Ellipse Width="260" Height="260"
-                            HorizontalAlignment="Left" VerticalAlignment="Bottom"
-                            Margin="-80,0,0,-80" Opacity="0.10">
+                    <Ellipse Width="220" Height="220"
+                             HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                             Margin="-60,0,0,-60" Opacity="0.1">
                         <Ellipse.Fill>
                             <RadialGradientBrush>
-                                <GradientStop Color="#74C69D" Offset="0"/>
+                                <GradientStop Color="#40916C" Offset="0"/>
                                 <GradientStop Color="Transparent" Offset="1"/>
                             </RadialGradientBrush>
                         </Ellipse.Fill>
-                        <Ellipse.Effect><BlurEffect Radius="40"/></Ellipse.Effect>
+                        <Ellipse.Effect><BlurEffect Radius="35"/></Ellipse.Effect>
                     </Ellipse>
 
                     <!-- Close button -->
@@ -696,32 +691,29 @@
                             VerticalAlignment="Top" Margin="0,14,14,0"
                             Width="30" Height="30"
                             Background="Transparent" BorderThickness="0"
-                            Foreground="#52B788" FontSize="13"
+                            Foreground="#74C69D" FontSize="13"
                             Cursor="Hand" Click="CloseWindow_Click"/>
 
                     <!-- Glass Form Card -->
                     <Border x:Name="FormCard"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
-                            Width="360" CornerRadius="22"
-                            Padding="36,32" Opacity="0">
+                            Width="360" CornerRadius="20"
+                            Padding="36,30" Opacity="0">
                         <Border.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#1A3D2B" Offset="0"/>
-                                <GradientStop Color="#122D1E" Offset="1"/>
-                            </LinearGradientBrush>
+                            <SolidColorBrush Color="#FAFFFE"/>
                         </Border.Background>
                         <Border.BorderBrush>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#3A7D5A" Offset="0"/>
-                                <GradientStop Color="#1F5C3E" Offset="1"/>
+                                <GradientStop Color="#B7E4C7" Offset="0"/>
+                                <GradientStop Color="#D8F3DC" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.BorderBrush>
-                        <Border.BorderThickness>1</Border.BorderThickness>
+                        <Border.BorderThickness>1.5</Border.BorderThickness>
                         <Border.Effect>
-                            <DropShadowEffect Color="#000000" BlurRadius="60"
-                                            ShadowDepth="12" Opacity="0.45"
-                                            Direction="270"/>
+                            <DropShadowEffect Color="#1B4332" BlurRadius="44"
+                                              ShadowDepth="10" Opacity="0.1"
+                                              Direction="270"/>
                         </Border.Effect>
                         <Border.RenderTransform>
                             <TranslateTransform/>
@@ -730,42 +722,31 @@
                         <StackPanel>
                             <!-- Header -->
                             <TextBlock Text="Welcome back 👋"
-                                    FontSize="26" FontWeight="Bold"
-                                    Foreground="White" Margin="0,0,0,5"/>
+                                       FontSize="26" FontWeight="Bold"
+                                       Foreground="#1B4332" Margin="0,0,0,4"/>
                             <TextBlock Text="Sign in to continue to FundForest"
-                                    FontSize="12" Foreground="#74C69D"
-                                    Margin="0,0,0,24"/>
-
-                            <!-- Divider -->
-                            <Border Height="1" Margin="0,0,0,22" Opacity="0.2">
-                                <Border.Background>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                        <GradientStop Color="Transparent" Offset="0"/>
-                                        <GradientStop Color="#74C69D" Offset="0.5"/>
-                                        <GradientStop Color="Transparent" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                            </Border>
+                                       FontSize="12" Foreground="#74C69D"
+                                       Margin="0,0,0,26"/>
 
                             <!-- Username -->
                             <TextBlock Text="USERNAME" FontSize="10"
-                                    FontWeight="SemiBold" Foreground="#74C69D"
-                                    Margin="0,0,0,6"/>
-                            <TextBox Style="{StaticResource GlassTextBoxDarkStyle}"
-                                    Tag="&#xE77B;"
-                                    Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
-                                    Margin="0,0,0,16"/>
+                                       FontWeight="SemiBold" Foreground="#4A6741"
+                                       Margin="0,0,0,5"/>
+                            <TextBox Style="{StaticResource GlassTextBoxStyle}"
+                                     Tag="&#xE77B;"
+                                     Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
+                                     Margin="0,0,0,14"/>
 
                             <!-- Password -->
                             <TextBlock Text="PASSWORD" FontSize="10"
-                                    FontWeight="SemiBold" Foreground="#74C69D"
-                                    Margin="0,0,0,6"/>
+                                       FontWeight="SemiBold" Foreground="#4A6741"
+                                       Margin="0,0,0,5"/>
                             <PasswordBox x:Name="PasswordBox"
-                                        Style="{StaticResource GlassPasswordBoxDarkStyle}"
-                                        Margin="0,0,0,8"/>
+                                         Style="{StaticResource GlassPasswordBoxStyle}"
+                                         Margin="0,0,0,8"/>
 
                             <!-- Forgot password -->
-                            <TextBlock HorizontalAlignment="Right" Margin="0,0,0,22">
+                            <TextBlock HorizontalAlignment="Right" Margin="0,0,0,20">
                                 <Hyperlink Foreground="#52B788"
                                         TextDecorations="None" FontSize="11"
                                         Click="ForgotPassword_Click">
@@ -774,60 +755,50 @@
                             </TextBlock>
 
                             <!-- Error -->
-                            <Border CornerRadius="8" Padding="12,8"
-                                    Margin="0,0,0,14"
-                                    Visibility="{Binding ErrorMessage,
-                                        Converter={StaticResource StrVis}}">
-                                <Border.Background>
-                                    <SolidColorBrush Color="#3D1A1A"/>
-                                </Border.Background>
-                                <Border.BorderBrush>
-                                    <SolidColorBrush Color="#7A2A2A"/>
-                                </Border.BorderBrush>
-                                <Border.BorderThickness>1</Border.BorderThickness>
-                                <TextBlock Text="{Binding ErrorMessage}"
-                                        Foreground="#FF8A80"
-                                        FontSize="12" TextWrapping="Wrap"/>
-                            </Border>
+                        <Border CornerRadius="8" Padding="12,8"
+                                Margin="0,0,0,14"
+                                Background="#FFF0EE"
+                                BorderBrush="#FFD0CC"
+                                BorderThickness="1"
+                                Visibility="{Binding ErrorMessage,
+                                    Converter={StaticResource StrVis}}">
+                            <TextBlock Text="{Binding ErrorMessage}"
+                                    Foreground="#C0392B"
+                                    FontSize="12" TextWrapping="Wrap"/>
+                        </Border>
 
                             <!-- Sign In -->
                             <Button Content="Sign In  →"
                                     Style="{StaticResource GradientButtonStyle}"
                                     Command="{Binding LoginCommand}"
                                     CommandParameter="{Binding ElementName=PasswordBox}"
-                                    Margin="0,0,0,20"/>
+                                    Margin="0,0,0,18"/>
 
                             <!-- Divider -->
-                            <Grid Margin="0,0,0,18">
+                            <Grid Margin="0,0,0,16">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Border Grid.Column="0" Height="1"
-                                        VerticalAlignment="Center" Opacity="0.2">
-                                    <Border.Background>
-                                        <SolidColorBrush Color="#74C69D"/>
-                                    </Border.Background>
-                                </Border>
+                                        Background="#DDE8E0"
+                                        VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="1" Text="or"
-                                        FontSize="11" Foreground="#3D6B54"
-                                        Margin="12,0"/>
+                                           FontSize="11" Foreground="#8FAF8A"
+                                           Margin="10,0"/>
                                 <Border Grid.Column="2" Height="1"
-                                        VerticalAlignment="Center" Opacity="0.2">
-                                    <Border.Background>
-                                        <SolidColorBrush Color="#74C69D"/>
-                                    </Border.Background>
-                                </Border>
+                                        Background="#DDE8E0"
+                                        VerticalAlignment="Center"/>
                             </Grid>
 
                             <!-- Create account -->
                             <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Center">
                                 <TextBlock Text="New to FundForest?  "
-                                        FontSize="12" Foreground="#3D6B54"/>
+                                           FontSize="12" Foreground="#8FAF8A"/>
                                 <TextBlock FontSize="12">
-                                    <Hyperlink Foreground="#74C69D"
+                                    <Hyperlink Foreground="#2D6A4F"
                                             FontWeight="SemiBold"
                                             TextDecorations="None"
                                             Click="CreateAccount_Click">
@@ -846,8 +817,8 @@
                                 <Ellipse Width="6" Height="6" Fill="#52B788" Margin="3,0"/>
                                 <Ellipse Width="6" Height="6" Fill="#52B788" Margin="3,0"/>
                                 <TextBlock Text="  Signing in..."
-                                        FontSize="12" Foreground="#3D6B54"
-                                        VerticalAlignment="Center"/>
+                                           FontSize="12" Foreground="#8FAF8A"
+                                           VerticalAlignment="Center"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>

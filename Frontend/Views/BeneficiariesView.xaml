@@ -8,7 +8,6 @@
         <h:BoolToVisibilityConverter x:Key="BoolVis"/>
         <h:RowNumberConverter x:Key="RowNumberConverter"/>
 
-        <!-- Chip RadioButton Style -->
         <Style x:Key="ChipRadio" TargetType="RadioButton">
             <Setter Property="Template">
                 <Setter.Value>
@@ -72,27 +71,21 @@
                                 </LinearGradientBrush>
                             </Border.Background>
                             <Border.Effect>
-                                <DropShadowEffect Color="#1B4332" BlurRadius="12"
-                                                  ShadowDepth="0" Opacity="0.3"/>
+                                <DropShadowEffect Color="#1B4332" BlurRadius="12" ShadowDepth="0" Opacity="0.3"/>
                             </Border.Effect>
-                            <TextBlock Text="👥" FontSize="22"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
+                            <TextBlock Text="👥" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <StackPanel VerticalAlignment="Center">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Beneficiaries" FontSize="22"
-                                           FontWeight="Bold" Foreground="#1B4332"/>
-                                <Border CornerRadius="12" Padding="10,3" Margin="10,0,0,0"
-                                        VerticalAlignment="Center" Background="#D8F3DC">
+                                <TextBlock Text="Beneficiaries" FontSize="22" FontWeight="Bold" Foreground="#1B4332"/>
+                                <Border CornerRadius="12" Padding="10,3" Margin="10,0,0,0" VerticalAlignment="Center" Background="#D8F3DC">
                                     <TextBlock FontSize="11" FontWeight="Bold" Foreground="#1B4332">
                                         <Run Text="{Binding Beneficiaries.Count, Mode=OneWay}"/>
                                         <Run Text="total"/>
                                     </TextBlock>
                                 </Border>
                             </StackPanel>
-                            <TextBlock Text="Manage person and group beneficiaries"
-                                       FontSize="12" Foreground="#52B788" Margin="0,3,0,0"/>
+                            <TextBlock Text="Manage person and group beneficiaries" FontSize="12" Foreground="#52B788" Margin="0,3,0,0"/>
                         </StackPanel>
                     </StackPanel>
 
@@ -109,11 +102,9 @@
                                         </LinearGradientBrush>
                                     </Border.Background>
                                     <Border.Effect>
-                                        <DropShadowEffect Color="#1B4332" BlurRadius="14"
-                                                          ShadowDepth="0" Opacity="0.35"/>
+                                        <DropShadowEffect Color="#1B4332" BlurRadius="14" ShadowDepth="0" Opacity="0.35"/>
                                     </Border.Effect>
-                                    <TextBlock Text="+ Add Beneficiary" FontSize="13"
-                                               FontWeight="SemiBold" Foreground="White"/>
+                                    <TextBlock Text="+ Add Beneficiary" FontSize="13" FontWeight="SemiBold" Foreground="White"/>
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
@@ -137,8 +128,7 @@
                 <Border Grid.Row="0" Margin="0,0,0,12" CornerRadius="12"
                         Background="White" BorderBrush="#D8F3DC" BorderThickness="1.5">
                     <Border.Effect>
-                        <DropShadowEffect Color="#1B4332" BlurRadius="8"
-                                          ShadowDepth="0" Opacity="0.06"/>
+                        <DropShadowEffect Color="#1B4332" BlurRadius="8" ShadowDepth="0" Opacity="0.06"/>
                     </Border.Effect>
                     <Grid Margin="16,10">
                         <Grid.ColumnDefinitions>
@@ -151,32 +141,24 @@
                                      Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
                             <TextBlock Text="🔍  Search by name, contact, address..."
                                        Foreground="#A8C5B0" FontSize="12"
-                                       IsHitTestVisible="False"
-                                       VerticalAlignment="Center" Margin="14,0,0,0">
+                                       IsHitTestVisible="False" VerticalAlignment="Center" Margin="14,0,0,0">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Visibility" Value="Collapsed"/>
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding SearchText}" Value="">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding SearchText}" Value="{x:Null}">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding SearchText}" Value=""><Setter Property="Visibility" Value="Visible"/></DataTrigger>
+                                            <DataTrigger Binding="{Binding SearchText}" Value="{x:Null}"><Setter Property="Visibility" Value="Visible"/></DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
                         </Grid>
-                        <Button Grid.Column="1" Margin="10,0,0,0"
-                                Command="{Binding SearchCommand}">
+                        <Button Grid.Column="1" Margin="10,0,0,0" Command="{Binding SearchCommand}">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Border x:Name="Bd" CornerRadius="8" Padding="16,8"
-                                            BorderBrush="#52B788" BorderThickness="1.5"
-                                            Background="Transparent">
-                                        <TextBlock Text="Search" FontSize="12"
-                                                   FontWeight="SemiBold" Foreground="#1B4332"/>
+                                            BorderBrush="#52B788" BorderThickness="1.5" Background="Transparent">
+                                        <TextBlock Text="Search" FontSize="12" FontWeight="SemiBold" Foreground="#1B4332"/>
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
@@ -193,8 +175,7 @@
                 <Border Grid.Row="1" CornerRadius="16" Background="White"
                         BorderBrush="#D8F3DC" BorderThickness="1.5">
                     <Border.Effect>
-                        <DropShadowEffect Color="#1B4332" BlurRadius="16"
-                                          ShadowDepth="2" Opacity="0.06"/>
+                        <DropShadowEffect Color="#1B4332" BlurRadius="16" ShadowDepth="2" Opacity="0.06"/>
                     </Border.Effect>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -210,9 +191,9 @@
                                     <GradientStop Color="#F0FAF4" Offset="1"/>
                                 </LinearGradientBrush>
                             </Border.Background>
-                            <Grid Margin="16,0">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="66"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="80"/>
                                     <ColumnDefinition Width="80"/>
@@ -221,7 +202,7 @@
                                     <ColumnDefinition Width="150"/>
                                     <ColumnDefinition Width="90"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="#"             FontSize="11" FontWeight="Bold" Foreground="#52B788"/>
+                                <TextBlock Grid.Column="0" Text="#"             FontSize="11" FontWeight="Bold" Foreground="#52B788" Margin="16,0,0,0"/>
                                 <TextBlock Grid.Column="1" Text="NAME / GROUP"  FontSize="11" FontWeight="Bold" Foreground="#1B4332" Margin="8,0,0,0"/>
                                 <TextBlock Grid.Column="2" Text="TYPE"          FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
                                 <TextBlock Grid.Column="3" Text="GENDER"        FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
@@ -237,17 +218,11 @@
                                   ItemsSource="{Binding Beneficiaries}"
                                   SelectedItem="{Binding SelectedBeneficiary}"
                                   AutoGenerateColumns="False"
-                                  CanUserAddRows="False"
-                                  CanUserDeleteRows="False"
-                                  CanUserResizeRows="False"
-                                  CanUserReorderColumns="False"
-                                  GridLinesVisibility="Horizontal"
-                                  HorizontalGridLinesBrush="#EEF7F1"
-                                  HeadersVisibility="None"
-                                  Background="Transparent"
-                                  BorderThickness="0"
-                                  RowHeight="50"
-                                  SelectionMode="Single"
+                                  CanUserAddRows="False" CanUserDeleteRows="False"
+                                  CanUserResizeRows="False" CanUserReorderColumns="False"
+                                  GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#EEF7F1"
+                                  HeadersVisibility="None" Background="Transparent" BorderThickness="0"
+                                  RowHeight="50" SelectionMode="Single"
                                   ScrollViewer.VerticalScrollBarVisibility="Auto">
 
                             <DataGrid.RowStyle>
@@ -255,12 +230,8 @@
                                     <Setter Property="Background" Value="Transparent"/>
                                     <Setter Property="BorderThickness" Value="0"/>
                                     <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#F0FAF4"/>
-                                        </Trigger>
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter Property="Background" Value="#E0F5E9"/>
-                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#F0FAF4"/></Trigger>
+                                        <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="#E0F5E9"/></Trigger>
                                     </Style.Triggers>
                                 </Style>
                             </DataGrid.RowStyle>
@@ -283,17 +254,14 @@
 
                             <DataGrid.Columns>
 
-                                <!-- ROW NUMBER (sequential, not DB ID) -->
+                                <!-- ROW NUMBER -->
                                 <DataGridTemplateColumn Width="50">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border Width="32" Height="32" CornerRadius="8"
-                                                    Background="#D8F3DC" Margin="16,0,0,0"
-                                                    HorizontalAlignment="Left">
-                                                <TextBlock FontSize="12" FontWeight="Bold"
-                                                           Foreground="#1B4332"
-                                                           HorizontalAlignment="Center"
-                                                           VerticalAlignment="Center"
+                                                    Background="#D8F3DC" Margin="16,0,0,0" HorizontalAlignment="Left">
+                                                <TextBlock FontSize="12" FontWeight="Bold" Foreground="#1B4332"
+                                                           HorizontalAlignment="Center" VerticalAlignment="Center"
                                                            Text="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow},
                                                                           Converter={StaticResource RowNumberConverter}}"/>
                                             </Border>
@@ -306,10 +274,8 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding DisplayName}"
-                                                       FontSize="13" FontWeight="SemiBold"
-                                                       Foreground="#1B4332"
-                                                       TextTrimming="CharacterEllipsis"
-                                                       VerticalAlignment="Center"
+                                                       FontSize="13" FontWeight="SemiBold" Foreground="#1B4332"
+                                                       TextTrimming="CharacterEllipsis" VerticalAlignment="Center"
                                                        Margin="8,0,8,0"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -320,12 +286,10 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border CornerRadius="20" Padding="10,4"
-                                                    HorizontalAlignment="Left"
-                                                    VerticalAlignment="Center"
+                                                    HorizontalAlignment="Left" VerticalAlignment="Center"
                                                     Background="#D8F3DC">
                                                 <TextBlock Text="{Binding BeneficiaryType}"
-                                                           FontSize="11" FontWeight="SemiBold"
-                                                           Foreground="#1B4332"/>
+                                                           FontSize="11" FontWeight="SemiBold" Foreground="#1B4332"/>
                                             </Border>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -336,8 +300,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Gender}"
-                                                       FontSize="12" Foreground="#2D6A4F"
-                                                       VerticalAlignment="Center"/>
+                                                       FontSize="12" Foreground="#2D6A4F" VerticalAlignment="Center"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -347,13 +310,15 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border CornerRadius="20" Padding="10,4"
-                                                    HorizontalAlignment="Left"
-                                                    VerticalAlignment="Center">
+                                                    HorizontalAlignment="Left" VerticalAlignment="Center">
                                                 <Border.Style>
                                                     <Style TargetType="Border">
                                                         <Setter Property="Background" Value="Transparent"/>
                                                         <Style.Triggers>
                                                             <DataTrigger Binding="{Binding VulnerabilityType}" Value="Elderly">
+                                                                <Setter Property="Background" Value="#B7E4C7"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding VulnerabilityType}" Value="Senior Citizen">
                                                                 <Setter Property="Background" Value="#B7E4C7"/>
                                                             </DataTrigger>
                                                             <DataTrigger Binding="{Binding VulnerabilityType}" Value="PWD">
@@ -372,8 +337,7 @@
                                                     </Style>
                                                 </Border.Style>
                                                 <TextBlock Text="{Binding VulnerabilityType}"
-                                                           FontSize="11" FontWeight="SemiBold"
-                                                           Foreground="#1B4332"/>
+                                                           FontSize="11" FontWeight="SemiBold" Foreground="#1B4332"/>
                                             </Border>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -384,8 +348,7 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding ContactInfo}"
-                                                       FontSize="12" Foreground="#2D6A4F"
-                                                       VerticalAlignment="Center"/>
+                                                       FontSize="12" Foreground="#2D6A4F" VerticalAlignment="Center"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -397,8 +360,7 @@
                                             <TextBlock Text="{Binding Address}"
                                                        FontSize="12" Foreground="#52B788"
                                                        TextTrimming="CharacterEllipsis"
-                                                       VerticalAlignment="Center"
-                                                       Margin="0,0,8,0"/>
+                                                       VerticalAlignment="Center" Margin="0,0,8,0"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -408,26 +370,15 @@
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal"
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Center">
-                                                <Button ToolTip="Edit" Width="32" Height="32"
-                                                        Margin="3,0" Cursor="Hand"
-                                                        Command="{Binding DataContext.EditCommand,
-                                                            RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Button ToolTip="Edit" Width="32" Height="32" Margin="3,0" Cursor="Hand"
+                                                        Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                         CommandParameter="{Binding}"
-                                                        Visibility="{Binding DataContext.CanEdit,
-                                                            RelativeSource={RelativeSource AncestorType=UserControl},
-                                                            Converter={StaticResource BoolVis}}">
+                                                        Visibility="{Binding DataContext.CanEdit, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolVis}}">
                                                     <Button.Template>
                                                         <ControlTemplate TargetType="Button">
-                                                            <Border x:Name="Bd" CornerRadius="9"
-                                                                    Background="#D8F3DC"
-                                                                    BorderBrush="#52B788"
-                                                                    BorderThickness="1.5">
-                                                                <TextBlock Text="✏" FontSize="13"
-                                                                           HorizontalAlignment="Center"
-                                                                           VerticalAlignment="Center"
-                                                                           Foreground="#1B4332"/>
+                                                            <Border x:Name="Bd" CornerRadius="9" Background="#D8F3DC" BorderBrush="#52B788" BorderThickness="1.5">
+                                                                <TextBlock Text="✏" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#1B4332"/>
                                                             </Border>
                                                             <ControlTemplate.Triggers>
                                                                 <Trigger Property="IsMouseOver" Value="True">
@@ -437,23 +388,14 @@
                                                         </ControlTemplate>
                                                     </Button.Template>
                                                 </Button>
-                                                <Button ToolTip="Delete" Width="32" Height="32"
-                                                        Margin="3,0" Cursor="Hand"
-                                                        Command="{Binding DataContext.DeleteCommand,
-                                                            RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                <Button ToolTip="Delete" Width="32" Height="32" Margin="3,0" Cursor="Hand"
+                                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                         CommandParameter="{Binding}"
-                                                        Visibility="{Binding DataContext.CanDelete,
-                                                            RelativeSource={RelativeSource AncestorType=UserControl},
-                                                            Converter={StaticResource BoolVis}}">
+                                                        Visibility="{Binding DataContext.CanDelete, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolVis}}">
                                                     <Button.Template>
                                                         <ControlTemplate TargetType="Button">
-                                                            <Border x:Name="Bd" CornerRadius="9"
-                                                                    Background="#FFF0EE"
-                                                                    BorderBrush="#FFD0CC"
-                                                                    BorderThickness="1.5">
-                                                                <TextBlock Text="🗑" FontSize="13"
-                                                                           HorizontalAlignment="Center"
-                                                                           VerticalAlignment="Center"/>
+                                                            <Border x:Name="Bd" CornerRadius="9" Background="#FFF0EE" BorderBrush="#FFD0CC" BorderThickness="1.5">
+                                                                <TextBlock Text="🗑" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                             </Border>
                                                             <ControlTemplate.Triggers>
                                                                 <Trigger Property="IsMouseOver" Value="True">
@@ -477,10 +419,8 @@
         </Grid>
 
         <!-- SIDE FORM PANEL -->
-        <Border Grid.Column="1" Width="400"
-                Background="White"
-                BorderBrush="#D8F3DC"
-                BorderThickness="1.5,0,0,0"
+        <Border Grid.Column="1" Width="400" Background="White"
+                BorderBrush="#D8F3DC" BorderThickness="1.5,0,0,0"
                 Visibility="{Binding IsFormVisible, Converter={StaticResource BoolVis}}">
             <Grid>
                 <Grid.RowDefinitions>
@@ -490,8 +430,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- Form Header -->
-                <Border Grid.Row="0" Padding="24,18"
-                        BorderBrush="#D8F3DC" BorderThickness="0,0,0,1">
+                <Border Grid.Row="0" Padding="24,18" BorderBrush="#D8F3DC" BorderThickness="0,0,0,1">
                     <Border.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                             <GradientStop Color="#E8F5E9" Offset="0"/>
@@ -500,36 +439,25 @@
                     </Border.Background>
                     <Grid>
                         <StackPanel>
-                            <TextBlock Text="{Binding FormTitle}"
-                                       FontSize="17" FontWeight="Bold"
-                                       Foreground="#1B4332"/>
-                            <TextBlock Text="Fill in the details below"
-                                       FontSize="12" Foreground="#52B788"
-                                       Margin="0,3,0,0"/>
+                            <TextBlock Text="{Binding FormTitle}" FontSize="17" FontWeight="Bold" Foreground="#1B4332"/>
+                            <TextBlock Text="Fill in the details below" FontSize="12" Foreground="#52B788" Margin="0,3,0,0"/>
                         </StackPanel>
                         <Button HorizontalAlignment="Right" Content="✕"
-                                Style="{StaticResource IconButtonStyle}"
-                                Command="{Binding CancelCommand}"/>
+                                Style="{StaticResource IconButtonStyle}" Command="{Binding CancelCommand}"/>
                     </Grid>
                 </Border>
 
                 <!-- Form Fields -->
-                <ScrollViewer Grid.Row="1" Padding="24,16,24,0"
-                              VerticalScrollBarVisibility="Auto">
+                <ScrollViewer Grid.Row="1" Padding="24,16,24,0" VerticalScrollBarVisibility="Auto">
                     <StackPanel>
 
                         <!-- Beneficiary Type -->
                         <TextBlock Text="BENEFICIARY TYPE" Style="{StaticResource FormLabelStyle}"/>
                         <StackPanel Orientation="Horizontal" Margin="0,4,0,16">
-                            <RadioButton Content="Person" GroupName="BType"
-                                         Style="{StaticResource ChipRadio}"
-                                         Margin="0,0,8,0"
-                                         IsChecked="{Binding EditingBeneficiary.BeneficiaryType,
-                                             Converter={h:EnumToBoolConverter}, ConverterParameter=Person}"/>
-                            <RadioButton Content="Group" GroupName="BType"
-                                         Style="{StaticResource ChipRadio}"
-                                         IsChecked="{Binding EditingBeneficiary.BeneficiaryType,
-                                             Converter={h:EnumToBoolConverter}, ConverterParameter=Group}"/>
+                            <RadioButton Content="Person" GroupName="BType" Style="{StaticResource ChipRadio}" Margin="0,0,8,0"
+                                         IsChecked="{Binding EditingBeneficiary.BeneficiaryType, Converter={h:EnumToBoolConverter}, ConverterParameter=Person}"/>
+                            <RadioButton Content="Group" GroupName="BType" Style="{StaticResource ChipRadio}"
+                                         IsChecked="{Binding EditingBeneficiary.BeneficiaryType, Converter={h:EnumToBoolConverter}, ConverterParameter=Group}"/>
                         </StackPanel>
 
                         <!-- PERSON FIELDS -->
@@ -541,14 +469,14 @@
 
                             <TextBlock Text="GENDER" Style="{StaticResource FormLabelStyle}"/>
                             <WrapPanel Margin="0,4,0,14">
-                                <RadioButton Content="Male"   GroupName="Gender" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                <RadioButton Content="Male"         GroupName="Gender" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
                                              IsChecked="{Binding EditingBeneficiary.Gender, Converter={h:EnumToBoolConverter}, ConverterParameter=Male}"/>
-                                <RadioButton Content="Female" GroupName="Gender" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                <RadioButton Content="Female"       GroupName="Gender" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
                                              IsChecked="{Binding EditingBeneficiary.Gender, Converter={h:EnumToBoolConverter}, ConverterParameter=Female}"/>
-                                <RadioButton Content="Other"  GroupName="Gender" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                <RadioButton Content="Other"        GroupName="Gender" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
                                              IsChecked="{Binding EditingBeneficiary.Gender, Converter={h:EnumToBoolConverter}, ConverterParameter=Other}"/>
                                 <RadioButton Content="None (Group)" GroupName="Gender" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                             IsChecked="{Binding EditingBeneficiary.Gender, Converter={h:EnumToBoolConverter}, ConverterParameter=Other}"/>
+                                             IsChecked="{Binding EditingBeneficiary.Gender, Converter={h:EnumToBoolConverter}, ConverterParameter=None}"/>
                             </WrapPanel>
 
                             <TextBlock Text="AGE" Style="{StaticResource FormLabelStyle}"/>
@@ -578,17 +506,19 @@
                         <!-- VULNERABILITY TYPE -->
                         <TextBlock Text="VULNERABILITY TYPE" Style="{StaticResource FormLabelStyle}"/>
                         <WrapPanel Margin="0,4,0,14">
-                            <RadioButton Content="None"        GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                            <RadioButton Content="None"           GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
                                          IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=None}"/>
-                            <RadioButton Content="Elderly"     GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                            <RadioButton Content="Elderly"        GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
                                          IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=Elderly}"/>
-                            <RadioButton Content="PWD"         GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                            <RadioButton Content="Senior Citizen" GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                         IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=Senior Citizen}"/>
+                            <RadioButton Content="PWD"            GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
                                          IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=PWD}"/>
-                            <RadioButton Content="Indigent"    GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                            <RadioButton Content="Indigent"       GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
                                          IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=Indigent}"/>
-                            <RadioButton Content="Solo Parent" GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                            <RadioButton Content="Solo Parent"    GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
                                          IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=Solo Parent}"/>
-                            <RadioButton Content="4Ps"         GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                            <RadioButton Content="4Ps"            GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
                                          IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=4Ps}"/>
                         </WrapPanel>
 
@@ -596,8 +526,7 @@
                         <TextBlock Text="ADDRESS" Style="{StaticResource FormLabelStyle}"/>
                         <TextBox Style="{StaticResource ModernTextBoxStyle}"
                                  Height="80" HorizontalAlignment="Stretch"
-                                 TextWrapping="Wrap" AcceptsReturn="True"
-                                 Margin="0,0,0,14"
+                                 TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,14"
                                  Text="{Binding EditingBeneficiary.Address, UpdateSourceTrigger=PropertyChanged}"/>
 
                         <!-- CONTACT INFO -->
@@ -620,16 +549,12 @@
                 </ScrollViewer>
 
                 <!-- Form Footer -->
-                <Border Grid.Row="2" Padding="24,14"
-                        BorderBrush="#D8F3DC" BorderThickness="0,1,0,0"
-                        Background="#F7FDF9">
+                <Border Grid.Row="2" Padding="24,14" BorderBrush="#D8F3DC" BorderThickness="0,1,0,0" Background="#F7FDF9">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Content="Cancel" Margin="0,0,10,0"
-                                Style="{StaticResource OutlineButtonStyle}"
-                                Command="{Binding CancelCommand}"/>
+                                Style="{StaticResource OutlineButtonStyle}" Command="{Binding CancelCommand}"/>
                         <Button Content="Save Beneficiary"
-                                Style="{StaticResource PrimaryButtonStyle}"
-                                Command="{Binding SaveCommand}"/>
+                                Style="{StaticResource PrimaryButtonStyle}" Command="{Binding SaveCommand}"/>
                     </StackPanel>
                 </Border>
             </Grid>

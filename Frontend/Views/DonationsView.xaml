@@ -123,11 +123,13 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
+                <!-- Search Bar -->
                 <Border Grid.Row="0" Margin="0,0,0,12" CornerRadius="12" Background="White" BorderBrush="#D8F3DC" BorderThickness="1.5">
                     <Border.Effect><DropShadowEffect Color="#1B4332" BlurRadius="8" ShadowDepth="0" Opacity="0.06"/></Border.Effect>
                     <Grid Margin="16,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
@@ -153,6 +155,23 @@
                         <DatePicker Grid.Column="2" Style="{StaticResource ModernDatePickerStyle}" SelectedDate="{Binding FilterFrom}" Width="140"/>
                         <TextBlock Grid.Column="3" Text="To:" VerticalAlignment="Center" Margin="12,0,6,0" Foreground="#52B788" FontSize="12" FontWeight="SemiBold"/>
                         <DatePicker Grid.Column="4" Style="{StaticResource ModernDatePickerStyle}" SelectedDate="{Binding FilterTo}" Width="140"/>
+                        <Button Grid.Column="5" Margin="10,0,0,0">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="Bd" CornerRadius="8" Padding="16,8"
+                                            BorderBrush="#52B788" BorderThickness="1.5"
+                                            Background="Transparent">
+                                        <TextBlock Text="Search" FontSize="12"
+                                                   FontWeight="SemiBold" Foreground="#1B4332"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Bd" Property="Background" Value="#D8F3DC"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
                     </Grid>
                 </Border>
 
@@ -225,7 +244,6 @@
                             </DataGrid.CellStyle>
                             <DataGrid.Columns>
 
-                                <!-- ROW NUMBER -->
                                 <DataGridTemplateColumn Width="50">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>

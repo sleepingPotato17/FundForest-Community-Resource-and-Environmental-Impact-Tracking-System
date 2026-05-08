@@ -130,20 +130,41 @@
                 <Border Grid.Row="0" Margin="0,0,0,12" CornerRadius="12" Background="White" BorderBrush="#D8F3DC" BorderThickness="1.5">
                     <Border.Effect><DropShadowEffect Color="#1B4332" BlurRadius="8" ShadowDepth="0" Opacity="0.06"/></Border.Effect>
                     <Grid Margin="16,10">
-                        <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="36" BorderThickness="0" Background="Transparent"
-                                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Text="🔍  Search programs..." Foreground="#A8C5B0" FontSize="12"
-                                   IsHitTestVisible="False" VerticalAlignment="Center" Margin="14,0,0,0">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding SearchText}" Value=""><Setter Property="Visibility" Value="Visible"/></DataTrigger>
-                                        <DataTrigger Binding="{Binding SearchText}" Value="{x:Null}"><Setter Property="Visibility" Value="Visible"/></DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="36" BorderThickness="0" Background="Transparent"
+                                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="🔍  Search programs..." Foreground="#A8C5B0" FontSize="12"
+                                       IsHitTestVisible="False" VerticalAlignment="Center" Margin="14,0,0,0">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SearchText}" Value=""><Setter Property="Visibility" Value="Visible"/></DataTrigger>
+                                            <DataTrigger Binding="{Binding SearchText}" Value="{x:Null}"><Setter Property="Visibility" Value="Visible"/></DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                        <Button Grid.Column="1" Margin="10,0,0,0">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="Bd" CornerRadius="8" Padding="16,8"
+                                            BorderBrush="#52B788" BorderThickness="1.5" Background="Transparent">
+                                        <TextBlock Text="Search" FontSize="12" FontWeight="SemiBold" Foreground="#1B4332"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="Bd" Property="Background" Value="#D8F3DC"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
                     </Grid>
                 </Border>
 
@@ -155,6 +176,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
+                        <!-- Column Headers — fixed alignment -->
                         <Border Grid.Row="0" CornerRadius="14,14,0,0" Padding="0,12">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
@@ -162,9 +184,9 @@
                                     <GradientStop Color="#F0FAF4" Offset="1"/>
                                 </LinearGradientBrush>
                             </Border.Background>
-                            <Grid Margin="16,0">
+                            <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="66"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="90"/>
                                     <ColumnDefinition Width="130"/>
@@ -173,7 +195,7 @@
                                     <ColumnDefinition Width="110"/>
                                     <ColumnDefinition Width="110"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="#"            FontSize="11" FontWeight="Bold" Foreground="#52B788"/>
+                                <TextBlock Grid.Column="0" Text="#"            FontSize="11" FontWeight="Bold" Foreground="#52B788" Margin="16,0,0,0"/>
                                 <TextBlock Grid.Column="1" Text="PROGRAM NAME" FontSize="11" FontWeight="Bold" Foreground="#1B4332" Margin="8,0,0,0"/>
                                 <TextBlock Grid.Column="2" Text="TARGET"       FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
                                 <TextBlock Grid.Column="3" Text="BARANGAY"     FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
@@ -218,7 +240,6 @@
                             </DataGrid.CellStyle>
                             <DataGrid.Columns>
 
-                                <!-- ROW NUMBER -->
                                 <DataGridTemplateColumn Width="50">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>

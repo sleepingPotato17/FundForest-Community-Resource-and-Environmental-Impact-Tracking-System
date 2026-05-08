@@ -27,13 +27,9 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- ═══════════════════════════════
-                 HEADER: Logo + Title + Badge
-                 ═══════════════════════════════ -->
+            <!-- HEADER -->
             <Grid Grid.Row="0" Margin="0,0,0,18">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-
-                    <!-- Logo Badge (matches Donations card style) -->
                     <Border Width="50" Height="50" CornerRadius="14" Margin="0,0,14,0">
                         <Border.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -50,8 +46,6 @@
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"/>
                     </Border>
-
-                    <!-- Title + subtitle + pending badge -->
                     <StackPanel VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Manage Users" FontSize="22"
@@ -70,9 +64,7 @@
                 </StackPanel>
             </Grid>
 
-            <!-- ═══════════════════════════════
-                 ERROR BANNER
-                 ═══════════════════════════════ -->
+            <!-- ERROR BANNER -->
             <Border Grid.Row="1" Background="#FFF0EE" BorderBrush="#FFD0CC"
                     BorderThickness="1" CornerRadius="10" Padding="14,10"
                     Margin="0,0,0,12"
@@ -83,9 +75,7 @@
                 </StackPanel>
             </Border>
 
-            <!-- ═══════════════════════════════
-                 TABLE CARD
-                 ═══════════════════════════════ -->
+            <!-- TABLE CARD -->
             <Border Grid.Row="2" CornerRadius="16" Background="White"
                     BorderBrush="#D8F3DC" BorderThickness="1.5">
                 <Border.Effect>
@@ -114,11 +104,11 @@
                                 <ColumnDefinition Width="130"/>
                                 <ColumnDefinition Width="120"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="FULL NAME"   FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
-                            <TextBlock Grid.Column="1" Text="USERNAME"    FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
-                            <TextBlock Grid.Column="2" Text="ROLE"        FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
-                            <TextBlock Grid.Column="3" Text="REGISTERED"  FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
-                            <TextBlock Grid.Column="4" Text="STATUS"      FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
+                            <TextBlock Grid.Column="0" Text="FULL NAME"  FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
+                            <TextBlock Grid.Column="1" Text="USERNAME"   FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
+                            <TextBlock Grid.Column="2" Text="ROLE"       FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
+                            <TextBlock Grid.Column="3" Text="REGISTERED" FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
+                            <TextBlock Grid.Column="4" Text="STATUS"     FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
                         </Grid>
                     </Border>
 
@@ -132,6 +122,7 @@
                               CanUserDeleteRows="False"
                               CanUserResizeRows="False"
                               CanUserReorderColumns="False"
+                              CanUserResizeColumns="False"
                               GridLinesVisibility="Horizontal"
                               HorizontalGridLinesBrush="#EEF7F1"
                               HeadersVisibility="None"
@@ -139,7 +130,9 @@
                               Background="Transparent"
                               BorderThickness="0"
                               RowHeight="50"
-                              ScrollViewer.VerticalScrollBarVisibility="Auto">
+                              RowHeaderWidth="0"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
@@ -174,7 +167,6 @@
 
                         <DataGrid.Columns>
 
-                            <!-- Full Name -->
                             <DataGridTemplateColumn Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -187,7 +179,6 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Username -->
                             <DataGridTemplateColumn Width="130">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -198,7 +189,6 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Role Badge -->
                             <DataGridTemplateColumn Width="100">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -214,7 +204,6 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Registered -->
                             <DataGridTemplateColumn Width="130">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -225,7 +214,6 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Status Badge -->
                             <DataGridTemplateColumn Width="120">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -269,21 +257,19 @@
                 </Grid>
             </Border>
 
-            <!-- ═══════════════════════════════
-                 ACTION BUTTONS
-                 ═══════════════════════════════ -->
+            <!-- ACTION BUTTONS — full width, no white space -->
             <Border Grid.Row="3" Margin="0,14,0,0" CornerRadius="12"
-                    Padding="16,10" Background="White"
+                    Padding="8,10" Background="White"
                     BorderBrush="#D8F3DC" BorderThickness="1.5">
                 <Border.Effect>
                     <DropShadowEffect Color="#1B4332" BlurRadius="10"
                                       ShadowDepth="0" Opacity="0.05"/>
                 </Border.Effect>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <UniformGrid Rows="1" Columns="4">
 
                     <!-- Refresh -->
                     <Button Content="↻  Refresh" Command="{Binding RefreshCommand}"
-                            Height="38" Padding="18,0" Margin="0,0,8,0" Cursor="Hand"
+                            Height="38" Margin="4,0" Cursor="Hand"
                             FontSize="13" FontWeight="SemiBold" Foreground="#40916C"
                             Background="Transparent" BorderBrush="#B7E4C7" BorderThickness="1.5">
                         <Button.Template>
@@ -291,8 +277,7 @@
                                 <Border x:Name="Bd" CornerRadius="10"
                                         Background="{TemplateBinding Background}"
                                         BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness}"
-                                        Padding="{TemplateBinding Padding}">
+                                        BorderThickness="{TemplateBinding BorderThickness}">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <ControlTemplate.Triggers>
@@ -306,11 +291,11 @@
 
                     <!-- Approve -->
                     <Button Content="✓  Approve" Command="{Binding ApproveCommand}"
-                            Height="38" Padding="18,0" Margin="0,0,8,0" Cursor="Hand"
+                            Height="38" Margin="4,0" Cursor="Hand"
                             FontSize="13" FontWeight="SemiBold" Foreground="White">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border x:Name="Bd" CornerRadius="10" Padding="{TemplateBinding Padding}">
+                                <Border x:Name="Bd" CornerRadius="10">
                                     <Border.Background>
                                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                                             <GradientStop Color="#1B4332" Offset="0"/>
@@ -337,11 +322,11 @@
 
                     <!-- Reject -->
                     <Button Content="✕  Reject" Command="{Binding RejectCommand}"
-                            Height="38" Padding="18,0" Margin="0,0,8,0" Cursor="Hand"
+                            Height="38" Margin="4,0" Cursor="Hand"
                             FontSize="13" FontWeight="SemiBold" Foreground="#C0392B">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border x:Name="Bd" CornerRadius="10" Padding="{TemplateBinding Padding}"
+                                <Border x:Name="Bd" CornerRadius="10"
                                         Background="#FFF0EE" BorderBrush="#FFD0CC" BorderThickness="1.5">
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
@@ -359,11 +344,11 @@
 
                     <!-- Delete -->
                     <Button Content="🗑  Delete" Command="{Binding DeleteCommand}"
-                            Height="38" Padding="18,0" Cursor="Hand"
+                            Height="38" Margin="4,0" Cursor="Hand"
                             FontSize="13" FontWeight="SemiBold" Foreground="White">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border x:Name="Bd" CornerRadius="10" Padding="{TemplateBinding Padding}"
+                                <Border x:Name="Bd" CornerRadius="10"
                                         Background="#E63946" BorderThickness="0">
                                     <Border.Effect>
                                         <DropShadowEffect Color="#E63946" BlurRadius="10"
@@ -383,7 +368,7 @@
                         </Button.Template>
                     </Button>
 
-                </StackPanel>
+                </UniformGrid>
             </Border>
 
         </Grid>
