@@ -15,7 +15,6 @@
 </div>
 
 <br>
-
 ---
 
 ## Table of Contents
@@ -37,7 +36,6 @@
 15. [Acknowledgements](#acknowledgements)
 
 ---
-
 <br>
 
 ## Project Overview
@@ -58,7 +56,6 @@ The system covers the full lifecycle of community resource management: from reco
 FundForest does not simply store records — it enforces accountability. Every action in the system is tied to a role, every distribution is linked to a beneficiary and program, and every donation is attributed to a donor. This creates a complete, traceable audit trail that can be reviewed at any time.
 
 <br>
-
 ---
 
 ## 🧩 UML Diagram
