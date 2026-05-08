@@ -40,17 +40,26 @@
 
 <br>
 
-<p align="justify">
-FundForest is a centralized system designed to improve transparency, accountability, and efficiency in managing community projects and donation drives.
+## Project Overview
 
-Many organizations struggle with tracking where donations go, how resources are used, and whether aid reaches the intended beneficiaries. FundForest addresses this issue by replacing manual processes (such as spreadsheets and paper records) with a structured digital platform.
-</p>
-The purpose of this system is to:
+**FundForest** is a Windows desktop application developed using C# and WPF (.NET 8) with a MariaDB relational database backend. It was created to address a persistent problem in community-based organizations — the lack of a structured, transparent, and auditable system for managing donated funds and distributed resources.
 
-- Provide real-time tracking of funds and resources
-- Ensure accurate and reliable data management
-- Improve trust between donors, administrators, and beneficiaries
-- Enable organizations to measure their impact effectively
+Many barangay-level organizations, community cooperatives, and local government units still rely on manual record-keeping through spreadsheets or paper forms. These methods are prone to error, difficult to audit, and offer no real-time visibility into how resources are being allocated. FundForest replaces these outdated processes with a centralized, role-aware, and database-backed management system.
+
+The system covers the full lifecycle of community resource management: from recording a donation and registering a donor, to creating a program, enrolling beneficiaries, and logging each distribution — all tracked, searchable, and secured by role-based access control.
+
+**Target Users:**
+- Barangay administrators managing community aid programs
+- Staff responsible for recording donations and distributions
+- Local users who need read-only visibility into program data
+- System administrators overseeing user accounts and approvals
+
+**Core Value Proposition:**
+FundForest does not simply store records — it enforces accountability. Every action in the system is tied to a role, every distribution is linked to a beneficiary and program, and every donation is attributed to a donor. This creates a complete, traceable audit trail that can be reviewed at any time.
+
+<br>
+
+---
 
 ## 🧩 UML Diagram
 
