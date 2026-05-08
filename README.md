@@ -700,7 +700,7 @@ The following enhancements are planned or recommended for future development cyc
 | Name | GitHub |
 |------|--------|
 | John Joseph S. Dimatulac | [@Youuusoff](https://github.com/Youuusoff) |
-| Jiselle Mae M. Silla | [@ellemrsgn27](https://github.com/ellemrsgn27) |
+| Jisselle Mae M. Silla | [@ellemrsgn27](https://github.com/ellemrsgn27) |
 | Lance Kert O. Mendoza | [@sleepingPotato17](https://github.com/sleepingPotato17) |
 
 </div>
