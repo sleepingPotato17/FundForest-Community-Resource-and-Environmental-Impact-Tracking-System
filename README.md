@@ -444,30 +444,21 @@ FundForest/
 │       ├── DistributionViewModel.cs
 │       └── ManageUsersViewModel.cs
 ├── Models/
-│   ├── User.cs
-│   ├── Donor.cs
-│   ├── Beneficiary.cs
-│   ├── Donation.cs
-│   ├── Program.cs
-│   └── Distribution.cs
+│   ├── Models.cs
 ├── Services/
 │   └── DatabaseService.cs
 ├── Helpers/
-│   ├── RelayCommand.cs
-│   ├── BaseViewModel.cs
-│   ├── BoolToVisibilityConverter.cs
-│   ├── EnumToBoolConverter.cs
-│   ├── NullToVisibilityConverter.cs
-│   ├── PesoConverter.cs
-│   ├── RowNumberConverter.cs
-│   ├── StatusToColorConverter.cs
-│   └── StringNotEmptyToVisibilityConverter.cs
+│   ├── Helpers.cs
 ├── Resources/
-│   └── Styles/
-│       └── GlobalStyles.xaml
+│   └── styles.xaml
+│   └── colors.xaml
+├── .gitignore
+├── app.manifest
 ├── App.xaml
 ├── App.xaml.cs
+├── debug.txt
 ├── FundForest.csproj
+├── FundForest.sln
 └── README.md
 
 ```
