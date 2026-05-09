@@ -434,15 +434,13 @@ FundForest/
 │   │   ├── ManageUsersView.xaml
 │   │   └── ManageUsersView.xaml.cs
 │   └── ViewModels/
-│       ├── LoginViewModel.cs
-│       ├── RegisterViewModel.cs
-│       ├── DashboardViewModel.cs
 │       ├── BeneficiariesViewModel.cs
-│       ├── DonorsViewModel.cs
-│       ├── DonationsViewModel.cs
-│       ├── ProgramsViewModel.cs
-│       ├── DistributionViewModel.cs
+│       ├── DashboardViewModel.cs
+│       ├── LoginViewModel.cs
+│       ├── MainViewModel.cs
 │       └── ManageUsersViewModel.cs
+│       └── ModuleViewModel.cs
+│       └──  RegisterViewModel.cs        
 ├── Models/
 │   ├── Models.cs
 ├── Services/
