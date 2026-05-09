@@ -615,8 +615,8 @@ The system enforces three distinct access levels:
 | Role | Permissions |
 |------|-------------|
 | Admin | Full access to all modules including User Management. Can approve, reject, and delete user accounts. |
-| Staff | Can perform CRUD operations on Donors, Beneficiaries, Donations, Programs, and Distributions except delete. Cannot access User Management and Export PDF. |
-| Local | Read-only access. Can view records but cannot add, edit, or delete any data. |
+| Staff | Can perform CRUD operations on Donors, Beneficiaries, Donations, Programs, and Distributions except delete. Cannot access User Management. |
+| Local | Read-only access. Can view records but cannot add, edit, or delete any data and cannot access Export PDF. |
 
 Role enforcement occurs at two levels:
 1. **Navigation** — Menu items and tabs are shown or hidden based on the authenticated user's role
