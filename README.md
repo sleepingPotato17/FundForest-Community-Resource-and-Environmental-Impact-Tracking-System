@@ -95,7 +95,7 @@ FundForest does not simply store records — it enforces accountability. Every a
 - Link each donation to a registered donor
 - Capture donation date, amount, goods description (for in-kind donations), and notes
 - Filter donations by donor name and date range
-- Export donation records to CSV format for external reporting
+- Export donation records to PDF format for external reporting
 
 ### Program Management
 - Create community programs with defined start and end dates
@@ -652,7 +652,7 @@ cmd.Parameters.AddWithValue("@contact", donor.ContactInfo);
 | Dashboard | Summary statistics and quick navigation | ![Dashboard](screenshots/dashboard.png) |
 | Beneficiaries | Beneficiary list with search and side-panel form | ![Beneficiaries](screenshots/beneficiaries.png) |
 | Donors | Donor registry with CRUD operations | ![Donors](screenshots/donors.png) |
-| Donations | Donation records with date filtering and CSV export | ![Donations](screenshots/donations.png) |
+| Donations | Donation records with date filtering and PDF export | ![Donations](screenshots/donations.png) |
 | Programs | Program list with archive functionality | ![Programs](screenshots/programs.png) |
 | Distribution | Distribution tracking linked to programs and beneficiaries | ![Distribution](screenshots/distribution.png) |
 | Manage Users | Admin-only user approval and management panel | ![Users](screenshots/users.png) |
@@ -668,7 +668,6 @@ The following enhancements are planned or recommended for future development cyc
 | Enhancement | Description |
 |-------------|-------------|
 | Cloud Database | Host MariaDB on a cloud provider (AWS RDS, Azure Database, PlanetScale) to allow multi-location access |
-| PDF Report Export | Generate formatted PDF reports for donations, beneficiary lists, and distribution summaries using FastReport |
 | Analytics Dashboard | Extend the dashboard with trend charts showing monthly donation volume, program activity, and distribution rates |
 | Email Notifications | Send automated email alerts for pending account approvals, new donations, and upcoming program deadlines |
 | Audit Log | Record every Create, Update, and Delete action with the user who performed it and the timestamp |
