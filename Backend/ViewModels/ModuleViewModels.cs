@@ -1,12 +1,17 @@
 using System;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Text;
 using System.Windows;
 using FundForest.Helpers;
 using FundForest.Models;
 using FundForest.Services;
 using Microsoft.Win32;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
+using iText.Kernel.Colors;
+using iText.Commons.Bouncycastle.Cert;
+using iText.Bouncycastle.X509;
 
 namespace FundForest.ViewModels
 {
@@ -34,9 +39,6 @@ namespace FundForest.ViewModels
         public string ErrorMessage  { get => _errorMessage;  set => SetProperty(ref _errorMessage, value); }
         public string[] TypeOptions = { "Individual", "Group" };
 
-        
-
-        // ✅ ROLE PERMISSIONS
         public bool CanEdit   => SessionService.Instance.CanEdit;
         public bool CanDelete => SessionService.Instance.CanDelete;
         public bool CanAdd    => SessionService.Instance.CanEdit;
@@ -50,7 +52,7 @@ namespace FundForest.ViewModels
         public DonorsViewModel()
         {
             AddCommand    = new RelayCommand(OpenAdd);
-            EditCommand   = new RelayCommand(OpenEdit,    _ => SelectedDonor != null);
+            EditCommand   = new RelayCommand(OpenEdit,       _ => SelectedDonor != null);
             DeleteCommand = new RelayCommand(DeleteSelected, _ => SelectedDonor != null);
             SaveCommand   = new RelayCommand(Save);
             CancelCommand = new RelayCommand(() => IsFormVisible = false);
@@ -73,8 +75,14 @@ namespace FundForest.ViewModels
         {
             if (SelectedDonor == null) return;
             if (!SessionService.Instance.CanEdit) return;
-            EditingDonor = new Donor { DonorID = SelectedDonor.DonorID, DonorName = SelectedDonor.DonorName,
-                DonationType = SelectedDonor.DonationType, ContactInfo = SelectedDonor.ContactInfo, Address = SelectedDonor.Address };
+            EditingDonor = new Donor
+            {
+                DonorID      = SelectedDonor.DonorID,
+                DonorName    = SelectedDonor.DonorName,
+                DonationType = SelectedDonor.DonationType,
+                ContactInfo  = SelectedDonor.ContactInfo,
+                Address      = SelectedDonor.Address
+            };
             IsEditMode = true; IsFormVisible = true; ErrorMessage = "";
         }
 
@@ -132,31 +140,36 @@ namespace FundForest.ViewModels
         public bool IsGoods => EditingDonation.DonationType == "Goods";
         public string[] TypeOptions = { "Cash", "Goods" };
 
-        // ✅ ROLE PERMISSIONS
         public bool CanEdit   => SessionService.Instance.CanEdit;
         public bool CanDelete => SessionService.Instance.CanDelete;
         public bool CanAdd    => SessionService.Instance.CanEdit;
 
-        public RelayCommand AddCommand      { get; }
-        public RelayCommand EditCommand     { get; }
-        public RelayCommand DeleteCommand   { get; }
-        public RelayCommand SaveCommand     { get; }
-        public RelayCommand CancelCommand   { get; }
-        public RelayCommand ExportCommand   { get; }
-        public RelayCommand ClearFilterCmd  { get; }
+        public RelayCommand AddCommand     { get; }
+        public RelayCommand EditCommand    { get; }
+        public RelayCommand DeleteCommand  { get; }
+        public RelayCommand SaveCommand    { get; }
+        public RelayCommand CancelCommand  { get; }
+        public RelayCommand ExportCommand  { get; }
+        public RelayCommand ClearFilterCmd { get; }
 
         public DonationsViewModel()
         {
             AddCommand     = new RelayCommand(OpenAdd);
-            EditCommand    = new RelayCommand(OpenEdit,    _ => SelectedDonation != null);
+            EditCommand    = new RelayCommand(OpenEdit,       _ => SelectedDonation != null);
             DeleteCommand  = new RelayCommand(DeleteSelected, _ => SelectedDonation != null);
             SaveCommand    = new RelayCommand(Save);
             CancelCommand  = new RelayCommand(() => IsFormVisible = false);
-            ExportCommand  = new RelayCommand(ExportToCsv);
+            ExportCommand  = new RelayCommand(ExportToPdf);
             ClearFilterCmd = new RelayCommand(() => { FilterFrom = null; FilterTo = null; });
 
-            EditingDonation.PropertyChanged += (s, e) => { if (e.PropertyName == nameof(Donation.DonationType)) OnPropertyChanged(nameof(IsGoods)); };
-            LoadData(); LoadDonors();
+            EditingDonation.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == nameof(Donation.DonationType))
+                    OnPropertyChanged(nameof(IsGoods));
+            };
+
+            LoadData();
+            LoadDonors();
         }
 
         private void LoadData()
@@ -174,7 +187,8 @@ namespace FundForest.ViewModels
         private void OpenAdd(object? _)
         {
             if (!SessionService.Instance.CanEdit) return;
-            EditingDonation = new Donation { DonationDate = DateTime.Today }; IsEditMode = false; IsFormVisible = true; ErrorMessage = "";
+            EditingDonation = new Donation { DonationDate = DateTime.Today };
+            IsEditMode = false; IsFormVisible = true; ErrorMessage = "";
         }
 
         private void OpenEdit(object? _)
@@ -183,10 +197,14 @@ namespace FundForest.ViewModels
             if (!SessionService.Instance.CanEdit) return;
             EditingDonation = new Donation
             {
-                DonationID = SelectedDonation.DonationID, DonorID = SelectedDonation.DonorID,
-                DonorName = SelectedDonation.DonorName, Amount = SelectedDonation.Amount,
-                DonationType = SelectedDonation.DonationType, GoodsDescription = SelectedDonation.GoodsDescription,
-                DonationDate = SelectedDonation.DonationDate, Notes = SelectedDonation.Notes,
+                DonationID       = SelectedDonation.DonationID,
+                DonorID          = SelectedDonation.DonorID,
+                DonorName        = SelectedDonation.DonorName,
+                Amount           = SelectedDonation.Amount,
+                DonationType     = SelectedDonation.DonationType,
+                GoodsDescription = SelectedDonation.GoodsDescription,
+                DonationDate     = SelectedDonation.DonationDate,
+                Notes            = SelectedDonation.Notes,
             };
             IsEditMode = true; IsFormVisible = true;
         }
@@ -195,7 +213,8 @@ namespace FundForest.ViewModels
         {
             if (SelectedDonation == null) return;
             if (!SessionService.Instance.CanDelete) return;
-            if (MessageBox.Show("Delete this donation record?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
+            if (MessageBox.Show("Delete this donation record?", "Confirm",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
             try { _db.DeleteDonation(SelectedDonation.DonationID); LoadData(); }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error"); }
         }
@@ -213,15 +232,79 @@ namespace FundForest.ViewModels
             catch (Exception ex) { ErrorMessage = ex.Message; }
         }
 
-        private void ExportToCsv(object? _)
+        private void ExportToPdf(object? _)
         {
-            var dlg = new SaveFileDialog { Filter = "CSV Files|*.csv", FileName = "donations_export" };
+            var dlg = new SaveFileDialog { Filter = "PDF Files|*.pdf", FileName = "donations_export" };
             if (dlg.ShowDialog() != true) return;
-            var sb = new StringBuilder("Donor,Amount,Type,Goods Description,Date\n");
-            foreach (var d in Donations)
-                sb.AppendLine($"{d.DonorName},{d.Amount},{d.DonationType},{d.GoodsDescription},{d.DonationDate:yyyy-MM-dd}");
-            File.WriteAllText(dlg.FileName, sb.ToString());
-            MessageBox.Show("Exported successfully!", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            try
+            {
+
+                using var writer = new PdfWriter(dlg.FileName);
+                using var pdf    = new PdfDocument(writer);
+                using var doc    = new Document(pdf);
+
+                // Title
+                doc.Add(new Paragraph("Donations Report")
+                    .SetFontSize(18)
+                    .SetFontColor(new DeviceRgb(27, 67, 50))
+                    .SetMarginBottom(4));
+
+                doc.Add(new Paragraph($"Generated: {DateTime.Now:MMMM dd, yyyy}")
+                    .SetFontSize(10)
+                    .SetFontColor(new DeviceRgb(82, 183, 136))
+                    .SetMarginBottom(16));
+
+                // Table — 5 columns
+                var table = new Table(new float[] { 2f, 1.5f, 1f, 2f, 1.2f })
+                    .UseAllAvailableWidth();
+
+                // Header row
+                var headerBg = new DeviceRgb(27, 67, 50);
+                foreach (var h in new[] { "Donor", "Amount", "Type", "Goods Description", "Date" })
+                {
+                    table.AddHeaderCell(new Cell()
+                        .Add(new Paragraph(h)
+                            .SetFontColor(ColorConstants.WHITE)
+                            .SetFontSize(10))
+                        .SetBackgroundColor(headerBg)
+                        .SetPadding(8));
+                }
+
+                // Data rows
+                var rowAlt = new DeviceRgb(216, 243, 220);
+                bool alt = false;
+                foreach (var d in Donations)
+                {
+                    var bg = alt ? rowAlt : ColorConstants.WHITE;
+                    table.AddCell(new Cell().Add(new Paragraph(d.DonorName                          ?? "").SetFontSize(10)).SetBackgroundColor(bg).SetPadding(6));
+                    table.AddCell(new Cell().Add(new Paragraph($"PHP {d.Amount:N2}")                     .SetFontSize(10)).SetBackgroundColor(bg).SetPadding(6));
+                    table.AddCell(new Cell().Add(new Paragraph(d.DonationType                       ?? "").SetFontSize(10)).SetBackgroundColor(bg).SetPadding(6));
+                    table.AddCell(new Cell().Add(new Paragraph(d.GoodsDescription                   ?? "-").SetFontSize(10)).SetBackgroundColor(bg).SetPadding(6));
+                    table.AddCell(new Cell().Add(new Paragraph(d.DonationDate.ToString("MM/dd/yyyy"))     .SetFontSize(10)).SetBackgroundColor(bg).SetPadding(6));
+                    alt = !alt;
+                }
+
+                doc.Add(table);
+
+                // Total
+                var total = 0m;
+                foreach (var d in Donations) total += d.Amount;
+                doc.Add(new Paragraph($"Total Donations: PHP {total:N2}")
+                    .SetFontSize(12)
+                    .SetFontColor(new DeviceRgb(27, 67, 50))
+                    .SetMarginTop(12));
+
+                MessageBox.Show("PDF exported successfully!", "Export", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                var msg = ex.Message.Contains("Access to the path") || ex.Message.Contains("denied")
+                    ? "Export failed: The file is already open. Please close it and try again."
+                    : $"Export failed: {ex.Message}\n\nInner: {ex.InnerException?.Message}";
+
+                MessageBox.Show(msg, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 
@@ -250,7 +333,6 @@ namespace FundForest.ViewModels
         public string[] AudienceOptions = { "Group", "Barangay" };
         public string[] StatusOptions   = { "Active", "Archived" };
 
-        // ✅ ROLE PERMISSIONS
         public bool CanEdit   => SessionService.Instance.CanEdit;
         public bool CanDelete => SessionService.Instance.CanDelete;
         public bool CanAdd    => SessionService.Instance.CanEdit;
@@ -265,11 +347,11 @@ namespace FundForest.ViewModels
         public ProgramsViewModel()
         {
             AddCommand     = new RelayCommand(OpenAdd);
-            EditCommand    = new RelayCommand(OpenEdit,   _ => SelectedProgram != null);
+            EditCommand    = new RelayCommand(OpenEdit,       _ => SelectedProgram != null);
             DeleteCommand  = new RelayCommand(DeleteSelected, _ => SelectedProgram != null);
             SaveCommand    = new RelayCommand(Save);
             CancelCommand  = new RelayCommand(() => IsFormVisible = false);
-            ArchiveCommand = new RelayCommand(Archive, _ => SelectedProgram != null);
+            ArchiveCommand = new RelayCommand(Archive,        _ => SelectedProgram != null);
             LoadData();
         }
 
@@ -291,10 +373,14 @@ namespace FundForest.ViewModels
             if (!SessionService.Instance.CanEdit) return;
             EditingProgram = new Models.Program
             {
-                ProgramID = SelectedProgram.ProgramID, ProgramName = SelectedProgram.ProgramName,
-                StartDate = SelectedProgram.StartDate, EndDate = SelectedProgram.EndDate,
-                TargetAudience = SelectedProgram.TargetAudience, Barangay = SelectedProgram.Barangay,
-                Description = SelectedProgram.Description, Status = SelectedProgram.Status,
+                ProgramID      = SelectedProgram.ProgramID,
+                ProgramName    = SelectedProgram.ProgramName,
+                StartDate      = SelectedProgram.StartDate,
+                EndDate        = SelectedProgram.EndDate,
+                TargetAudience = SelectedProgram.TargetAudience,
+                Barangay       = SelectedProgram.Barangay,
+                Description    = SelectedProgram.Description,
+                Status         = SelectedProgram.Status,
             };
             IsEditMode = true; IsFormVisible = true;
         }
@@ -337,9 +423,9 @@ namespace FundForest.ViewModels
     public class DistributionViewModel : BaseViewModel
     {
         private readonly DatabaseService _db = new();
-        private ObservableCollection<Distribution>     _distributions = new();
-        private ObservableCollection<Beneficiary>      _beneficiaries = new();
-        private ObservableCollection<Models.Program>   _programs      = new();
+        private ObservableCollection<Distribution>   _distributions = new();
+        private ObservableCollection<Beneficiary>    _beneficiaries = new();
+        private ObservableCollection<Models.Program> _programs      = new();
         private Distribution? _selectedDistribution;
         private Distribution  _editingDistribution  = new() { DistributionDate = DateTime.Today };
         private bool   _isFormVisible;
@@ -347,9 +433,9 @@ namespace FundForest.ViewModels
         private string _searchText    = string.Empty;
         private string _errorMessage  = string.Empty;
 
-        public ObservableCollection<Distribution>   Distributions  { get => _distributions;  set => SetProperty(ref _distributions, value); }
-        public ObservableCollection<Beneficiary>    Beneficiaries  { get => _beneficiaries;  set => SetProperty(ref _beneficiaries, value); }
-        public ObservableCollection<Models.Program> Programs       { get => _programs;        set => SetProperty(ref _programs, value); }
+        public ObservableCollection<Distribution>   Distributions { get => _distributions; set => SetProperty(ref _distributions, value); }
+        public ObservableCollection<Beneficiary>    Beneficiaries { get => _beneficiaries; set => SetProperty(ref _beneficiaries, value); }
+        public ObservableCollection<Models.Program> Programs      { get => _programs;      set => SetProperty(ref _programs, value); }
         public Distribution? SelectedDistribution { get => _selectedDistribution; set => SetProperty(ref _selectedDistribution, value); }
         public Distribution  EditingDistribution  { get => _editingDistribution;  set => SetProperty(ref _editingDistribution, value); }
         public bool IsFormVisible   { get => _isFormVisible; set => SetProperty(ref _isFormVisible, value); }
@@ -359,7 +445,6 @@ namespace FundForest.ViewModels
         public string ErrorMessage  { get => _errorMessage;  set => SetProperty(ref _errorMessage, value); }
         public string[] StatusOptions = { "Pending", "Completed" };
 
-        // ✅ ROLE PERMISSIONS
         public bool CanEdit   => SessionService.Instance.CanEdit;
         public bool CanDelete => SessionService.Instance.CanDelete;
         public bool CanAdd    => SessionService.Instance.CanEdit;
@@ -373,11 +458,12 @@ namespace FundForest.ViewModels
         public DistributionViewModel()
         {
             AddCommand    = new RelayCommand(OpenAdd);
-            EditCommand   = new RelayCommand(OpenEdit,   _ => SelectedDistribution != null);
+            EditCommand   = new RelayCommand(OpenEdit,       _ => SelectedDistribution != null);
             DeleteCommand = new RelayCommand(DeleteSelected, _ => SelectedDistribution != null);
             SaveCommand   = new RelayCommand(Save);
             CancelCommand = new RelayCommand(() => IsFormVisible = false);
-            LoadData(); LoadLookups();
+            LoadData();
+            LoadLookups();
         }
 
         private void LoadData()
@@ -399,7 +485,8 @@ namespace FundForest.ViewModels
         private void OpenAdd(object? _)
         {
             if (!SessionService.Instance.CanEdit) return;
-            EditingDistribution = new Distribution { DistributionDate = DateTime.Today, Quantity = 1 }; IsEditMode = false; IsFormVisible = true; ErrorMessage = "";
+            EditingDistribution = new Distribution { DistributionDate = DateTime.Today, Quantity = 1 };
+            IsEditMode = false; IsFormVisible = true; ErrorMessage = "";
         }
 
         private void OpenEdit(object? _)
@@ -408,10 +495,15 @@ namespace FundForest.ViewModels
             if (!SessionService.Instance.CanEdit) return;
             EditingDistribution = new Distribution
             {
-                DistributionID = SelectedDistribution.DistributionID, BeneficiaryID = SelectedDistribution.BeneficiaryID,
-                ProgramID = SelectedDistribution.ProgramID, DistributionDate = SelectedDistribution.DistributionDate,
-                DistributedItem = SelectedDistribution.DistributedItem, Quantity = SelectedDistribution.Quantity,
-                Amount = SelectedDistribution.Amount, Status = SelectedDistribution.Status, Notes = SelectedDistribution.Notes,
+                DistributionID   = SelectedDistribution.DistributionID,
+                BeneficiaryID    = SelectedDistribution.BeneficiaryID,
+                ProgramID        = SelectedDistribution.ProgramID,
+                DistributionDate = SelectedDistribution.DistributionDate,
+                DistributedItem  = SelectedDistribution.DistributedItem,
+                Quantity         = SelectedDistribution.Quantity,
+                Amount           = SelectedDistribution.Amount,
+                Status           = SelectedDistribution.Status,
+                Notes            = SelectedDistribution.Notes,
             };
             IsEditMode = true; IsFormVisible = true;
         }
@@ -420,7 +512,8 @@ namespace FundForest.ViewModels
         {
             if (SelectedDistribution == null) return;
             if (!SessionService.Instance.CanDelete) return;
-            if (MessageBox.Show("Delete this distribution record?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
+            if (MessageBox.Show("Delete this distribution record?", "Confirm",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
             try { _db.DeleteDistribution(SelectedDistribution.DistributionID); LoadData(); }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error"); }
         }

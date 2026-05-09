@@ -81,6 +81,22 @@ namespace FundForest.Helpers
     }
 
     // =============================================
+    // BoolToWidthConverter  — returns GridLength
+    // =============================================
+    [ValueConversion(typeof(bool), typeof(GridLength))]
+    public class BoolToWidthConverter : MarkupExtension, IValueConverter
+    {
+        private static BoolToWidthConverter? _instance;
+        public override object ProvideValue(IServiceProvider sp) => _instance ??= new();
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+            => (value is bool b && b) ? new GridLength(90) : new GridLength(0);
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+            => throw new NotImplementedException();
+    }
+
+    // =============================================
     // EnumToBoolConverter
     // =============================================
     [ValueConversion(typeof(string), typeof(bool))]
@@ -168,21 +184,24 @@ namespace FundForest.Helpers
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
             => Binding.DoNothing;
     }
-    
+
+    // =============================================
+    // RowNumberConverter
+    // =============================================
     [ValueConversion(typeof(DataGridRow), typeof(int))]
-public class RowNumberConverter : MarkupExtension, IValueConverter
-{
-    private static RowNumberConverter? _instance;
-    public override object ProvideValue(IServiceProvider sp) => _instance ??= new();
-
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public class RowNumberConverter : MarkupExtension, IValueConverter
     {
-        if (value is DataGridRow row)
-            return row.GetIndex() + 1;
-        return string.Empty;
-    }
+        private static RowNumberConverter? _instance;
+        public override object ProvideValue(IServiceProvider sp) => _instance ??= new();
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        => throw new NotImplementedException();
-}
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is DataGridRow row)
+                return row.GetIndex() + 1;
+            return string.Empty;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+            => throw new NotImplementedException();
+    }
 }

@@ -209,7 +209,8 @@
                                 <TextBlock Grid.Column="4" Text="VULNERABILITY" FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
                                 <TextBlock Grid.Column="5" Text="CONTACT"       FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
                                 <TextBlock Grid.Column="6" Text="ADDRESS"       FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
-                                <TextBlock Grid.Column="7" Text="ACTIONS"       FontSize="11" FontWeight="Bold" Foreground="#1B4332" HorizontalAlignment="Center"/>
+                                <TextBlock Grid.Column="7" Text="ACTIONS" FontSize="11" FontWeight="Bold" Foreground="#1B4332" HorizontalAlignment="Center"
+                                           Visibility="{Binding CanEdit, Converter={StaticResource BoolVis}}"/>
                             </Grid>
                         </Border>
 
@@ -255,7 +256,8 @@
                             <DataGrid.Columns>
 
                                 <!-- ROW NUMBER -->
-                                <DataGridTemplateColumn Width="50">
+                                <DataGridTemplateColumn Width="50"
+                                    Visibility="{Binding DataContext.CanEdit, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolVis}}">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border Width="32" Height="32" CornerRadius="8"

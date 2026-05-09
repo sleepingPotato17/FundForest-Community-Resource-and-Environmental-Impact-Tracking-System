@@ -7,6 +7,35 @@
     <UserControl.Resources>
         <h:BoolToVisibilityConverter x:Key="BoolVis"/>
         <h:RowNumberConverter x:Key="RowNumberConverter"/>
+
+        <Style x:Key="TableHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#E8F5E9" Offset="0"/>
+                        <GradientStop Color="#F0FAF4" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="#1B4332"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="8,12"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="SeparatorVisibility" Value="Collapsed"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridColumnHeader">
+                        <Border Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="ChipRadio" TargetType="RadioButton">
             <Setter Property="Template">
                 <Setter.Value>
@@ -152,10 +181,8 @@
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Border x:Name="Bd" CornerRadius="8" Padding="16,8"
-                                            BorderBrush="#52B788" BorderThickness="1.5"
-                                            Background="Transparent">
-                                        <TextBlock Text="Search" FontSize="12"
-                                                   FontWeight="SemiBold" Foreground="#1B4332"/>
+                                            BorderBrush="#52B788" BorderThickness="1.5" Background="Transparent">
+                                        <TextBlock Text="Search" FontSize="12" FontWeight="SemiBold" Foreground="#1B4332"/>
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
@@ -174,185 +201,169 @@
                     <Border.Effect>
                         <DropShadowEffect Color="#1B4332" BlurRadius="16" ShadowDepth="2" Opacity="0.06"/>
                     </Border.Effect>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
 
-                        <!-- Column Headers -->
-                        <Border Grid.Row="0" CornerRadius="14,14,0,0" Padding="0,12">
-                            <Border.Background>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                    <GradientStop Color="#E8F5E9" Offset="0"/>
-                                    <GradientStop Color="#F0FAF4" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="66"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="160"/>
-                                    <ColumnDefinition Width="200"/>
-                                    <ColumnDefinition Width="110"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="#"          FontSize="11" FontWeight="Bold" Foreground="#52B788" Margin="16,0,0,0"/>
-                                <TextBlock Grid.Column="1" Text="DONOR NAME" FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
-                                <TextBlock Grid.Column="2" Text="TYPE"       FontSize="11" FontWeight="Bold" Foreground="#1B4332" HorizontalAlignment="Left"/>
-                                <TextBlock Grid.Column="3" Text="CONTACT"    FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
-                                <TextBlock Grid.Column="4" Text="ADDRESS"    FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
-                                <TextBlock Grid.Column="5" Text="ACTIONS"    FontSize="11" FontWeight="Bold" Foreground="#1B4332" HorizontalAlignment="Center"/>
-                            </Grid>
-                        </Border>
+                    <DataGrid ItemsSource="{Binding Donors}"
+                              SelectedItem="{Binding SelectedDonor}"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False" CanUserDeleteRows="False"
+                              CanUserResizeRows="False" CanUserReorderColumns="False"
+                              CanUserResizeColumns="False"
+                              GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#EEF7F1"
+                              HeadersVisibility="Column"
+                              ColumnHeaderStyle="{StaticResource TableHeaderStyle}"
+                              Background="Transparent" BorderThickness="0"
+                              RowHeight="50" SelectionMode="Single"
+                              RowHeaderWidth="0"
+                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
-                        <!-- Rows -->
-                        <DataGrid Grid.Row="1"
-                                ItemsSource="{Binding Donors}"
-                                SelectedItem="{Binding SelectedDonor}"
-                                AutoGenerateColumns="False"
-                                CanUserAddRows="False"
-                                CanUserDeleteRows="False"
-                                CanUserResizeRows="False"
-                                CanUserReorderColumns="False"
-                                CanUserResizeColumns="False"
-                                GridLinesVisibility="Horizontal"
-                                HorizontalGridLinesBrush="#EEF7F1"
-                                HeadersVisibility="None"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                RowHeight="50"
-                                SelectionMode="Single"
-                                RowHeaderWidth="0"
-                                ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#F0FAF4"/></Trigger>
+                                    <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="#E0F5E9"/></Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
 
-                            <DataGrid.RowStyle>
-                                <Style TargetType="DataGridRow">
-                                    <Setter Property="Background" Value="Transparent"/>
-                                    <Setter Property="BorderThickness" Value="0"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#F0FAF4"/></Trigger>
-                                        <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="#E0F5E9"/></Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </DataGrid.RowStyle>
-
-                            <DataGrid.CellStyle>
-                                <Style TargetType="DataGridCell">
-                                    <Setter Property="BorderThickness" Value="0"/>
-                                    <Setter Property="Padding" Value="0"/>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="DataGridCell">
-                                                <Border Background="{TemplateBinding Background}" Padding="0">
-                                                    <ContentPresenter VerticalAlignment="Center"/>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </DataGrid.CellStyle>
-
-                            <DataGrid.Columns>
-
-                                <DataGridTemplateColumn Width="66">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Border Width="32" Height="32" CornerRadius="8"
-                                                    Background="#D8F3DC" Margin="16,0,0,0" HorizontalAlignment="Left">
-                                                <TextBlock FontSize="12" FontWeight="Bold" Foreground="#1B4332"
-                                                        HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                        Text="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow},
-                                                                        Converter={StaticResource RowNumberConverter}}"/>
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="DataGridCell">
+                                            <Border Background="{TemplateBinding Background}" Padding="0">
+                                                <ContentPresenter VerticalAlignment="Center"/>
                                             </Border>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DataGrid.CellStyle>
 
-                                <DataGridTemplateColumn Width="*">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding DonorName}" FontSize="13" FontWeight="SemiBold"
-                                                    Foreground="#1B4332" TextTrimming="CharacterEllipsis"
-                                                    VerticalAlignment="Center" Margin="0,0,8,0"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                        <DataGrid.Columns>
 
-                                <DataGridTemplateColumn Width="120">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Border CornerRadius="20" Padding="10,4" HorizontalAlignment="Left"
-                                                    VerticalAlignment="Center" Background="#D8F3DC">
-                                                <TextBlock Text="{Binding DonationType}" FontSize="11" FontWeight="SemiBold" Foreground="#1B4332"/>
-                                            </Border>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                            <!-- ROW NUMBER -->
+                            <DataGridTemplateColumn Width="66" Header="#">
+                                <DataGridTemplateColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource TableHeaderStyle}">
+                                        <Setter Property="Foreground" Value="#52B788"/>
+                                        <Setter Property="Padding" Value="16,12"/>
+                                    </Style>
+                                </DataGridTemplateColumn.HeaderStyle>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border Width="32" Height="32" CornerRadius="8"
+                                                Background="#D8F3DC" Margin="16,0,0,0" HorizontalAlignment="Left">
+                                            <TextBlock FontSize="12" FontWeight="Bold" Foreground="#1B4332"
+                                                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                       Text="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow},
+                                                                      Converter={StaticResource RowNumberConverter}}"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="160">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding ContactInfo}" FontSize="12" Foreground="#2D6A4F" VerticalAlignment="Center"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                            <!-- Donor Name -->
+                            <DataGridTemplateColumn Width="*" Header="DONOR NAME">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding DonorName}" FontSize="13" FontWeight="SemiBold"
+                                                   Foreground="#1B4332" TextTrimming="CharacterEllipsis"
+                                                   VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="200">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Text="{Binding Address}" FontSize="12" Foreground="#52B788"
-                                                    TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                            <!-- Type -->
+                            <DataGridTemplateColumn Width="120" Header="TYPE">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Border CornerRadius="20" Padding="10,4" HorizontalAlignment="Left"
+                                                VerticalAlignment="Center" Background="#D8F3DC">
+                                            <TextBlock Text="{Binding DonationType}" FontSize="11" FontWeight="SemiBold" Foreground="#1B4332"/>
+                                        </Border>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="110">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                <Button ToolTip="Edit" Width="32" Height="32" Margin="3,0" Cursor="Hand"
-                                                        Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                        CommandParameter="{Binding}"
-                                                        Visibility="{Binding DataContext.CanEdit, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolVis}}">
-                                                    <Button.Template>
-                                                        <ControlTemplate TargetType="Button">
-                                                            <Border x:Name="Bd" CornerRadius="9" Background="#D8F3DC" BorderBrush="#52B788" BorderThickness="1.5">
-                                                                <TextBlock Text="✏" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#1B4332"/>
-                                                            </Border>
-                                                            <ControlTemplate.Triggers>
-                                                                <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Bd" Property="Background" Value="#B7E4C7"/></Trigger>
-                                                            </ControlTemplate.Triggers>
-                                                        </ControlTemplate>
-                                                    </Button.Template>
-                                                </Button>
-                                                <Button ToolTip="Delete" Width="32" Height="32" Margin="3,0" Cursor="Hand"
-                                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                        CommandParameter="{Binding}"
-                                                        Visibility="{Binding DataContext.CanDelete, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolVis}}">
-                                                    <Button.Template>
-                                                        <ControlTemplate TargetType="Button">
-                                                            <Border x:Name="Bd" CornerRadius="9" Background="#FFF0EE" BorderBrush="#FFD0CC" BorderThickness="1.5">
-                                                                <TextBlock Text="🗑" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                            </Border>
-                                                            <ControlTemplate.Triggers>
-                                                                <Trigger Property="IsMouseOver" Value="True">
-                                                                    <Setter TargetName="Bd" Property="Background" Value="#FFE0DC"/>
-                                                                    <Setter TargetName="Bd" Property="BorderBrush" Value="#E63946"/>
-                                                                </Trigger>
-                                                            </ControlTemplate.Triggers>
-                                                        </ControlTemplate>
-                                                    </Button.Template>
-                                                </Button>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                            <!-- Contact -->
+                            <DataGridTemplateColumn Width="160" Header="CONTACT">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding ContactInfo}" FontSize="12" Foreground="#2D6A4F" VerticalAlignment="Center"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
 
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Grid>
+                            <!-- Address — fills space when Actions hidden -->
+                            <DataGridTemplateColumn Width="*" Header="ADDRESS">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Address}" FontSize="12" Foreground="#52B788"
+                                                   TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <!-- Actions — buttons hidden for Local via StackPanel Visibility -->
+                            <DataGridTemplateColumn Width="110" Header="ACTIONS">
+                                <DataGridTemplateColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource TableHeaderStyle}">
+                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        <Setter Property="Visibility" Value="{Binding DataContext.CanEdit,
+                                            RelativeSource={RelativeSource AncestorType=DataGrid},
+                                            Converter={StaticResource BoolVis}}"/>
+                                    </Style>
+                                </DataGridTemplateColumn.HeaderStyle>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                    Visibility="{Binding DataContext.CanEdit, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolVis}}">
+                                            <Button ToolTip="Edit" Width="32" Height="32" Margin="3,0" Cursor="Hand"
+                                                    Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}">
+                                                <Button.Template>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border x:Name="Bd" CornerRadius="9" Background="#D8F3DC" BorderBrush="#52B788" BorderThickness="1.5">
+                                                            <TextBlock Text="✏" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#1B4332"/>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter TargetName="Bd" Property="Background" Value="#B7E4C7"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+                                            <Button ToolTip="Delete" Width="32" Height="32" Margin="3,0" Cursor="Hand"
+                                                    Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    CommandParameter="{Binding}"
+                                                    Visibility="{Binding DataContext.CanDelete, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolVis}}">
+                                                <Button.Template>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border x:Name="Bd" CornerRadius="9" Background="#FFF0EE" BorderBrush="#FFD0CC" BorderThickness="1.5">
+                                                            <TextBlock Text="🗑" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter TargetName="Bd" Property="Background" Value="#FFE0DC"/>
+                                                                <Setter TargetName="Bd" Property="BorderBrush" Value="#E63946"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Border>
             </Grid>
         </Grid>

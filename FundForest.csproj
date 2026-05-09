@@ -10,12 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BouncyCastle.Cryptography" Version="2.6.2" />
+    <PackageReference Include="itext7" Version="9.6.0" />
+    <PackageReference Include="itext7.bouncy-castle-adapter" Version="9.6.0" />
     <PackageReference Include="MySql.Data" Version="8.3.0" />
     <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-rc2" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-    <PackageReference Include="FastReport.OpenSource" Version="2024.1.0"/>
-    <PackageReference Include="FastReport.OpenSource.Export.PdfSimple" Version="2024.1.0"/>
+    <PackageReference Include="FastReport.OpenSource" Version="2024.1.0" />
+    <PackageReference Include="FastReport.OpenSource.Export.PdfSimple" Version="2024.1.0" />
   </ItemGroup>
 
   <ItemGroup>
