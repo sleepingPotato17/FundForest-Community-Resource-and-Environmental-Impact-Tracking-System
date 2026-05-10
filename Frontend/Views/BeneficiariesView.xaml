@@ -41,14 +41,11 @@
         </Style>
     </UserControl.Resources>
 
+    <!-- Root Grid — table fills full width, modal overlays on top -->
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
 
-        <!-- MAIN AREA -->
-        <Grid Grid.Column="0">
+        <!-- MAIN AREA — always full width -->
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -209,7 +206,7 @@
                                 <TextBlock Grid.Column="4" Text="VULNERABILITY" FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
                                 <TextBlock Grid.Column="5" Text="CONTACT"       FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
                                 <TextBlock Grid.Column="6" Text="ADDRESS"       FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
-                                <TextBlock Grid.Column="7" Text="ACTIONS" FontSize="11" FontWeight="Bold" Foreground="#1B4332" HorizontalAlignment="Center"
+                                <TextBlock Grid.Column="7" Text="ACTIONS"       FontSize="11" FontWeight="Bold" Foreground="#1B4332" HorizontalAlignment="Center"
                                            Visibility="{Binding CanEdit, Converter={StaticResource BoolVis}}"/>
                             </Grid>
                         </Border>
@@ -255,9 +252,7 @@
 
                             <DataGrid.Columns>
 
-                                <!-- ROW NUMBER -->
-                                <DataGridTemplateColumn Width="50"
-                                    Visibility="{Binding DataContext.CanEdit, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolVis}}">
+                                <DataGridTemplateColumn Width="50">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border Width="32" Height="32" CornerRadius="8"
@@ -271,7 +266,6 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <!-- Name -->
                                 <DataGridTemplateColumn Width="*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -283,7 +277,6 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <!-- Type Badge -->
                                 <DataGridTemplateColumn Width="80">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -297,7 +290,6 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <!-- Gender -->
                                 <DataGridTemplateColumn Width="80">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -307,7 +299,6 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <!-- Vulnerability Badge -->
                                 <DataGridTemplateColumn Width="120">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -317,24 +308,12 @@
                                                     <Style TargetType="Border">
                                                         <Setter Property="Background" Value="Transparent"/>
                                                         <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding VulnerabilityType}" Value="Elderly">
-                                                                <Setter Property="Background" Value="#B7E4C7"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding VulnerabilityType}" Value="Senior Citizen">
-                                                                <Setter Property="Background" Value="#B7E4C7"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding VulnerabilityType}" Value="PWD">
-                                                                <Setter Property="Background" Value="#D8F3DC"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding VulnerabilityType}" Value="Indigent">
-                                                                <Setter Property="Background" Value="#95D5B2"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding VulnerabilityType}" Value="Solo Parent">
-                                                                <Setter Property="Background" Value="#B7E4C7"/>
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding VulnerabilityType}" Value="4Ps">
-                                                                <Setter Property="Background" Value="#D8F3DC"/>
-                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding VulnerabilityType}" Value="Elderly"><Setter Property="Background" Value="#B7E4C7"/></DataTrigger>
+                                                            <DataTrigger Binding="{Binding VulnerabilityType}" Value="Senior Citizen"><Setter Property="Background" Value="#B7E4C7"/></DataTrigger>
+                                                            <DataTrigger Binding="{Binding VulnerabilityType}" Value="PWD"><Setter Property="Background" Value="#D8F3DC"/></DataTrigger>
+                                                            <DataTrigger Binding="{Binding VulnerabilityType}" Value="Indigent"><Setter Property="Background" Value="#95D5B2"/></DataTrigger>
+                                                            <DataTrigger Binding="{Binding VulnerabilityType}" Value="Solo Parent"><Setter Property="Background" Value="#B7E4C7"/></DataTrigger>
+                                                            <DataTrigger Binding="{Binding VulnerabilityType}" Value="4Ps"><Setter Property="Background" Value="#D8F3DC"/></DataTrigger>
                                                         </Style.Triggers>
                                                     </Style>
                                                 </Border.Style>
@@ -345,7 +324,6 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <!-- Contact -->
                                 <DataGridTemplateColumn Width="130">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -355,7 +333,6 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <!-- Address -->
                                 <DataGridTemplateColumn Width="150">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -367,7 +344,6 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <!-- Actions -->
                                 <DataGridTemplateColumn Width="90">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -420,146 +396,153 @@
             </Grid>
         </Grid>
 
-        <!-- SIDE FORM PANEL -->
-        <Border Grid.Column="1" Width="400" Background="White"
-                BorderBrush="#D8F3DC" BorderThickness="1.5,0,0,0"
-                Visibility="{Binding IsFormVisible, Converter={StaticResource BoolVis}}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+        <!-- MODAL OVERLAY — dim background + centered floating card -->
+        <Grid Visibility="{Binding IsFormVisible, Converter={StaticResource BoolVis}}">
 
-                <!-- Form Header -->
-                <Border Grid.Row="0" Padding="24,18" BorderBrush="#D8F3DC" BorderThickness="0,0,0,1">
-                    <Border.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="#E8F5E9" Offset="0"/>
-                            <GradientStop Color="#F0FAF4" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
-                    <Grid>
+            <!-- Dim backdrop -->
+            <Border Background="#80000000"/>
+
+            <!-- Centered modal card -->
+            <Border Width="520" MaxHeight="640"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Background="White" CornerRadius="20"
+                    BorderBrush="#B7E4C7" BorderThickness="1.5">
+                <Border.Effect>
+                    <DropShadowEffect Color="#000000" BlurRadius="40" ShadowDepth="8" Opacity="0.2"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Modal Header -->
+                    <Border Grid.Row="0" CornerRadius="20,20,0,0" Padding="28,20" BorderBrush="#D8F3DC" BorderThickness="0,0,0,1">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#E8F5E9" Offset="0"/>
+                                <GradientStop Color="#F0FAF4" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text="{Binding FormTitle}" FontSize="18" FontWeight="Bold" Foreground="#1B4332"/>
+                                <TextBlock Text="Fill in the details below" FontSize="12" Foreground="#52B788" Margin="0,3,0,0"/>
+                            </StackPanel>
+                            <Button HorizontalAlignment="Right" Content="✕"
+                                    Style="{StaticResource IconButtonStyle}" Command="{Binding CancelCommand}"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Modal Fields -->
+                    <ScrollViewer Grid.Row="1" Padding="28,20,28,0" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
-                            <TextBlock Text="{Binding FormTitle}" FontSize="17" FontWeight="Bold" Foreground="#1B4332"/>
-                            <TextBlock Text="Fill in the details below" FontSize="12" Foreground="#52B788" Margin="0,3,0,0"/>
-                        </StackPanel>
-                        <Button HorizontalAlignment="Right" Content="✕"
-                                Style="{StaticResource IconButtonStyle}" Command="{Binding CancelCommand}"/>
-                    </Grid>
-                </Border>
 
-                <!-- Form Fields -->
-                <ScrollViewer Grid.Row="1" Padding="24,16,24,0" VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
+                            <TextBlock Text="BENEFICIARY TYPE" Style="{StaticResource FormLabelStyle}"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,4,0,16">
+                                <RadioButton Content="Person" GroupName="BType" Style="{StaticResource ChipRadio}" Margin="0,0,8,0"
+                                             IsChecked="{Binding EditingBeneficiary.BeneficiaryType, Converter={h:EnumToBoolConverter}, ConverterParameter=Person}"/>
+                                <RadioButton Content="Group" GroupName="BType" Style="{StaticResource ChipRadio}"
+                                             IsChecked="{Binding EditingBeneficiary.BeneficiaryType, Converter={h:EnumToBoolConverter}, ConverterParameter=Group}"/>
+                            </StackPanel>
 
-                        <!-- Beneficiary Type -->
-                        <TextBlock Text="BENEFICIARY TYPE" Style="{StaticResource FormLabelStyle}"/>
-                        <StackPanel Orientation="Horizontal" Margin="0,4,0,16">
-                            <RadioButton Content="Person" GroupName="BType" Style="{StaticResource ChipRadio}" Margin="0,0,8,0"
-                                         IsChecked="{Binding EditingBeneficiary.BeneficiaryType, Converter={h:EnumToBoolConverter}, ConverterParameter=Person}"/>
-                            <RadioButton Content="Group" GroupName="BType" Style="{StaticResource ChipRadio}"
-                                         IsChecked="{Binding EditingBeneficiary.BeneficiaryType, Converter={h:EnumToBoolConverter}, ConverterParameter=Group}"/>
-                        </StackPanel>
+                            <!-- PERSON FIELDS -->
+                            <StackPanel Visibility="{Binding IsPersonType, Converter={StaticResource BoolVis}}">
+                                <TextBlock Text="FULL NAME *" Style="{StaticResource FormLabelStyle}"/>
+                                <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
+                                         HorizontalAlignment="Stretch" Margin="0,0,0,14"
+                                         Text="{Binding EditingBeneficiary.FullName, UpdateSourceTrigger=PropertyChanged}"/>
 
-                        <!-- PERSON FIELDS -->
-                        <StackPanel Visibility="{Binding IsPersonType, Converter={StaticResource BoolVis}}">
-                            <TextBlock Text="FULL NAME *" Style="{StaticResource FormLabelStyle}"/>
-                            <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
-                                     HorizontalAlignment="Stretch" Margin="0,0,0,14"
-                                     Text="{Binding EditingBeneficiary.FullName, UpdateSourceTrigger=PropertyChanged}"/>
+                                <TextBlock Text="GENDER" Style="{StaticResource FormLabelStyle}"/>
+                                <WrapPanel Margin="0,4,0,14">
+                                    <RadioButton Content="Male"         GroupName="Gender" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                                 IsChecked="{Binding EditingBeneficiary.Gender, Converter={h:EnumToBoolConverter}, ConverterParameter=Male}"/>
+                                    <RadioButton Content="Female"       GroupName="Gender" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                                 IsChecked="{Binding EditingBeneficiary.Gender, Converter={h:EnumToBoolConverter}, ConverterParameter=Female}"/>
+                                    <RadioButton Content="Other"        GroupName="Gender" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                                 IsChecked="{Binding EditingBeneficiary.Gender, Converter={h:EnumToBoolConverter}, ConverterParameter=Other}"/>
+                                    <RadioButton Content="None (Group)" GroupName="Gender" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                                 IsChecked="{Binding EditingBeneficiary.Gender, Converter={h:EnumToBoolConverter}, ConverterParameter=None}"/>
+                                </WrapPanel>
 
-                            <TextBlock Text="GENDER" Style="{StaticResource FormLabelStyle}"/>
+                                <TextBlock Text="AGE" Style="{StaticResource FormLabelStyle}"/>
+                                <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
+                                         HorizontalAlignment="Stretch" Margin="0,0,0,14"
+                                         Text="{Binding EditingBeneficiary.Age, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+
+                            <!-- GROUP FIELDS -->
+                            <StackPanel Visibility="{Binding IsGroupType, Converter={StaticResource BoolVis}}">
+                                <TextBlock Text="GROUP NAME *" Style="{StaticResource FormLabelStyle}"/>
+                                <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
+                                         HorizontalAlignment="Stretch" Margin="0,0,0,14"
+                                         Text="{Binding EditingBeneficiary.GroupName, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                <TextBlock Text="NUMBER OF MEMBERS" Style="{StaticResource FormLabelStyle}"/>
+                                <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
+                                         HorizontalAlignment="Stretch" Margin="0,0,0,14"
+                                         Text="{Binding EditingBeneficiary.NumberOfMembers, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                <TextBlock Text="GROUP REPRESENTATIVE" Style="{StaticResource FormLabelStyle}"/>
+                                <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
+                                         HorizontalAlignment="Stretch" Margin="0,0,0,14"
+                                         Text="{Binding EditingBeneficiary.GroupRepresentative, UpdateSourceTrigger=PropertyChanged}"/>
+                            </StackPanel>
+
+                            <TextBlock Text="VULNERABILITY TYPE" Style="{StaticResource FormLabelStyle}"/>
                             <WrapPanel Margin="0,4,0,14">
-                                <RadioButton Content="Male"         GroupName="Gender" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                             IsChecked="{Binding EditingBeneficiary.Gender, Converter={h:EnumToBoolConverter}, ConverterParameter=Male}"/>
-                                <RadioButton Content="Female"       GroupName="Gender" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                             IsChecked="{Binding EditingBeneficiary.Gender, Converter={h:EnumToBoolConverter}, ConverterParameter=Female}"/>
-                                <RadioButton Content="Other"        GroupName="Gender" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                             IsChecked="{Binding EditingBeneficiary.Gender, Converter={h:EnumToBoolConverter}, ConverterParameter=Other}"/>
-                                <RadioButton Content="None (Group)" GroupName="Gender" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                             IsChecked="{Binding EditingBeneficiary.Gender, Converter={h:EnumToBoolConverter}, ConverterParameter=None}"/>
+                                <RadioButton Content="None"           GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                             IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=None}"/>
+                                <RadioButton Content="Elderly"        GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                             IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=Elderly}"/>
+                                <RadioButton Content="Senior Citizen" GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                             IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=Senior Citizen}"/>
+                                <RadioButton Content="PWD"            GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                             IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=PWD}"/>
+                                <RadioButton Content="Indigent"       GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                             IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=Indigent}"/>
+                                <RadioButton Content="Solo Parent"    GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                             IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=Solo Parent}"/>
+                                <RadioButton Content="4Ps"            GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                             IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=4Ps}"/>
                             </WrapPanel>
 
-                            <TextBlock Text="AGE" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBlock Text="ADDRESS" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Style="{StaticResource ModernTextBoxStyle}"
+                                     Height="80" HorizontalAlignment="Stretch"
+                                     TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,14"
+                                     Text="{Binding EditingBeneficiary.Address, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            <TextBlock Text="CONTACT INFO" Style="{StaticResource FormLabelStyle}"/>
                             <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
                                      HorizontalAlignment="Stretch" Margin="0,0,0,14"
-                                     Text="{Binding EditingBeneficiary.Age, UpdateSourceTrigger=PropertyChanged}"/>
+                                     Text="{Binding EditingBeneficiary.ContactInfo, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            <TextBlock Text="CONTACT DATE" Style="{StaticResource FormLabelStyle}"/>
+                            <DatePicker Style="{StaticResource ModernDatePickerStyle}"
+                                        HorizontalAlignment="Stretch" Margin="0,0,0,14"
+                                        SelectedDate="{Binding EditingBeneficiary.ContactDate}"/>
+
+                            <TextBlock Text="{Binding ErrorMessage}"
+                                       Foreground="#E63946" FontSize="12"
+                                       TextWrapping="Wrap" Margin="0,4,0,12"/>
                         </StackPanel>
+                    </ScrollViewer>
 
-                        <!-- GROUP FIELDS -->
-                        <StackPanel Visibility="{Binding IsGroupType, Converter={StaticResource BoolVis}}">
-                            <TextBlock Text="GROUP NAME *" Style="{StaticResource FormLabelStyle}"/>
-                            <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
-                                     HorizontalAlignment="Stretch" Margin="0,0,0,14"
-                                     Text="{Binding EditingBeneficiary.GroupName, UpdateSourceTrigger=PropertyChanged}"/>
-
-                            <TextBlock Text="NUMBER OF MEMBERS" Style="{StaticResource FormLabelStyle}"/>
-                            <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
-                                     HorizontalAlignment="Stretch" Margin="0,0,0,14"
-                                     Text="{Binding EditingBeneficiary.NumberOfMembers, UpdateSourceTrigger=PropertyChanged}"/>
-
-                            <TextBlock Text="GROUP REPRESENTATIVE" Style="{StaticResource FormLabelStyle}"/>
-                            <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
-                                     HorizontalAlignment="Stretch" Margin="0,0,0,14"
-                                     Text="{Binding EditingBeneficiary.GroupRepresentative, UpdateSourceTrigger=PropertyChanged}"/>
+                    <!-- Modal Footer -->
+                    <Border Grid.Row="2" CornerRadius="0,0,20,20" Padding="28,16"
+                            BorderBrush="#D8F3DC" BorderThickness="0,1,0,0" Background="#F7FDF9">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Content="Cancel" Margin="0,0,10,0"
+                                    Style="{StaticResource OutlineButtonStyle}" Command="{Binding CancelCommand}"/>
+                            <Button Content="Save Beneficiary"
+                                    Style="{StaticResource PrimaryButtonStyle}" Command="{Binding SaveCommand}"/>
                         </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
 
-                        <!-- VULNERABILITY TYPE -->
-                        <TextBlock Text="VULNERABILITY TYPE" Style="{StaticResource FormLabelStyle}"/>
-                        <WrapPanel Margin="0,4,0,14">
-                            <RadioButton Content="None"           GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                         IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=None}"/>
-                            <RadioButton Content="Elderly"        GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                         IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=Elderly}"/>
-                            <RadioButton Content="Senior Citizen" GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                         IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=Senior Citizen}"/>
-                            <RadioButton Content="PWD"            GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                         IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=PWD}"/>
-                            <RadioButton Content="Indigent"       GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                         IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=Indigent}"/>
-                            <RadioButton Content="Solo Parent"    GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                         IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=Solo Parent}"/>
-                            <RadioButton Content="4Ps"            GroupName="Vuln" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                         IsChecked="{Binding EditingBeneficiary.VulnerabilityType, Converter={h:EnumToBoolConverter}, ConverterParameter=4Ps}"/>
-                        </WrapPanel>
-
-                        <!-- ADDRESS -->
-                        <TextBlock Text="ADDRESS" Style="{StaticResource FormLabelStyle}"/>
-                        <TextBox Style="{StaticResource ModernTextBoxStyle}"
-                                 Height="80" HorizontalAlignment="Stretch"
-                                 TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,14"
-                                 Text="{Binding EditingBeneficiary.Address, UpdateSourceTrigger=PropertyChanged}"/>
-
-                        <!-- CONTACT INFO -->
-                        <TextBlock Text="CONTACT INFO" Style="{StaticResource FormLabelStyle}"/>
-                        <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
-                                 HorizontalAlignment="Stretch" Margin="0,0,0,14"
-                                 Text="{Binding EditingBeneficiary.ContactInfo, UpdateSourceTrigger=PropertyChanged}"/>
-
-                        <!-- CONTACT DATE -->
-                        <TextBlock Text="CONTACT DATE" Style="{StaticResource FormLabelStyle}"/>
-                        <DatePicker Style="{StaticResource ModernDatePickerStyle}"
-                                    HorizontalAlignment="Stretch" Margin="0,0,0,14"
-                                    SelectedDate="{Binding EditingBeneficiary.ContactDate}"/>
-
-                        <!-- Error -->
-                        <TextBlock Text="{Binding ErrorMessage}"
-                                   Foreground="#E63946" FontSize="12"
-                                   TextWrapping="Wrap" Margin="0,4,0,12"/>
-                    </StackPanel>
-                </ScrollViewer>
-
-                <!-- Form Footer -->
-                <Border Grid.Row="2" Padding="24,14" BorderBrush="#D8F3DC" BorderThickness="0,1,0,0" Background="#F7FDF9">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Content="Cancel" Margin="0,0,10,0"
-                                Style="{StaticResource OutlineButtonStyle}" Command="{Binding CancelCommand}"/>
-                        <Button Content="Save Beneficiary"
-                                Style="{StaticResource PrimaryButtonStyle}" Command="{Binding SaveCommand}"/>
-                    </StackPanel>
-                </Border>
-            </Grid>
-        </Border>
     </Grid>
 </UserControl>

@@ -38,12 +38,9 @@
     </UserControl.Resources>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
+        <!-- MAIN AREA — always full width -->
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -176,7 +173,6 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <!-- Column Headers — fixed alignment -->
                         <Border Grid.Row="0" CornerRadius="14,14,0,0" Padding="0,12">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
@@ -203,7 +199,7 @@
                                 <TextBlock Grid.Column="5" Text="END DATE"     FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
                                 <TextBlock Grid.Column="6" Text="STATUS"       FontSize="11" FontWeight="Bold" Foreground="#1B4332"/>
                                 <TextBlock Grid.Column="7" Text="ACTIONS"      FontSize="11" FontWeight="Bold" Foreground="#1B4332" HorizontalAlignment="Center"
-                                    Visibility="{Binding DataContext.CanEdit, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolVis}}"/>
+                                           Visibility="{Binding DataContext.CanEdit, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolVis}}"/>
                             </Grid>
                         </Border>
 
@@ -241,8 +237,7 @@
                             </DataGrid.CellStyle>
                             <DataGrid.Columns>
 
-                                <DataGridTemplateColumn Width="50"
-                                    Visibility="{Binding DataContext.CanEdit, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolVis}}">
+                                <DataGridTemplateColumn Width="50">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <Border Width="32" Height="32" CornerRadius="8"
@@ -375,80 +370,119 @@
             </Grid>
         </Grid>
 
-        <Border Grid.Column="1" Width="400" Background="White" BorderBrush="#D8F3DC" BorderThickness="1.5,0,0,0"
-                Visibility="{Binding IsFormVisible, Converter={StaticResource BoolVis}}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Border Grid.Row="0" Padding="24,18" BorderBrush="#D8F3DC" BorderThickness="0,0,0,1">
-                    <Border.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="#E8F5E9" Offset="0"/>
-                            <GradientStop Color="#F0FAF4" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
-                    <Grid>
-                        <StackPanel>
-                            <TextBlock Text="{Binding FormTitle}" FontSize="17" FontWeight="Bold" Foreground="#1B4332"/>
-                            <TextBlock Text="Fill in the details below" FontSize="12" Foreground="#52B788" Margin="0,3,0,0"/>
-                        </StackPanel>
-                        <Button HorizontalAlignment="Right" Content="✕" Style="{StaticResource IconButtonStyle}" Command="{Binding CancelCommand}"/>
-                    </Grid>
-                </Border>
-                <ScrollViewer Grid.Row="1" Padding="24,16,24,0" VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <TextBlock Text="PROGRAM NAME *" Style="{StaticResource FormLabelStyle}"/>
-                        <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42" HorizontalAlignment="Stretch" Margin="0,0,0,14"
-                                 Text="{Binding EditingProgram.ProgramName, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Grid Margin="0,0,0,14">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="8"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0">
-                                <TextBlock Text="START DATE" Style="{StaticResource FormLabelStyle}"/>
-                                <DatePicker Style="{StaticResource ModernDatePickerStyle}" HorizontalAlignment="Stretch" SelectedDate="{Binding EditingProgram.StartDate}"/>
+        <!-- MODAL OVERLAY -->
+        <Grid Visibility="{Binding IsFormVisible, Converter={StaticResource BoolVis}}">
+
+            <!-- Dim backdrop -->
+            <Border Background="#80000000"/>
+
+            <!-- Centered modal card -->
+            <Border Width="520" MaxHeight="600"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Background="White" CornerRadius="20"
+                    BorderBrush="#B7E4C7" BorderThickness="1.5">
+                <Border.Effect>
+                    <DropShadowEffect Color="#000000" BlurRadius="40" ShadowDepth="8" Opacity="0.2"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Modal Header -->
+                    <Border Grid.Row="0" CornerRadius="20,20,0,0" Padding="28,20"
+                            BorderBrush="#D8F3DC" BorderThickness="0,0,0,1">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#E8F5E9" Offset="0"/>
+                                <GradientStop Color="#F0FAF4" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text="{Binding FormTitle}" FontSize="18" FontWeight="Bold" Foreground="#1B4332"/>
+                                <TextBlock Text="Fill in the details below" FontSize="12" Foreground="#52B788" Margin="0,3,0,0"/>
                             </StackPanel>
-                            <StackPanel Grid.Column="2">
-                                <TextBlock Text="END DATE" Style="{StaticResource FormLabelStyle}"/>
-                                <DatePicker Style="{StaticResource ModernDatePickerStyle}" HorizontalAlignment="Stretch" SelectedDate="{Binding EditingProgram.EndDate}"/>
-                            </StackPanel>
+                            <Button HorizontalAlignment="Right" Content="✕"
+                                    Style="{StaticResource IconButtonStyle}" Command="{Binding CancelCommand}"/>
                         </Grid>
-                        <TextBlock Text="TARGET AUDIENCE" Style="{StaticResource FormLabelStyle}"/>
-                        <WrapPanel Margin="0,4,0,14">
-                            <RadioButton Content="👥 Group" GroupName="Audience" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                         IsChecked="{Binding EditingProgram.TargetAudience, Converter={h:EnumToBoolConverter}, ConverterParameter=Group}"/>
-                            <RadioButton Content="🏘 Barangay" GroupName="Audience" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                         IsChecked="{Binding EditingProgram.TargetAudience, Converter={h:EnumToBoolConverter}, ConverterParameter=Barangay}"/>
-                        </WrapPanel>
-                        <TextBlock Text="BARANGAY / LOCATION" Style="{StaticResource FormLabelStyle}"/>
-                        <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42" HorizontalAlignment="Stretch" Margin="0,0,0,14"
-                                 Text="{Binding EditingProgram.Barangay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Text="STATUS" Style="{StaticResource FormLabelStyle}"/>
-                        <WrapPanel Margin="0,4,0,14">
-                            <RadioButton Content="✅ Active" GroupName="Status" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                         IsChecked="{Binding EditingProgram.Status, Converter={h:EnumToBoolConverter}, ConverterParameter=Active}"/>
-                            <RadioButton Content="📦 Archived" GroupName="Status" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                         IsChecked="{Binding EditingProgram.Status, Converter={h:EnumToBoolConverter}, ConverterParameter=Archived}"/>
-                        </WrapPanel>
-                        <TextBlock Text="DESCRIPTION" Style="{StaticResource FormLabelStyle}"/>
-                        <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="110" HorizontalAlignment="Stretch"
-                                 TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,14"
-                                 Text="{Binding EditingProgram.Description, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Text="{Binding ErrorMessage}" Foreground="#E63946" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,12"/>
-                    </StackPanel>
-                </ScrollViewer>
-                <Border Grid.Row="2" Padding="24,14" BorderBrush="#D8F3DC" BorderThickness="0,1,0,0" Background="#F7FDF9">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Content="Cancel" Style="{StaticResource OutlineButtonStyle}" Command="{Binding CancelCommand}" Margin="0,0,10,0"/>
-                        <Button Content="Save Program" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding SaveCommand}"/>
-                    </StackPanel>
-                </Border>
-            </Grid>
-        </Border>
+                    </Border>
+
+                    <!-- Modal Fields -->
+                    <ScrollViewer Grid.Row="1" Padding="28,20,28,0" VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <TextBlock Text="PROGRAM NAME *" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
+                                     HorizontalAlignment="Stretch" Margin="0,0,0,14"
+                                     Text="{Binding EditingProgram.ProgramName, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            <Grid Margin="0,0,0,14">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="8"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="START DATE" Style="{StaticResource FormLabelStyle}"/>
+                                    <DatePicker Style="{StaticResource ModernDatePickerStyle}"
+                                                HorizontalAlignment="Stretch"
+                                                SelectedDate="{Binding EditingProgram.StartDate}"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Text="END DATE" Style="{StaticResource FormLabelStyle}"/>
+                                    <DatePicker Style="{StaticResource ModernDatePickerStyle}"
+                                                HorizontalAlignment="Stretch"
+                                                SelectedDate="{Binding EditingProgram.EndDate}"/>
+                                </StackPanel>
+                            </Grid>
+
+                            <TextBlock Text="TARGET AUDIENCE" Style="{StaticResource FormLabelStyle}"/>
+                            <WrapPanel Margin="0,4,0,14">
+                                <RadioButton Content="👥 Group" GroupName="Audience" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                             IsChecked="{Binding EditingProgram.TargetAudience, Converter={h:EnumToBoolConverter}, ConverterParameter=Group}"/>
+                                <RadioButton Content="🏘 Barangay" GroupName="Audience" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                             IsChecked="{Binding EditingProgram.TargetAudience, Converter={h:EnumToBoolConverter}, ConverterParameter=Barangay}"/>
+                            </WrapPanel>
+
+                            <TextBlock Text="BARANGAY / LOCATION" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
+                                     HorizontalAlignment="Stretch" Margin="0,0,0,14"
+                                     Text="{Binding EditingProgram.Barangay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            <TextBlock Text="STATUS" Style="{StaticResource FormLabelStyle}"/>
+                            <WrapPanel Margin="0,4,0,14">
+                                <RadioButton Content="✅ Active" GroupName="Status" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                             IsChecked="{Binding EditingProgram.Status, Converter={h:EnumToBoolConverter}, ConverterParameter=Active}"/>
+                                <RadioButton Content="📦 Archived" GroupName="Status" Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                             IsChecked="{Binding EditingProgram.Status, Converter={h:EnumToBoolConverter}, ConverterParameter=Archived}"/>
+                            </WrapPanel>
+
+                            <TextBlock Text="DESCRIPTION" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="110"
+                                     HorizontalAlignment="Stretch"
+                                     TextWrapping="Wrap" AcceptsReturn="True" Margin="0,0,0,14"
+                                     Text="{Binding EditingProgram.Description, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            <TextBlock Text="{Binding ErrorMessage}" Foreground="#E63946"
+                                       FontSize="12" TextWrapping="Wrap" Margin="0,0,0,12"/>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <!-- Modal Footer -->
+                    <Border Grid.Row="2" CornerRadius="0,0,20,20" Padding="28,16"
+                            BorderBrush="#D8F3DC" BorderThickness="0,1,0,0" Background="#F7FDF9">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Content="Cancel" Style="{StaticResource OutlineButtonStyle}"
+                                    Command="{Binding CancelCommand}" Margin="0,0,10,0"/>
+                            <Button Content="Save Program" Style="{StaticResource PrimaryButtonStyle}"
+                                    Command="{Binding SaveCommand}"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+
     </Grid>
 </UserControl>

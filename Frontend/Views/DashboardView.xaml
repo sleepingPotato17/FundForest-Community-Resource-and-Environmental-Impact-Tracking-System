@@ -27,6 +27,7 @@
 
             <!-- STAT CARDS ROW 1 -->
             <UniformGrid Grid.Row="1" Columns="3" Margin="0,0,0,16">
+
                 <!-- Beneficiaries -->
                 <Border Style="{StaticResource StatCardStyle}" Margin="0,0,12,0">
                     <Grid>
@@ -35,11 +36,13 @@
                             <ColumnDefinition Width="48"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel>
-                            <TextBlock Text="Total Beneficiaries" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBlock Text="Total Beneficiaries"
+                                       FontSize="10" FontWeight="Bold" FontStretch="Expanded"
+                                       Foreground="#2D6A4F" Margin="0,0,0,4"/>
                             <TextBlock Text="{Binding TotalBeneficiaries}" FontSize="36"
                                        FontWeight="Bold" Foreground="{StaticResource PrimaryGreenBrush}"/>
                             <TextBlock Text="Individuals &amp; Groups" FontSize="11"
-                                       Foreground="{StaticResource TextMutedBrush}" Margin="0,4,0,0"/>
+                                       Foreground="#52B788" Margin="0,4,0,0"/>
                         </StackPanel>
                         <Border Grid.Column="1" Width="44" Height="44" CornerRadius="12"
                                 Background="{StaticResource PaleMintBrush}">
@@ -58,11 +61,13 @@
                             <ColumnDefinition Width="48"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel>
-                            <TextBlock Text="Active Programs" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBlock Text="Active Programs"
+                                       FontSize="10" FontWeight="Bold" FontStretch="Expanded"
+                                       Foreground="#2D6A4F" Margin="0,0,0,4"/>
                             <TextBlock Text="{Binding TotalPrograms}" FontSize="36"
                                        FontWeight="Bold" Foreground="{StaticResource PrimaryGreenBrush}"/>
                             <TextBlock Text="Running programs" FontSize="11"
-                                       Foreground="{StaticResource TextMutedBrush}" Margin="0,4,0,0"/>
+                                       Foreground="#52B788" Margin="0,4,0,0"/>
                         </StackPanel>
                         <Border Grid.Column="1" Width="44" Height="44" CornerRadius="12"
                                 Background="{StaticResource PaleMintBrush}">
@@ -81,11 +86,13 @@
                             <ColumnDefinition Width="48"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel>
-                            <TextBlock Text="Total Donors" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBlock Text="Total Donors"
+                                       FontSize="10" FontWeight="Bold" FontStretch="Expanded"
+                                       Foreground="#2D6A4F" Margin="0,0,0,4"/>
                             <TextBlock Text="{Binding TotalDonors}" FontSize="36"
                                        FontWeight="Bold" Foreground="{StaticResource PrimaryGreenBrush}"/>
                             <TextBlock Text="Registered donors" FontSize="11"
-                                       Foreground="{StaticResource TextMutedBrush}" Margin="0,4,0,0"/>
+                                       Foreground="#52B788" Margin="0,4,0,0"/>
                         </StackPanel>
                         <Border Grid.Column="1" Width="44" Height="44" CornerRadius="12"
                                 Background="{StaticResource PaleMintBrush}">
@@ -99,6 +106,7 @@
 
             <!-- STAT CARDS ROW 2 -->
             <UniformGrid Grid.Row="2" Columns="3" Margin="0,0,0,24">
+
                 <!-- Total Donations -->
                 <Border Style="{StaticResource StatCardStyle}" Margin="0,0,12,0">
                     <Grid>
@@ -107,11 +115,13 @@
                             <ColumnDefinition Width="48"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel>
-                            <TextBlock Text="Total Donations" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBlock Text="Total Donations"
+                                       FontSize="10" FontWeight="Bold" FontStretch="Expanded"
+                                       Foreground="#2D6A4F" Margin="0,0,0,4"/>
                             <TextBlock Text="{Binding TotalDonations}" FontSize="36"
                                        FontWeight="Bold" Foreground="{StaticResource AccentGreenBrush}"/>
                             <TextBlock Text="Donation records" FontSize="11"
-                                       Foreground="{StaticResource TextMutedBrush}" Margin="0,4,0,0"/>
+                                       Foreground="#52B788" Margin="0,4,0,0"/>
                         </StackPanel>
                         <Border Grid.Column="1" Width="44" Height="44" CornerRadius="12"
                                 Background="#FFF0E8">
@@ -130,11 +140,13 @@
                             <ColumnDefinition Width="48"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel>
-                            <TextBlock Text="Total Distributions" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBlock Text="Total Distributions"
+                                       FontSize="10" FontWeight="Bold" FontStretch="Expanded"
+                                       Foreground="#2D6A4F" Margin="0,0,0,4"/>
                             <TextBlock Text="{Binding TotalDistributions}" FontSize="36"
                                        FontWeight="Bold" Foreground="{StaticResource AccentGreenBrush}"/>
                             <TextBlock Text="Distribution records" FontSize="11"
-                                       Foreground="{StaticResource TextMutedBrush}" Margin="0,4,0,0"/>
+                                       Foreground="#52B788" Margin="0,4,0,0"/>
                         </StackPanel>
                         <Border Grid.Column="1" Width="44" Height="44" CornerRadius="12"
                                 Background="#E8F0FF">
@@ -153,7 +165,9 @@
                             <ColumnDefinition Width="48"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel>
-                            <TextBlock Text="Total Distributed" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBlock Text="Total Distributed"
+                                       FontSize="10" FontWeight="Bold" FontStretch="Expanded"
+                                       Foreground="#2D6A4F" Margin="0,0,0,4"/>
                             <TextBlock FontSize="28" FontWeight="Bold"
                                        Foreground="{StaticResource PrimaryGreenBrush}">
                                 <TextBlock.Text>
@@ -163,7 +177,7 @@
                                 </TextBlock.Text>
                             </TextBlock>
                             <TextBlock Text="Completed distributions" FontSize="11"
-                                       Foreground="{StaticResource TextMutedBrush}" Margin="0,4,0,0"/>
+                                       Foreground="#52B788" Margin="0,4,0,0"/>
                         </StackPanel>
                         <Border Grid.Column="1" Width="44" Height="44" CornerRadius="12"
                                 Background="{StaticResource PaleMintBrush}">
@@ -189,7 +203,6 @@
                             <TextBlock Text="Last 6 months" FontSize="12"
                                        Foreground="{StaticResource TextMutedBrush}" Margin="0,2,0,0"/>
                         </StackPanel>
-                        <!-- Legend -->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <Ellipse Width="10" Height="10" Fill="{StaticResource PrimaryGreenBrush}"
                                      VerticalAlignment="Center"/>
@@ -208,6 +221,7 @@
                                         TooltipPosition="Top"/>
                 </Grid>
             </Border>
+
         </Grid>
     </ScrollViewer>
 </UserControl>

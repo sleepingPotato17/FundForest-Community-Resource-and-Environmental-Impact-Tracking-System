@@ -70,12 +70,9 @@
     </UserControl.Resources>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
+        <!-- MAIN AREA — always full width -->
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -246,7 +243,6 @@
 
                         <DataGrid.Columns>
 
-                            <!-- ROW NUMBER -->
                             <DataGridTemplateColumn Width="66" Header="#">
                                 <DataGridTemplateColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource TableHeaderStyle}">
@@ -267,7 +263,6 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Donor Name -->
                             <DataGridTemplateColumn Width="*" Header="DONOR NAME">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -278,7 +273,6 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Type -->
                             <DataGridTemplateColumn Width="120" Header="TYPE">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -290,7 +284,6 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Contact -->
                             <DataGridTemplateColumn Width="160" Header="CONTACT">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -299,7 +292,6 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Address — fills space when Actions hidden -->
                             <DataGridTemplateColumn Width="*" Header="ADDRESS">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -309,7 +301,6 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <!-- Actions — buttons hidden for Local via StackPanel Visibility -->
                             <DataGridTemplateColumn Width="110" Header="ACTIONS">
                                 <DataGridTemplateColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource TableHeaderStyle}">
@@ -368,71 +359,94 @@
             </Grid>
         </Grid>
 
-        <!-- SIDE FORM PANEL -->
-        <Border Grid.Column="1" Width="400" Background="White"
-                BorderBrush="#D8F3DC" BorderThickness="1.5,0,0,0"
-                Visibility="{Binding IsFormVisible, Converter={StaticResource BoolVis}}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Border Grid.Row="0" Padding="24,18" BorderBrush="#D8F3DC" BorderThickness="0,0,0,1">
-                    <Border.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="#E8F5E9" Offset="0"/>
-                            <GradientStop Color="#F0FAF4" Offset="1"/>
-                        </LinearGradientBrush>
-                    </Border.Background>
-                    <Grid>
+        <!-- MODAL OVERLAY -->
+        <Grid Visibility="{Binding IsFormVisible, Converter={StaticResource BoolVis}}">
+
+            <!-- Dim backdrop -->
+            <Border Background="#80000000"/>
+
+            <!-- Centered modal card -->
+            <Border Width="480" MaxHeight="560"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Background="White" CornerRadius="20"
+                    BorderBrush="#B7E4C7" BorderThickness="1.5">
+                <Border.Effect>
+                    <DropShadowEffect Color="#000000" BlurRadius="40" ShadowDepth="8" Opacity="0.2"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Modal Header -->
+                    <Border Grid.Row="0" CornerRadius="20,20,0,0" Padding="28,20"
+                            BorderBrush="#D8F3DC" BorderThickness="0,0,0,1">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#E8F5E9" Offset="0"/>
+                                <GradientStop Color="#F0FAF4" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text="{Binding FormTitle}" FontSize="18" FontWeight="Bold" Foreground="#1B4332"/>
+                                <TextBlock Text="Fill in the details below" FontSize="12" Foreground="#52B788" Margin="0,3,0,0"/>
+                            </StackPanel>
+                            <Button HorizontalAlignment="Right" Content="✕"
+                                    Style="{StaticResource IconButtonStyle}"
+                                    Command="{Binding CancelCommand}"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Modal Fields -->
+                    <ScrollViewer Grid.Row="1" Padding="28,20,28,0" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
-                            <TextBlock Text="{Binding FormTitle}" FontSize="17" FontWeight="Bold" Foreground="#1B4332"/>
-                            <TextBlock Text="Fill in the details below" FontSize="12" Foreground="#52B788" Margin="0,3,0,0"/>
+                            <TextBlock Text="DONOR NAME *" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
+                                     HorizontalAlignment="Stretch" Margin="0,0,0,14"
+                                     Text="{Binding EditingDonor.DonorName, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            <TextBlock Text="DONOR TYPE" Style="{StaticResource FormLabelStyle}"/>
+                            <WrapPanel Margin="0,4,0,14">
+                                <RadioButton Content="👤 Individual" GroupName="DonationType"
+                                             Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                             IsChecked="{Binding EditingDonor.DonationType, Converter={h:EnumToBoolConverter}, ConverterParameter=Individual}"/>
+                                <RadioButton Content="👥 Group" GroupName="DonationType"
+                                             Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
+                                             IsChecked="{Binding EditingDonor.DonationType, Converter={h:EnumToBoolConverter}, ConverterParameter=Group}"/>
+                            </WrapPanel>
+
+                            <TextBlock Text="CONTACT INFO" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
+                                     HorizontalAlignment="Stretch" Margin="0,0,0,14"
+                                     Text="{Binding EditingDonor.ContactInfo, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            <TextBlock Text="ADDRESS" Style="{StaticResource FormLabelStyle}"/>
+                            <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="80"
+                                     HorizontalAlignment="Stretch" TextWrapping="Wrap"
+                                     AcceptsReturn="True" Margin="0,0,0,14"
+                                     Text="{Binding EditingDonor.Address, UpdateSourceTrigger=PropertyChanged}"/>
+
+                            <TextBlock Text="{Binding ErrorMessage}" Foreground="#E63946"
+                                       FontSize="12" TextWrapping="Wrap" Margin="0,0,0,12"/>
                         </StackPanel>
-                        <Button HorizontalAlignment="Right" Content="✕"
-                                Style="{StaticResource IconButtonStyle}"
-                                Command="{Binding CancelCommand}"/>
-                    </Grid>
-                </Border>
-                <ScrollViewer Grid.Row="1" Padding="24,16,24,0" VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <TextBlock Text="DONOR NAME *" Style="{StaticResource FormLabelStyle}"/>
-                        <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
-                                 HorizontalAlignment="Stretch" Margin="0,0,0,14"
-                                 Text="{Binding EditingDonor.DonorName, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Text="DONOR TYPE" Style="{StaticResource FormLabelStyle}"/>
-                        <WrapPanel Margin="0,4,0,14">
-                            <RadioButton Content="👤 Individual" GroupName="DonationType"
-                                         Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                         IsChecked="{Binding EditingDonor.DonationType, Converter={h:EnumToBoolConverter}, ConverterParameter=Individual}"/>
-                            <RadioButton Content="👥 Group" GroupName="DonationType"
-                                         Style="{StaticResource ChipRadio}" Margin="0,0,8,8"
-                                         IsChecked="{Binding EditingDonor.DonationType, Converter={h:EnumToBoolConverter}, ConverterParameter=Group}"/>
-                        </WrapPanel>
-                        <TextBlock Text="CONTACT INFO" Style="{StaticResource FormLabelStyle}"/>
-                        <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="42"
-                                 HorizontalAlignment="Stretch" Margin="0,0,0,14"
-                                 Text="{Binding EditingDonor.ContactInfo, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Text="ADDRESS" Style="{StaticResource FormLabelStyle}"/>
-                        <TextBox Style="{StaticResource ModernTextBoxStyle}" Height="80"
-                                 HorizontalAlignment="Stretch" TextWrapping="Wrap"
-                                 AcceptsReturn="True" Margin="0,0,0,14"
-                                 Text="{Binding EditingDonor.Address, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Text="{Binding ErrorMessage}" Foreground="#E63946"
-                                   FontSize="12" TextWrapping="Wrap" Margin="0,0,0,12"/>
-                    </StackPanel>
-                </ScrollViewer>
-                <Border Grid.Row="2" Padding="24,14" BorderBrush="#D8F3DC"
-                        BorderThickness="0,1,0,0" Background="#F7FDF9">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Content="Cancel" Style="{StaticResource OutlineButtonStyle}"
-                                Command="{Binding CancelCommand}" Margin="0,0,10,0"/>
-                        <Button Content="Save Donor" Style="{StaticResource PrimaryButtonStyle}"
-                                Command="{Binding SaveCommand}"/>
-                    </StackPanel>
-                </Border>
-            </Grid>
-        </Border>
+                    </ScrollViewer>
+
+                    <!-- Modal Footer -->
+                    <Border Grid.Row="2" CornerRadius="0,0,20,20" Padding="28,16"
+                            BorderBrush="#D8F3DC" BorderThickness="0,1,0,0" Background="#F7FDF9">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Content="Cancel" Style="{StaticResource OutlineButtonStyle}"
+                                    Command="{Binding CancelCommand}" Margin="0,0,10,0"/>
+                            <Button Content="Save Donor" Style="{StaticResource PrimaryButtonStyle}"
+                                    Command="{Binding SaveCommand}"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+
     </Grid>
 </UserControl>
