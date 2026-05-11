@@ -571,7 +571,8 @@ namespace FundForest.Services
             adapter.Fill(dt);
             return dt;
         }
-         // TEMPORARY — remove after first successful login
+
+        // TEMPORARY — remove after first successful login
         public void ResetAdminPassword()
         {
             string hashed = BCrypt.Net.BCrypt.HashPassword("admin123");

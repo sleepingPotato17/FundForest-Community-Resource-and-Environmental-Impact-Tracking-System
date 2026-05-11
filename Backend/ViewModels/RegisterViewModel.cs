@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using FundForest.Services;
 
 namespace FundForest.ViewModels
 {
@@ -9,6 +10,8 @@ namespace FundForest.ViewModels
         private string _username = string.Empty;
         private string _errorMessage = string.Empty;
         private string _successMessage = string.Empty;
+
+        private readonly DatabaseService _db = new();
 
         public string FullName
         {
@@ -51,6 +54,12 @@ namespace FundForest.ViewModels
                 return;
             }
 
+            if (Username.Trim().Length < 4)
+            {
+                ErrorMessage = "Username must be at least 4 characters.";
+                return;
+            }
+
             if (string.IsNullOrWhiteSpace(password))
             {
                 ErrorMessage = "Password is required.";
@@ -75,8 +84,32 @@ namespace FundForest.ViewModels
                 return;
             }
 
-            // TODO: Replace with your actual DB save logic
-            SuccessMessage = $"Account created successfully for {Username}!";
+            if (role == "Admin")
+            {
+                ErrorMessage = "Admin accounts cannot be created here.";
+                return;
+            }
+
+            if (role != "Staff" && role != "Local")
+            {
+                ErrorMessage = "Invalid role selected.";
+                return;
+            }
+
+            if (_db.UsernameExists(Username.Trim()))
+            {
+                ErrorMessage = "Username already exists. Please choose another.";
+                return;
+            }
+
+            string hashed = BCrypt.Net.BCrypt.HashPassword(password);
+            _db.CreateAdmin(Username.Trim(), hashed, FullName.Trim(), role);
+
+            SuccessMessage = "Account created! Please wait for admin approval before logging in.";
+
+            // Clear fields after successful registration
+            FullName = string.Empty;
+            Username = string.Empty;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
