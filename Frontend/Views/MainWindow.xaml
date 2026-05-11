@@ -294,7 +294,7 @@
 
                                 <!-- ✅ Manage Users — Admin only -->
                                 <RadioButton Style="{StaticResource NavButtonStyle}"
-                                             Content="Manage Users" Tag="&#xE716;"
+                                             Content="Manage Users" Tag="&#xE713;"
                                              GroupName="Nav"
                                              Command="{Binding NavManageUsersCommand}"
                                              Visibility="{Binding IsAdmin, Converter={StaticResource BoolVis}}"/>

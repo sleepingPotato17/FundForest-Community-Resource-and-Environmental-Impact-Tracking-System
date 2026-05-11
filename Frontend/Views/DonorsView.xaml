@@ -26,8 +26,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="DataGridColumnHeader">
-                        <Border Background="{TemplateBinding Background}"
-                                Padding="{TemplateBinding Padding}">
+                        <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
                             <ContentPresenter VerticalAlignment="Center"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
                         </Border>
@@ -41,8 +40,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="RadioButton">
                         <Border x:Name="Bd" CornerRadius="20" Padding="14,7"
-                                BorderThickness="1.5" Cursor="Hand"
-                                BorderBrush="#B7E4C7" Background="White">
+                                BorderThickness="1.5" Cursor="Hand" BorderBrush="#B7E4C7" Background="White">
                             <TextBlock x:Name="Txt" Text="{TemplateBinding Content}"
                                        FontSize="12" Foreground="#40916C" FontWeight="SemiBold"/>
                         </Border>
@@ -71,7 +69,6 @@
 
     <Grid>
 
-        <!-- MAIN AREA — always full width -->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -193,8 +190,7 @@
                 </Border>
 
                 <!-- TABLE CARD -->
-                <Border Grid.Row="1" CornerRadius="16" Background="White"
-                        BorderBrush="#D8F3DC" BorderThickness="1.5">
+                <Border Grid.Row="1" CornerRadius="16" Background="White" BorderBrush="#D8F3DC" BorderThickness="1.5">
                     <Border.Effect>
                         <DropShadowEffect Color="#1B4332" BlurRadius="16" ShadowDepth="2" Opacity="0.06"/>
                     </Border.Effect>
@@ -209,18 +205,29 @@
                               HeadersVisibility="Column"
                               ColumnHeaderStyle="{StaticResource TableHeaderStyle}"
                               Background="Transparent" BorderThickness="0"
-                              RowHeight="50" SelectionMode="Single"
+                              RowHeight="50" SelectionMode="Single" SelectionUnit="FullRow"
                               RowHeaderWidth="0"
                               ScrollViewer.VerticalScrollBarVisibility="Auto"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
+                        <DataGrid.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"                          Color="#E0F5E9"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}"                      Color="#1B4332"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"         Color="#E0F5E9"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}"     Color="#1B4332"/>
+                        </DataGrid.Resources>
+
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
                                 <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="#1B4332"/>
                                 <Setter Property="BorderThickness" Value="0"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#F0FAF4"/></Trigger>
-                                    <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="#E0F5E9"/></Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#E0F5E9"/>
+                                        <Setter Property="Foreground" Value="#1B4332"/>
+                                    </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </DataGrid.RowStyle>
@@ -229,10 +236,11 @@
                             <Style TargetType="DataGridCell">
                                 <Setter Property="BorderThickness" Value="0"/>
                                 <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Background" Value="Transparent"/>
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="DataGridCell">
-                                            <Border Background="{TemplateBinding Background}" Padding="0">
+                                            <Border Background="Transparent" Padding="0">
                                                 <ContentPresenter VerticalAlignment="Center"/>
                                             </Border>
                                         </ControlTemplate>
@@ -361,15 +369,10 @@
 
         <!-- MODAL OVERLAY -->
         <Grid Visibility="{Binding IsFormVisible, Converter={StaticResource BoolVis}}">
-
-            <!-- Dim backdrop -->
             <Border Background="#80000000"/>
-
-            <!-- Centered modal card -->
             <Border Width="480" MaxHeight="560"
                     HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Background="White" CornerRadius="20"
-                    BorderBrush="#B7E4C7" BorderThickness="1.5">
+                    Background="White" CornerRadius="20" BorderBrush="#B7E4C7" BorderThickness="1.5">
                 <Border.Effect>
                     <DropShadowEffect Color="#000000" BlurRadius="40" ShadowDepth="8" Opacity="0.2"/>
                 </Border.Effect>
@@ -380,7 +383,6 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <!-- Modal Header -->
                     <Border Grid.Row="0" CornerRadius="20,20,0,0" Padding="28,20"
                             BorderBrush="#D8F3DC" BorderThickness="0,0,0,1">
                         <Border.Background>
@@ -395,12 +397,10 @@
                                 <TextBlock Text="Fill in the details below" FontSize="12" Foreground="#52B788" Margin="0,3,0,0"/>
                             </StackPanel>
                             <Button HorizontalAlignment="Right" Content="✕"
-                                    Style="{StaticResource IconButtonStyle}"
-                                    Command="{Binding CancelCommand}"/>
+                                    Style="{StaticResource IconButtonStyle}" Command="{Binding CancelCommand}"/>
                         </Grid>
                     </Border>
 
-                    <!-- Modal Fields -->
                     <ScrollViewer Grid.Row="1" Padding="28,20,28,0" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
                             <TextBlock Text="DONOR NAME *" Style="{StaticResource FormLabelStyle}"/>
@@ -434,7 +434,6 @@
                         </StackPanel>
                     </ScrollViewer>
 
-                    <!-- Modal Footer -->
                     <Border Grid.Row="2" CornerRadius="0,0,20,20" Padding="28,16"
                             BorderBrush="#D8F3DC" BorderThickness="0,1,0,0" Background="#F7FDF9">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

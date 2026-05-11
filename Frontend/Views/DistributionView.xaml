@@ -39,7 +39,6 @@
 
     <Grid>
 
-        <!-- MAIN AREA -->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -196,25 +195,40 @@
                                   CanUserResizeRows="False" CanUserReorderColumns="False"
                                   GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#EEF7F1"
                                   HeadersVisibility="None" Background="Transparent" BorderThickness="0"
-                                  RowHeight="50" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                  RowHeight="50" SelectionMode="Single" SelectionUnit="FullRow"
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+                            <DataGrid.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"                          Color="#E0F5E9"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}"                      Color="#1B4332"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"         Color="#E0F5E9"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}"     Color="#1B4332"/>
+                            </DataGrid.Resources>
+
                             <DataGrid.RowStyle>
                                 <Style TargetType="DataGridRow">
                                     <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Foreground" Value="#1B4332"/>
                                     <Setter Property="BorderThickness" Value="0"/>
                                     <Style.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#F0FAF4"/></Trigger>
-                                        <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="#E0F5E9"/></Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#E0F5E9"/>
+                                            <Setter Property="Foreground" Value="#1B4332"/>
+                                        </Trigger>
                                     </Style.Triggers>
                                 </Style>
                             </DataGrid.RowStyle>
+
                             <DataGrid.CellStyle>
                                 <Style TargetType="DataGridCell">
                                     <Setter Property="BorderThickness" Value="0"/>
                                     <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Background" Value="Transparent"/>
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="DataGridCell">
-                                                <Border Background="{TemplateBinding Background}" Padding="0">
+                                                <Border Background="Transparent" Padding="0">
                                                     <ContentPresenter VerticalAlignment="Center"/>
                                                 </Border>
                                             </ControlTemplate>
@@ -222,6 +236,7 @@
                                     </Setter>
                                 </Style>
                             </DataGrid.CellStyle>
+
                             <DataGrid.Columns>
 
                                 <DataGridTemplateColumn Width="50">
@@ -374,8 +389,7 @@
             <Border Background="#80000000"/>
             <Border Width="520" MaxHeight="660"
                     HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Background="White" CornerRadius="20"
-                    BorderBrush="#B7E4C7" BorderThickness="1.5">
+                    Background="White" CornerRadius="20" BorderBrush="#B7E4C7" BorderThickness="1.5">
                 <Border.Effect>
                     <DropShadowEffect Color="#000000" BlurRadius="40" ShadowDepth="8" Opacity="0.2"/>
                 </Border.Effect>
@@ -386,7 +400,6 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <!-- Modal Header -->
                     <Border Grid.Row="0" CornerRadius="20,20,0,0" Padding="28,20"
                             BorderBrush="#D8F3DC" BorderThickness="0,0,0,1">
                         <Border.Background>
@@ -405,7 +418,6 @@
                         </Grid>
                     </Border>
 
-                    <!-- Modal Fields -->
                     <ScrollViewer Grid.Row="1" Padding="28,20,28,0" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
 
@@ -489,7 +501,6 @@
                         </StackPanel>
                     </ScrollViewer>
 
-                    <!-- Modal Footer -->
                     <Border Grid.Row="2" CornerRadius="0,0,20,20" Padding="28,16"
                             BorderBrush="#D8F3DC" BorderThickness="0,1,0,0" Background="#F7FDF9">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

@@ -38,18 +38,14 @@
                             </LinearGradientBrush>
                         </Border.Background>
                         <Border.Effect>
-                            <DropShadowEffect Color="#1B4332" BlurRadius="14"
-                                              ShadowDepth="0" Opacity="0.35"/>
+                            <DropShadowEffect Color="#1B4332" BlurRadius="14" ShadowDepth="0" Opacity="0.35"/>
                         </Border.Effect>
-                        <TextBlock Text="SP" FontSize="17" FontWeight="Bold"
-                                   Foreground="White"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"/>
+                        <TextBlock Text="⚙️" FontSize="17" FontWeight="Bold" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                     <StackPanel VerticalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Manage Users" FontSize="22"
-                                       FontWeight="Bold" Foreground="#1B4332"/>
+                            <TextBlock Text="Manage Users" FontSize="22" FontWeight="Bold" Foreground="#1B4332"/>
                             <Border CornerRadius="12" Padding="10,3" Margin="10,0,0,0"
                                     VerticalAlignment="Center" Background="#D8F3DC">
                                 <TextBlock FontSize="11" FontWeight="Bold" Foreground="#1B4332">
@@ -66,8 +62,7 @@
 
             <!-- ERROR BANNER -->
             <Border Grid.Row="1" Background="#FFF0EE" BorderBrush="#FFD0CC"
-                    BorderThickness="1" CornerRadius="10" Padding="14,10"
-                    Margin="0,0,0,12"
+                    BorderThickness="1" CornerRadius="10" Padding="14,10" Margin="0,0,0,12"
                     Visibility="{Binding ErrorMessage, Converter={StaticResource StrVis}}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="⚠ " Foreground="#C0392B" FontSize="13"/>
@@ -76,11 +71,9 @@
             </Border>
 
             <!-- TABLE CARD -->
-            <Border Grid.Row="2" CornerRadius="16" Background="White"
-                    BorderBrush="#D8F3DC" BorderThickness="1.5">
+            <Border Grid.Row="2" CornerRadius="16" Background="White" BorderBrush="#D8F3DC" BorderThickness="1.5">
                 <Border.Effect>
-                    <DropShadowEffect Color="#1B4332" BlurRadius="16"
-                                      ShadowDepth="2" Opacity="0.06"/>
+                    <DropShadowEffect Color="#1B4332" BlurRadius="16" ShadowDepth="2" Opacity="0.06"/>
                 </Border.Effect>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -118,25 +111,28 @@
                               SelectedItem="{Binding SelectedUser}"
                               AutoGenerateColumns="False"
                               IsReadOnly="True"
-                              CanUserAddRows="False"
-                              CanUserDeleteRows="False"
-                              CanUserResizeRows="False"
-                              CanUserReorderColumns="False"
+                              CanUserAddRows="False" CanUserDeleteRows="False"
+                              CanUserResizeRows="False" CanUserReorderColumns="False"
                               CanUserResizeColumns="False"
-                              GridLinesVisibility="Horizontal"
-                              HorizontalGridLinesBrush="#EEF7F1"
+                              GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#EEF7F1"
                               HeadersVisibility="None"
-                              SelectionMode="Single"
-                              Background="Transparent"
-                              BorderThickness="0"
-                              RowHeight="50"
-                              RowHeaderWidth="0"
+                              SelectionMode="Single" SelectionUnit="FullRow"
+                              Background="Transparent" BorderThickness="0"
+                              RowHeight="50" RowHeaderWidth="0"
                               ScrollViewer.VerticalScrollBarVisibility="Auto"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                        <DataGrid.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"                          Color="#E0F5E9"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}"                      Color="#1B4332"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"         Color="#E0F5E9"/>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}"     Color="#1B4332"/>
+                        </DataGrid.Resources>
 
                         <DataGrid.RowStyle>
                             <Style TargetType="DataGridRow">
                                 <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="#1B4332"/>
                                 <Setter Property="BorderThickness" Value="0"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
@@ -144,6 +140,7 @@
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter Property="Background" Value="#E0F5E9"/>
+                                        <Setter Property="Foreground" Value="#1B4332"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -153,10 +150,11 @@
                             <Style TargetType="DataGridCell">
                                 <Setter Property="BorderThickness" Value="0"/>
                                 <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Background" Value="Transparent"/>
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="DataGridCell">
-                                            <Border Background="{TemplateBinding Background}" Padding="16,0">
+                                            <Border Background="Transparent" Padding="16,0">
                                                 <ContentPresenter VerticalAlignment="Center"/>
                                             </Border>
                                         </ControlTemplate>
@@ -170,11 +168,8 @@
                             <DataGridTemplateColumn Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding FullName}"
-                                                   FontSize="13" FontWeight="SemiBold"
-                                                   Foreground="#1B4332"
-                                                   TextTrimming="CharacterEllipsis"
-                                                   VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding FullName}" FontSize="13" FontWeight="SemiBold"
+                                                   Foreground="#1B4332" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -182,9 +177,7 @@
                             <DataGridTemplateColumn Width="130">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Username}"
-                                                   FontSize="12" Foreground="#2D6A4F"
-                                                   VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding Username}" FontSize="12" Foreground="#2D6A4F" VerticalAlignment="Center"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -192,13 +185,9 @@
                             <DataGridTemplateColumn Width="100">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Border CornerRadius="20" Padding="10,4"
-                                                HorizontalAlignment="Left"
-                                                VerticalAlignment="Center"
-                                                Background="#D8F3DC">
-                                            <TextBlock Text="{Binding Role}"
-                                                       FontSize="11" FontWeight="SemiBold"
-                                                       Foreground="#1B4332"/>
+                                        <Border CornerRadius="20" Padding="10,4" HorizontalAlignment="Left"
+                                                VerticalAlignment="Center" Background="#D8F3DC">
+                                            <TextBlock Text="{Binding Role}" FontSize="11" FontWeight="SemiBold" Foreground="#1B4332"/>
                                         </Border>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -208,8 +197,7 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding CreatedAt, StringFormat=MMM dd yyyy}"
-                                                   FontSize="12" Foreground="#52B788"
-                                                   VerticalAlignment="Center"/>
+                                                   FontSize="12" Foreground="#52B788" VerticalAlignment="Center"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -217,9 +205,7 @@
                             <DataGridTemplateColumn Width="120">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Border CornerRadius="20" Padding="10,4"
-                                                HorizontalAlignment="Left"
-                                                VerticalAlignment="Center">
+                                        <Border CornerRadius="20" Padding="10,4" HorizontalAlignment="Left" VerticalAlignment="Center">
                                             <Border.Style>
                                                 <Style TargetType="Border">
                                                     <Style.Triggers>
@@ -232,8 +218,7 @@
                                                     </Style.Triggers>
                                                 </Style>
                                             </Border.Style>
-                                            <TextBlock Text="{Binding StatusLabel}"
-                                                       FontSize="11" FontWeight="SemiBold">
+                                            <TextBlock Text="{Binding StatusLabel}" FontSize="11" FontWeight="SemiBold">
                                                 <TextBlock.Style>
                                                     <Style TargetType="TextBlock">
                                                         <Style.Triggers>
@@ -257,17 +242,14 @@
                 </Grid>
             </Border>
 
-            <!-- ACTION BUTTONS — full width, no white space -->
+            <!-- ACTION BUTTONS -->
             <Border Grid.Row="3" Margin="0,14,0,0" CornerRadius="12"
-                    Padding="8,10" Background="White"
-                    BorderBrush="#D8F3DC" BorderThickness="1.5">
+                    Padding="8,10" Background="White" BorderBrush="#D8F3DC" BorderThickness="1.5">
                 <Border.Effect>
-                    <DropShadowEffect Color="#1B4332" BlurRadius="10"
-                                      ShadowDepth="0" Opacity="0.05"/>
+                    <DropShadowEffect Color="#1B4332" BlurRadius="10" ShadowDepth="0" Opacity="0.05"/>
                 </Border.Effect>
                 <UniformGrid Rows="1" Columns="4">
 
-                    <!-- Refresh -->
                     <Button Content="↻  Refresh" Command="{Binding RefreshCommand}"
                             Height="38" Margin="4,0" Cursor="Hand"
                             FontSize="13" FontWeight="SemiBold" Foreground="#40916C"
@@ -289,7 +271,6 @@
                         </Button.Template>
                     </Button>
 
-                    <!-- Approve -->
                     <Button Content="✓  Approve" Command="{Binding ApproveCommand}"
                             Height="38" Margin="4,0" Cursor="Hand"
                             FontSize="13" FontWeight="SemiBold" Foreground="White">
@@ -303,24 +284,18 @@
                                         </LinearGradientBrush>
                                     </Border.Background>
                                     <Border.Effect>
-                                        <DropShadowEffect Color="#1B4332" BlurRadius="10"
-                                                          ShadowDepth="0" Opacity="0.3"/>
+                                        <DropShadowEffect Color="#1B4332" BlurRadius="10" ShadowDepth="0" Opacity="0.3"/>
                                     </Border.Effect>
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <ControlTemplate.Triggers>
-                                    <Trigger Property="IsEnabled" Value="False">
-                                        <Setter TargetName="Bd" Property="Opacity" Value="0.4"/>
-                                    </Trigger>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="Bd" Property="Opacity" Value="0.85"/>
-                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False"><Setter TargetName="Bd" Property="Opacity" Value="0.4"/></Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Bd" Property="Opacity" Value="0.85"/></Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
 
-                    <!-- Reject -->
                     <Button Content="✕  Reject" Command="{Binding RejectCommand}"
                             Height="38" Margin="4,0" Cursor="Hand"
                             FontSize="13" FontWeight="SemiBold" Foreground="#C0392B">
@@ -331,38 +306,27 @@
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <ControlTemplate.Triggers>
-                                    <Trigger Property="IsEnabled" Value="False">
-                                        <Setter TargetName="Bd" Property="Opacity" Value="0.4"/>
-                                    </Trigger>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="Bd" Property="Background" Value="#FFD6D6"/>
-                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False"><Setter TargetName="Bd" Property="Opacity" Value="0.4"/></Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Bd" Property="Background" Value="#FFD6D6"/></Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
 
-                    <!-- Delete -->
                     <Button Content="🗑  Delete" Command="{Binding DeleteCommand}"
                             Height="38" Margin="4,0" Cursor="Hand"
                             FontSize="13" FontWeight="SemiBold" Foreground="White">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border x:Name="Bd" CornerRadius="10"
-                                        Background="#E63946" BorderThickness="0">
+                                <Border x:Name="Bd" CornerRadius="10" Background="#E63946" BorderThickness="0">
                                     <Border.Effect>
-                                        <DropShadowEffect Color="#E63946" BlurRadius="10"
-                                                          ShadowDepth="0" Opacity="0.3"/>
+                                        <DropShadowEffect Color="#E63946" BlurRadius="10" ShadowDepth="0" Opacity="0.3"/>
                                     </Border.Effect>
                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <ControlTemplate.Triggers>
-                                    <Trigger Property="IsEnabled" Value="False">
-                                        <Setter TargetName="Bd" Property="Opacity" Value="0.4"/>
-                                    </Trigger>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="Bd" Property="Opacity" Value="0.85"/>
-                                    </Trigger>
+                                    <Trigger Property="IsEnabled" Value="False"><Setter TargetName="Bd" Property="Opacity" Value="0.4"/></Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Bd" Property="Opacity" Value="0.85"/></Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Button.Template>

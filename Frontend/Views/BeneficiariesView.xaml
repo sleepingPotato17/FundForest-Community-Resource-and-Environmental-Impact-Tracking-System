@@ -223,13 +223,26 @@
                                   RowHeight="50" SelectionMode="Single"
                                   ScrollViewer.VerticalScrollBarVisibility="Auto">
 
+                            <!-- FIX: Override system blue selection highlight with green -->
+                            <DataGrid.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"                         Color="#B7E4C7"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}"                     Color="#1B4332"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"        Color="#D8F3DC"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}"    Color="#1B4332"/>
+                            </DataGrid.Resources>
+
                             <DataGrid.RowStyle>
                                 <Style TargetType="DataGridRow">
                                     <Setter Property="Background" Value="Transparent"/>
                                     <Setter Property="BorderThickness" Value="0"/>
                                     <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#F0FAF4"/></Trigger>
-                                        <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="#E0F5E9"/></Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#F0FAF4"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#E0F5E9"/>
+                                            <Setter Property="Foreground" Value="#1B4332"/>
+                                        </Trigger>
                                     </Style.Triggers>
                                 </Style>
                             </DataGrid.RowStyle>
@@ -252,6 +265,7 @@
 
                             <DataGrid.Columns>
 
+                                <!-- FIX: Row number uses ItemContainerGenerator index, not a data property -->
                                 <DataGridTemplateColumn Width="50">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>

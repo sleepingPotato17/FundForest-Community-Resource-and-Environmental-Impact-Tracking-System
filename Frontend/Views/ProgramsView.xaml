@@ -39,7 +39,7 @@
 
     <Grid>
 
-        <!-- MAIN AREA — always full width -->
+        <!-- MAIN AREA -->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -209,14 +209,27 @@
                                   CanUserResizeRows="False" CanUserReorderColumns="False"
                                   GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#EEF7F1"
                                   HeadersVisibility="None" Background="Transparent" BorderThickness="0"
-                                  RowHeight="50" SelectionMode="Single" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                  RowHeight="50" SelectionMode="Single" SelectionUnit="FullRow"
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <DataGrid.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"                          Color="#E0F5E9"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}"                      Color="#1B4332"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"         Color="#E0F5E9"/>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}"     Color="#1B4332"/>
+                            </DataGrid.Resources>
                             <DataGrid.RowStyle>
                                 <Style TargetType="DataGridRow">
                                     <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Foreground" Value="#1B4332"/>
                                     <Setter Property="BorderThickness" Value="0"/>
                                     <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="#F0FAF4"/></Trigger>
-                                        <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="#E0F5E9"/></Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#F0FAF4"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#E0F5E9"/>
+                                            <Setter Property="Foreground" Value="#1B4332"/>
+                                        </Trigger>
                                     </Style.Triggers>
                                 </Style>
                             </DataGrid.RowStyle>
@@ -224,10 +237,11 @@
                                 <Style TargetType="DataGridCell">
                                     <Setter Property="BorderThickness" Value="0"/>
                                     <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Background" Value="Transparent"/>
                                     <Setter Property="Template">
                                         <Setter.Value>
                                             <ControlTemplate TargetType="DataGridCell">
-                                                <Border Background="{TemplateBinding Background}" Padding="0">
+                                                <Border Background="Transparent" Padding="0">
                                                     <ContentPresenter VerticalAlignment="Center"/>
                                                 </Border>
                                             </ControlTemplate>
@@ -372,11 +386,7 @@
 
         <!-- MODAL OVERLAY -->
         <Grid Visibility="{Binding IsFormVisible, Converter={StaticResource BoolVis}}">
-
-            <!-- Dim backdrop -->
             <Border Background="#80000000"/>
-
-            <!-- Centered modal card -->
             <Border Width="520" MaxHeight="600"
                     HorizontalAlignment="Center" VerticalAlignment="Center"
                     Background="White" CornerRadius="20"
@@ -391,7 +401,6 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <!-- Modal Header -->
                     <Border Grid.Row="0" CornerRadius="20,20,0,0" Padding="28,20"
                             BorderBrush="#D8F3DC" BorderThickness="0,0,0,1">
                         <Border.Background>
@@ -410,7 +419,6 @@
                         </Grid>
                     </Border>
 
-                    <!-- Modal Fields -->
                     <ScrollViewer Grid.Row="1" Padding="28,20,28,0" VerticalScrollBarVisibility="Auto">
                         <StackPanel>
                             <TextBlock Text="PROGRAM NAME *" Style="{StaticResource FormLabelStyle}"/>
@@ -470,7 +478,6 @@
                         </StackPanel>
                     </ScrollViewer>
 
-                    <!-- Modal Footer -->
                     <Border Grid.Row="2" CornerRadius="0,0,20,20" Padding="28,16"
                             BorderBrush="#D8F3DC" BorderThickness="0,1,0,0" Background="#F7FDF9">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
