@@ -26,15 +26,17 @@
 4. [Object-Oriented Programming Principles](#object-oriented-programming-principles)
 5. [System Architecture](#system-architecture)
 6. [Project Structure](#project-structure)
-7. [Installation Guide](#installation-guide)
-8. [Database Setup](#database-setup)
-9. [Authentication and Security](#authentication-and-security)
-10. [User Interface Preview](#user-interface-preview)
-11. [Future Improvements](#future-improvements)
-12. [Developers](#developers)
-13. [Lessons Learned](#lessons-learned)
-14. [License](#license)
-15. [Acknowledgements](#acknowledgements)
+7. [UML Diagram].(#uml-diagram)
+8. [Flowchart].(#flowchart)
+9. [Installation Guide](#installation-guide)
+10. [Database Setup](#database-setup)
+11. [Authentication and Security](#authentication-and-security)
+12. [User Interface Preview](#user-interface-preview)
+13. [Future Improvements](#future-improvements)
+14. [Developers](#developers)
+15. [Lessons Learned](#lessons-learned)
+16. [License](#license)
+17. [Acknowledgements](#acknowledgements)
 
 ---
 
@@ -463,6 +465,18 @@ FundForest/
 <br>
 
 ---
+
+## UML Diagram
+
+---
+
+<br>
+
+## Flowchart
+
+---
+
+<br>
 
 ## Installation Guide
 
