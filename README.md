@@ -26,8 +26,8 @@
 4. [Object-Oriented Programming Principles](#object-oriented-programming-principles)
 5. [System Architecture](#system-architecture)
 6. [Project Structure](#project-structure)
-7. [UML Diagram].(#uml-diagram)
-8. [Flowchart].(#flowchart)
+7. [UML Diagram].(#uml-diagram).
+8. [Flowchart].(#flowchart).
 9. [Installation Guide](#installation-guide)
 10. [Database Setup](#database-setup)
 11. [Authentication and Security](#authentication-and-security)
