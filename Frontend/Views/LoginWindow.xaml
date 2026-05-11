@@ -17,7 +17,6 @@
         <h:BoolToVisibilityConverter x:Key="BoolVis"/>
         <h:StringNotEmptyToVisibilityConverter x:Key="StrVis"/>
 
-        <!-- Blob Float 1 -->
         <Storyboard x:Key="BlobFloat1" RepeatBehavior="Forever" AutoReverse="True">
             <DoubleAnimation Storyboard.TargetName="Blob1"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
@@ -26,8 +25,6 @@
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
                              From="0" To="20" Duration="0:0:7" AutoReverse="True"/>
         </Storyboard>
-
-        <!-- Blob Float 2 -->
         <Storyboard x:Key="BlobFloat2" RepeatBehavior="Forever" AutoReverse="True">
             <DoubleAnimation Storyboard.TargetName="Blob2"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
@@ -36,15 +33,11 @@
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
                              From="0" To="-15" Duration="0:0:8" AutoReverse="True"/>
         </Storyboard>
-
-        <!-- Blob Float 3 -->
         <Storyboard x:Key="BlobFloat3" RepeatBehavior="Forever" AutoReverse="True">
             <DoubleAnimation Storyboard.TargetName="Blob3"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
                              From="0" To="-22" Duration="0:0:4"/>
         </Storyboard>
-
-        <!-- Leaf Fall 1 -->
         <Storyboard x:Key="LeafFall1" RepeatBehavior="Forever">
             <DoubleAnimation Storyboard.TargetName="Leaf1"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
@@ -56,8 +49,6 @@
                              Storyboard.TargetProperty="Opacity"
                              From="0" To="0.8" Duration="0:0:1"/>
         </Storyboard>
-
-        <!-- Leaf Fall 2 -->
         <Storyboard x:Key="LeafFall2" RepeatBehavior="Forever" BeginTime="0:0:3">
             <DoubleAnimation Storyboard.TargetName="Leaf2"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
@@ -66,8 +57,6 @@
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
                              From="0" To="-35" Duration="0:0:11" AutoReverse="True"/>
         </Storyboard>
-
-        <!-- Leaf Fall 3 -->
         <Storyboard x:Key="LeafFall3" RepeatBehavior="Forever" BeginTime="0:0:6">
             <DoubleAnimation Storyboard.TargetName="Leaf3"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
@@ -76,8 +65,6 @@
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)"
                              From="0" To="55" Duration="0:0:8" AutoReverse="True"/>
         </Storyboard>
-
-        <!-- Particle 1 -->
         <Storyboard x:Key="Particle1" RepeatBehavior="Forever" BeginTime="0:0:1">
             <DoubleAnimation Storyboard.TargetName="P1"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
@@ -86,8 +73,6 @@
                              Storyboard.TargetProperty="Opacity"
                              From="0" To="0.7" Duration="0:0:2" AutoReverse="True"/>
         </Storyboard>
-
-        <!-- Particle 2 -->
         <Storyboard x:Key="Particle2" RepeatBehavior="Forever" BeginTime="0:0:3">
             <DoubleAnimation Storyboard.TargetName="P2"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
@@ -96,8 +81,6 @@
                              Storyboard.TargetProperty="Opacity"
                              From="0" To="0.5" Duration="0:0:3" AutoReverse="True"/>
         </Storyboard>
-
-        <!-- Particle 3 -->
         <Storyboard x:Key="Particle3" RepeatBehavior="Forever" BeginTime="0:0:5">
             <DoubleAnimation Storyboard.TargetName="P3"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
@@ -106,8 +89,6 @@
                              Storyboard.TargetProperty="Opacity"
                              From="0" To="0.6" Duration="0:0:2" AutoReverse="True"/>
         </Storyboard>
-
-        <!-- Logo Pulse -->
         <Storyboard x:Key="LogoPulse" RepeatBehavior="Forever" AutoReverse="True">
             <DoubleAnimation Storyboard.TargetName="LogoBorder"
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
@@ -116,8 +97,6 @@
                              Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
                              From="1" To="1.07" Duration="0:0:2"/>
         </Storyboard>
-
-        <!-- Tagline Fade In -->
         <Storyboard x:Key="TaglineFadeIn">
             <DoubleAnimation Storyboard.TargetName="TaglineText"
                              Storyboard.TargetProperty="Opacity"
@@ -130,8 +109,6 @@
                 <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
-
-        <!-- Form Slide Up -->
         <Storyboard x:Key="FormFadeIn">
             <DoubleAnimation Storyboard.TargetName="FormCard"
                              Storyboard.TargetProperty="Opacity"
@@ -145,7 +122,6 @@
             </DoubleAnimation>
         </Storyboard>
 
-        <!-- Gradient Button -->
         <Style x:Key="GradientButtonStyle" TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -188,7 +164,6 @@
             </Setter>
         </Style>
 
-        <!-- Glass TextBox -->
         <Style x:Key="GlassTextBoxStyle" TargetType="TextBox">
             <Setter Property="Background" Value="#22FFFFFF"/>
             <Setter Property="Foreground" Value="#1B4332"/>
@@ -234,72 +209,6 @@
             </Setter>
         </Style>
 
-        <!-- Glass PasswordBox -->
-        <Style x:Key="GlassPasswordBoxStyle" TargetType="PasswordBox">
-            <Setter Property="Background" Value="#22FFFFFF"/>
-            <Setter Property="Foreground" Value="#1B4332"/>
-            <Setter Property="BorderBrush" Value="#50B7E4C7"/>
-            <Setter Property="BorderThickness" Value="1.5"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Height" Value="50"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="PasswordBox">
-                        <Border x:Name="Bd"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="12">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="44"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="44"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="&#xE72E;"
-                                           FontFamily="Segoe MDL2 Assets" FontSize="16"
-                                           Foreground="#52B788"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <ScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
-                                              Margin="0,0,0,0" VerticalAlignment="Center"/>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsFocused" Value="True">
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#52B788"/>
-                                <Setter TargetName="Bd" Property="Background" Value="#33FFFFFF"/>
-                                <Setter TargetName="Bd" Property="Effect">
-                                    <Setter.Value>
-                                        <DropShadowEffect Color="#52B788" BlurRadius="14" ShadowDepth="0" Opacity="0.35"/>
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Plain TextBox (for revealed password) -->
-        <Style x:Key="RevealTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#1B4332"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border Background="Transparent">
-                            <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Eye ToggleButton -->
         <Style x:Key="EyeToggleStyle" TargetType="ToggleButton">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -314,8 +223,7 @@
                                        Text="&#xE7B3;"
                                        FontFamily="Segoe MDL2 Assets"
                                        FontSize="15" Foreground="#74C69D"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
@@ -333,7 +241,6 @@
 
     </Window.Resources>
 
-    <!-- Root -->
     <Border CornerRadius="20" ClipToBounds="True">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -341,9 +248,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- ================================================
-                 LEFT PANEL — Nature Immersive
-                 ================================================ -->
+            <!-- LEFT PANEL -->
             <Border Grid.Column="0" ClipToBounds="True">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0.8,1">
@@ -353,21 +258,15 @@
                         <GradientStop Color="#2D6A4F" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
-
                 <Grid>
-                    <!-- Tree silhouettes -->
                     <Path Data="M 60,580 L 60,350 L 30,350 L 80,200 L 130,350 L 100,350 L 100,580 Z"
-                          Fill="#0D2B1A" Opacity="0.9"
-                          HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0,0,0"/>
+                          Fill="#0D2B1A" Opacity="0.9" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0,0,0"/>
                     <Path Data="M 160,580 L 160,380 L 125,380 L 185,210 L 245,380 L 210,380 L 210,580 Z"
-                          Fill="#0A2318" Opacity="0.85"
-                          HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="60,0,0,0"/>
+                          Fill="#0A2318" Opacity="0.85" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="60,0,0,0"/>
                     <Path Data="M 100,580 L 100,420 L 70,420 L 120,280 L 170,420 L 140,420 L 140,580 Z"
-                          Fill="#122D1E" Opacity="0.8"
-                          HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="220,0,0,0"/>
+                          Fill="#122D1E" Opacity="0.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="220,0,0,0"/>
                     <Path Data="M 60,580 L 60,460 L 40,460 L 75,360 L 110,460 L 90,460 L 90,580 Z"
-                          Fill="#0D2B1A" Opacity="0.75"
-                          HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="330,0,0,0"/>
+                          Fill="#0D2B1A" Opacity="0.75" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="330,0,0,0"/>
                     <Rectangle Height="60" VerticalAlignment="Bottom" Opacity="0.6">
                         <Rectangle.Fill>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -386,7 +285,6 @@
                         <Rectangle.Effect><BlurEffect Radius="20"/></Rectangle.Effect>
                     </Rectangle>
 
-                    <!-- Blobs -->
                     <Ellipse x:Name="Blob1" Width="350" Height="350"
                              HorizontalAlignment="Left" VerticalAlignment="Top"
                              Margin="-120,-120,0,0" Opacity="0.18">
@@ -424,9 +322,7 @@
                         <Ellipse.Effect><BlurEffect Radius="30"/></Ellipse.Effect>
                     </Ellipse>
 
-                    <!-- Light rays -->
-                    <Rectangle Width="2" Height="300"
-                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                    <Rectangle Width="2" Height="300" HorizontalAlignment="Left" VerticalAlignment="Top"
                                Margin="180,0,0,0" Opacity="0.06" RenderTransformOrigin="0.5,0">
                         <Rectangle.Fill>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -437,8 +333,7 @@
                         <Rectangle.RenderTransform><RotateTransform Angle="15"/></Rectangle.RenderTransform>
                         <Rectangle.Effect><BlurEffect Radius="8"/></Rectangle.Effect>
                     </Rectangle>
-                    <Rectangle Width="2" Height="250"
-                               HorizontalAlignment="Left" VerticalAlignment="Top"
+                    <Rectangle Width="2" Height="250" HorizontalAlignment="Left" VerticalAlignment="Top"
                                Margin="280,0,0,0" Opacity="0.05" RenderTransformOrigin="0.5,0">
                         <Rectangle.Fill>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -450,7 +345,6 @@
                         <Rectangle.Effect><BlurEffect Radius="10"/></Rectangle.Effect>
                     </Rectangle>
 
-                    <!-- Leaves -->
                     <TextBlock x:Name="Leaf1" Text="🍃" FontSize="24"
                                HorizontalAlignment="Left" VerticalAlignment="Top"
                                Margin="80,0,0,0" Opacity="0">
@@ -467,7 +361,6 @@
                         <TextBlock.RenderTransform><TranslateTransform/></TextBlock.RenderTransform>
                     </TextBlock>
 
-                    <!-- Particles -->
                     <Ellipse x:Name="P1" Width="5" Height="5" Fill="#80B7E4C7"
                              HorizontalAlignment="Left" VerticalAlignment="Bottom"
                              Margin="100,0,0,0" Opacity="0">
@@ -486,7 +379,6 @@
                         <Ellipse.Effect><BlurEffect Radius="3"/></Ellipse.Effect>
                     </Ellipse>
 
-                    <!-- Branding -->
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="48,0">
                         <Border x:Name="LogoBorder" Width="76" Height="76"
                                 CornerRadius="20" HorizontalAlignment="Center" Margin="0,0,0,20">
@@ -499,18 +391,14 @@
                             <Border.Effect>
                                 <DropShadowEffect Color="#52B788" BlurRadius="28" ShadowDepth="0" Opacity="0.7"/>
                             </Border.Effect>
-                            <Border.RenderTransform>
-                                <ScaleTransform CenterX="38" CenterY="38"/>
-                            </Border.RenderTransform>
-                            <TextBlock Text="🌿" FontSize="38"
-                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Border.RenderTransform><ScaleTransform CenterX="38" CenterY="38"/></Border.RenderTransform>
+                            <TextBlock Text="🌿" FontSize="38" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
 
                         <TextBlock Text="FundForest" FontSize="38" FontWeight="Bold"
                                    Foreground="White" HorizontalAlignment="Center"/>
 
-                        <Border Height="1.5" Width="100" HorizontalAlignment="Center"
-                                Margin="0,14,0,14" Opacity="0.4">
+                        <Border Height="1.5" Width="100" HorizontalAlignment="Center" Margin="0,14,0,14" Opacity="0.4">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                                     <GradientStop Color="Transparent" Offset="0"/>
@@ -522,8 +410,7 @@
 
                         <TextBlock x:Name="TaglineText"
                                    Text="Transparency that Roots,&#x0a;Impact that Grows"
-                                   FontSize="15" FontWeight="Medium"
-                                   Foreground="#95D5B2"
+                                   FontSize="15" FontWeight="Medium" Foreground="#95D5B2"
                                    HorizontalAlignment="Center" TextAlignment="Center"
                                    LineHeight="24" Opacity="0" Margin="0,0,0,32">
                             <TextBlock.RenderTransform><TranslateTransform/></TextBlock.RenderTransform>
@@ -535,22 +422,16 @@
                             <Border.BorderThickness>1</Border.BorderThickness>
                             <UniformGrid Columns="3">
                                 <StackPanel HorizontalAlignment="Center">
-                                    <TextBlock Text="1.2K+" FontSize="20" FontWeight="Bold"
-                                               Foreground="White" HorizontalAlignment="Center"/>
-                                    <TextBlock Text="Donors" FontSize="10"
-                                               Foreground="#74C69D" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="1.2K+" FontSize="20" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Donors" FontSize="10" Foreground="#74C69D" HorizontalAlignment="Center"/>
                                 </StackPanel>
                                 <StackPanel HorizontalAlignment="Center">
-                                    <TextBlock Text="500+" FontSize="20" FontWeight="Bold"
-                                               Foreground="White" HorizontalAlignment="Center"/>
-                                    <TextBlock Text="Programs" FontSize="10"
-                                               Foreground="#74C69D" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="500+" FontSize="20" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Programs" FontSize="10" Foreground="#74C69D" HorizontalAlignment="Center"/>
                                 </StackPanel>
                                 <StackPanel HorizontalAlignment="Center">
-                                    <TextBlock Text="₱2M+" FontSize="20" FontWeight="Bold"
-                                               Foreground="White" HorizontalAlignment="Center"/>
-                                    <TextBlock Text="Distributed" FontSize="10"
-                                               Foreground="#74C69D" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="₱2M+" FontSize="20" FontWeight="Bold" Foreground="White" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Distributed" FontSize="10" Foreground="#74C69D" HorizontalAlignment="Center"/>
                                 </StackPanel>
                             </UniformGrid>
                         </Border>
@@ -571,9 +452,7 @@
                 </Grid>
             </Border>
 
-            <!-- ================================================
-                 RIGHT PANEL — Login Form
-                 ================================================ -->
+            <!-- RIGHT PANEL -->
             <Border Grid.Column="1" ClipToBounds="True">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -581,11 +460,8 @@
                         <GradientStop Color="#E0F0E8" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
-
                 <Grid>
-                    <!-- Background blobs -->
-                    <Ellipse Width="280" Height="280"
-                             HorizontalAlignment="Right" VerticalAlignment="Top"
+                    <Ellipse Width="280" Height="280" HorizontalAlignment="Right" VerticalAlignment="Top"
                              Margin="0,-80,-80,0" Opacity="0.13">
                         <Ellipse.Fill>
                             <RadialGradientBrush>
@@ -595,8 +471,7 @@
                         </Ellipse.Fill>
                         <Ellipse.Effect><BlurEffect Radius="40"/></Ellipse.Effect>
                     </Ellipse>
-                    <Ellipse Width="220" Height="220"
-                             HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                    <Ellipse Width="220" Height="220" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                              Margin="-60,0,0,-60" Opacity="0.1">
                         <Ellipse.Fill>
                             <RadialGradientBrush>
@@ -607,14 +482,12 @@
                         <Ellipse.Effect><BlurEffect Radius="35"/></Ellipse.Effect>
                     </Ellipse>
 
-                    <!-- Close button -->
                     <Button Content="✕" HorizontalAlignment="Right" VerticalAlignment="Top"
                             Margin="0,14,14,0" Width="30" Height="30"
                             Background="Transparent" BorderThickness="0"
                             Foreground="#74C69D" FontSize="13"
                             Cursor="Hand" Click="CloseWindow_Click"/>
 
-                    <!-- Form Card -->
                     <Border x:Name="FormCard"
                             VerticalAlignment="Center" HorizontalAlignment="Center"
                             Width="360" CornerRadius="20" Padding="36,30" Opacity="0">
@@ -627,8 +500,7 @@
                         </Border.BorderBrush>
                         <Border.BorderThickness>1.5</Border.BorderThickness>
                         <Border.Effect>
-                            <DropShadowEffect Color="#1B4332" BlurRadius="44"
-                                              ShadowDepth="10" Opacity="0.1" Direction="270"/>
+                            <DropShadowEffect Color="#1B4332" BlurRadius="44" ShadowDepth="10" Opacity="0.1" Direction="270"/>
                         </Border.Effect>
                         <Border.RenderTransform><TranslateTransform/></Border.RenderTransform>
 
@@ -646,73 +518,65 @@
                                      Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
                                      Margin="0,0,0,14"/>
 
-                            <!-- Password with eye toggle -->
+                            <!-- Password -->
                             <TextBlock Text="PASSWORD" FontSize="10" FontWeight="SemiBold"
-                                    Foreground="#4A6741" Margin="0,0,0,5"/>
+                                       Foreground="#4A6741" Margin="0,0,0,5"/>
+                            <Border CornerRadius="12" Background="#22FFFFFF"
+                                    BorderBrush="#50B7E4C7" BorderThickness="1.5"
+                                    Height="50" Margin="0,0,0,8">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="44"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="44"/>
+                                    </Grid.ColumnDefinitions>
 
-                            <Grid Margin="0,0,0,8" Height="50">
+                                    <TextBlock Grid.Column="0" Text="&#xE72E;"
+                                               FontFamily="Segoe MDL2 Assets" FontSize="16"
+                                               Foreground="#52B788"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-                                <!-- Layer 1: PasswordBox (always underneath, always visible) -->
-                                <Border CornerRadius="12" Background="#22FFFFFF"
-                                        BorderBrush="#50B7E4C7" BorderThickness="1.5">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="44"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="44"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="&#xE72E;"
-                                                FontFamily="Segoe MDL2 Assets" FontSize="16"
-                                                Foreground="#52B788"
-                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        <PasswordBox x:Name="PasswordBox" Grid.Column="1"
-                                                    Background="Transparent" BorderThickness="0"
-                                                    FontSize="14" Foreground="#1B4332"
-                                                    VerticalContentAlignment="Center"/>
-                                        <ToggleButton x:Name="LoginEyeToggle" Grid.Column="2"
-                                                    Style="{StaticResource EyeToggleStyle}"
-                                                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Grid>
-                                </Border>
+                                    <!-- PasswordBox: visible when eye is OFF -->
+                                    <PasswordBox x:Name="PasswordBox" Grid.Column="1"
+                                                 Background="Transparent" BorderThickness="0"
+                                                 FontSize="14" Foreground="#1B4332"
+                                                 VerticalContentAlignment="Center"
+                                                 PasswordChanged="PasswordBox_PasswordChanged">
+                                        <PasswordBox.Style>
+                                            <Style TargetType="PasswordBox">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsChecked, ElementName=LoginEyeToggle}" Value="True">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </PasswordBox.Style>
+                                    </PasswordBox>
 
-                                <!-- Layer 2: Plain TextBox revealed only when eye is toggled ON -->
-                                <Border CornerRadius="12" Background="#22FFFFFF"
-                                        BorderBrush="#52B788" BorderThickness="1.5"
-                                        Visibility="Collapsed">
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsChecked, ElementName=LoginEyeToggle}" Value="True">
-                                                    <Setter Property="Visibility" Value="Visible"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Border.Style>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="44"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="44"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="&#xE72E;"
-                                                FontFamily="Segoe MDL2 Assets" FontSize="16"
-                                                Foreground="#52B788"
-                                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        <TextBox Grid.Column="1"
-                                                Background="Transparent" BorderThickness="0"
-                                                FontSize="14" Foreground="#1B4332"
-                                                VerticalContentAlignment="Center"
-                                                IsReadOnly="True"
-                                                Text="{Binding ElementName=PasswordBox, Path=Password, Mode=OneWay}"/>
-                                        <ToggleButton Grid.Column="2"
-                                                    IsChecked="{Binding IsChecked, ElementName=LoginEyeToggle, Mode=TwoWay}"
-                                                    Style="{StaticResource EyeToggleStyle}"
-                                                    VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Grid>
-                                </Border>
+                                    <!-- TextBox: visible when eye is ON -->
+                                    <TextBox x:Name="RevealPasswordBox" Grid.Column="1"
+                                             Background="Transparent" BorderThickness="0"
+                                             FontSize="14" Foreground="#1B4332"
+                                             VerticalContentAlignment="Center"
+                                             IsReadOnly="True">
+                                        <TextBox.Style>
+                                            <Style TargetType="TextBox">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsChecked, ElementName=LoginEyeToggle}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
 
-                            </Grid>
+                                    <ToggleButton x:Name="LoginEyeToggle" Grid.Column="2"
+                                                  Style="{StaticResource EyeToggleStyle}"
+                                                  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Grid>
+                            </Border>
 
                             <!-- Forgot password -->
                             <TextBlock HorizontalAlignment="Right" Margin="0,0,0,20">
@@ -745,8 +609,7 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Border Grid.Column="0" Height="1" Background="#DDE8E0" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Column="1" Text="or" FontSize="11"
-                                           Foreground="#8FAF8A" Margin="10,0"/>
+                                <TextBlock Grid.Column="1" Text="or" FontSize="11" Foreground="#8FAF8A" Margin="10,0"/>
                                 <Border Grid.Column="2" Height="1" Background="#DDE8E0" VerticalAlignment="Center"/>
                             </Grid>
 

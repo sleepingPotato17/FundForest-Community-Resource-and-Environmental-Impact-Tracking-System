@@ -102,51 +102,6 @@
             </Setter>
         </Style>
 
-        <Style x:Key="GlassPasswordBoxStyle" TargetType="PasswordBox">
-            <Setter Property="Background" Value="#F2F7F4"/>
-            <Setter Property="Foreground" Value="#1B4332"/>
-            <Setter Property="BorderBrush" Value="#D0E8DA"/>
-            <Setter Property="BorderThickness" Value="1.5"/>
-            <Setter Property="FontSize" Value="13"/>
-            <Setter Property="Height" Value="50"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="PasswordBox">
-                        <Border x:Name="Bd"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="10">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="46"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="&#xE72E;"
-                                           FontFamily="Segoe MDL2 Assets" FontSize="16"
-                                           Foreground="#74C69D"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <ScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
-                                              Margin="0,0,12,0" VerticalAlignment="Center"/>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsFocused" Value="True">
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#40916C"/>
-                                <Setter TargetName="Bd" Property="Background" Value="White"/>
-                                <Setter TargetName="Bd" Property="Effect">
-                                    <Setter.Value>
-                                        <DropShadowEffect Color="#52B788" BlurRadius="10" ShadowDepth="0" Opacity="0.2"/>
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
         <Style x:Key="GlassComboBoxStyle" TargetType="ComboBox">
             <Setter Property="Foreground" Value="#1B4332"/>
             <Setter Property="FontSize" Value="13"/>
@@ -194,8 +149,7 @@
                             <Popup x:Name="PART_Popup"
                                    IsOpen="{TemplateBinding IsDropDownOpen}"
                                    AllowsTransparency="True" Placement="Bottom"
-                                   PlacementTarget="{Binding ElementName=Bd}"
-                                   VerticalOffset="4">
+                                   PlacementTarget="{Binding ElementName=Bd}" VerticalOffset="4">
                                 <Border CornerRadius="10" Background="White"
                                         BorderBrush="#B7E4C7" BorderThickness="1.5"
                                         MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}">
@@ -248,25 +202,6 @@
             </Setter>
         </Style>
 
-        <!-- Plain TextBox for revealed password -->
-        <Style x:Key="RevealTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#1B4332"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="FontSize" Value="13"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border Background="Transparent">
-                            <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Eye ToggleButton -->
         <Style x:Key="EyeToggleStyle" TargetType="ToggleButton">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -306,7 +241,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- ══════════════ LEFT PANEL ══════════════ -->
+            <!-- LEFT PANEL -->
             <Border Grid.Column="0" ClipToBounds="True">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0.8,1">
@@ -317,7 +252,6 @@
                         <GradientStop Color="#2D6A4F" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
-
                 <Grid>
                     <Ellipse Width="320" Height="420" HorizontalAlignment="Left"
                              VerticalAlignment="Top" Margin="-120,-100,0,0" Opacity="0.06">
@@ -350,8 +284,7 @@
                             <Border.Effect>
                                 <DropShadowEffect Color="#52B788" BlurRadius="28" ShadowDepth="0" Opacity="0.5"/>
                             </Border.Effect>
-                            <TextBlock Text="🌿" FontSize="42"
-                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <TextBlock Text="🌿" FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
 
                         <TextBlock Text="FundForest" FontSize="34" FontWeight="Bold"
@@ -372,7 +305,6 @@
                                    Foreground="#74C69D" HorizontalAlignment="Center"
                                    Margin="0,0,0,16" FontStretch="Expanded"/>
 
-                        <!-- Admin -->
                         <Border Background="#16FFFFFF" CornerRadius="14" Padding="14,11"
                                 Margin="0,0,0,8" BorderBrush="#20FFFFFF" BorderThickness="1">
                             <StackPanel Orientation="Horizontal">
@@ -396,7 +328,6 @@
                             </StackPanel>
                         </Border>
 
-                        <!-- Staff -->
                         <Border Background="#16FFFFFF" CornerRadius="14" Padding="14,11"
                                 Margin="0,0,0,8" BorderBrush="#20FFFFFF" BorderThickness="1">
                             <StackPanel Orientation="Horizontal">
@@ -420,7 +351,6 @@
                             </StackPanel>
                         </Border>
 
-                        <!-- Local -->
                         <Border Background="#16FFFFFF" CornerRadius="14" Padding="14,11"
                                 BorderBrush="#20FFFFFF" BorderThickness="1">
                             <StackPanel Orientation="Horizontal">
@@ -447,10 +377,9 @@
                 </Grid>
             </Border>
 
-            <!-- ══════════════ RIGHT PANEL ══════════════ -->
+            <!-- RIGHT PANEL -->
             <Border Grid.Column="1" ClipToBounds="True" Background="#FBFEFC">
                 <Grid>
-                    <!-- Close button -->
                     <Button HorizontalAlignment="Right" VerticalAlignment="Top"
                             Margin="0,14,16,0" Width="32" Height="32"
                             Cursor="Hand" Click="CloseWindow_Click">
@@ -503,129 +432,115 @@
                                 <ComboBoxItem Content="Local" IsSelected="True"/>
                             </ComboBox>
 
-                            <!-- PASSWORD with eye toggle -->
+                            <!-- PASSWORD -->
                             <TextBlock Text="PASSWORD" Style="{StaticResource FieldLabel}"/>
-                            <Grid Height="50" Margin="0,0,0,10">
-                                <Border CornerRadius="10" Background="#F2F7F4"
-                                        BorderBrush="#D0E8DA" BorderThickness="1.5">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="46"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="44"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="&#xE72E;"
-                                                   FontFamily="Segoe MDL2 Assets" FontSize="16"
-                                                   Foreground="#74C69D"
-                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        <PasswordBox x:Name="PwdBox" Grid.Column="1"
-                                                     Background="Transparent" BorderThickness="0"
-                                                     FontSize="13" Foreground="#1B4332"
-                                                     VerticalContentAlignment="Center"/>
-                                        <ToggleButton x:Name="PwdEyeToggle"
-                                                      Grid.Column="2"
-                                                      Style="{StaticResource EyeToggleStyle}"
-                                                      VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
-                                    </Grid>
-                                </Border>
-                                <!-- Revealed layer -->
-                                <Border CornerRadius="10" Background="#F2F7F4"
-                                        BorderBrush="#40916C" BorderThickness="1.5">
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsChecked, ElementName=PwdEyeToggle}" Value="True">
-                                                    <Setter Property="Visibility" Value="Visible"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Border.Style>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="46"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="44"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="&#xE72E;"
-                                                   FontFamily="Segoe MDL2 Assets" FontSize="16"
-                                                   Foreground="#74C69D"
-                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        <TextBox Grid.Column="1"
-                                                 Style="{StaticResource RevealTextBoxStyle}"
-                                                 Text="{Binding ElementName=PwdBox, Path=Password, Mode=OneWay}"
-                                                 IsReadOnly="True"/>
-                                        <ToggleButton Grid.Column="2"
-                                                      IsChecked="{Binding IsChecked, ElementName=PwdEyeToggle, Mode=TwoWay}"
-                                                      Style="{StaticResource EyeToggleStyle}"
-                                                      VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
-                                    </Grid>
-                                </Border>
-                            </Grid>
+                            <Border CornerRadius="10" Background="#F2F7F4"
+                                    BorderBrush="#D0E8DA" BorderThickness="1.5"
+                                    Height="50" Margin="0,0,0,10">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="46"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="44"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="&#xE72E;"
+                                               FontFamily="Segoe MDL2 Assets" FontSize="16"
+                                               Foreground="#74C69D"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <!-- PasswordBox: visible when eye is OFF -->
+                                    <PasswordBox x:Name="PwdBox" Grid.Column="1"
+                                                 Background="Transparent" BorderThickness="0"
+                                                 FontSize="13" Foreground="#1B4332"
+                                                 VerticalContentAlignment="Center"
+                                                 PasswordChanged="PwdBox_PasswordChanged">
+                                        <PasswordBox.Style>
+                                            <Style TargetType="PasswordBox">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsChecked, ElementName=PwdEyeToggle}" Value="True">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </PasswordBox.Style>
+                                    </PasswordBox>
+                                    <!-- TextBox: visible when eye is ON -->
+                                    <TextBox x:Name="RevealPwdBox" Grid.Column="1"
+                                             Background="Transparent" BorderThickness="0"
+                                             FontSize="13" Foreground="#1B4332"
+                                             VerticalContentAlignment="Center"
+                                             IsReadOnly="True">
+                                        <TextBox.Style>
+                                            <Style TargetType="TextBox">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsChecked, ElementName=PwdEyeToggle}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                    <ToggleButton x:Name="PwdEyeToggle" Grid.Column="2"
+                                                  Style="{StaticResource EyeToggleStyle}"
+                                                  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Grid>
+                            </Border>
 
-                            <!-- CONFIRM PASSWORD with eye toggle -->
+                            <!-- CONFIRM PASSWORD -->
                             <TextBlock Text="CONFIRM PASSWORD" Style="{StaticResource FieldLabel}"/>
-                            <Grid Height="50" Margin="0,0,0,14">
-                                <Border CornerRadius="10" Background="#F2F7F4"
-                                        BorderBrush="#D0E8DA" BorderThickness="1.5">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="46"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="44"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="&#xE72E;"
-                                                   FontFamily="Segoe MDL2 Assets" FontSize="16"
-                                                   Foreground="#74C69D"
-                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        <PasswordBox x:Name="ConfirmPwdBox" Grid.Column="1"
-                                                     Background="Transparent" BorderThickness="0"
-                                                     FontSize="13" Foreground="#1B4332"
-                                                     VerticalContentAlignment="Center"/>
-                                        <ToggleButton x:Name="ConfirmPwdEyeToggle"
-                                                      Grid.Column="2"
-                                                      Style="{StaticResource EyeToggleStyle}"
-                                                      VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
-                                    </Grid>
-                                </Border>
-                                <!-- Revealed layer -->
-                                <Border CornerRadius="10" Background="#F2F7F4"
-                                        BorderBrush="#40916C" BorderThickness="1.5">
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsChecked, ElementName=ConfirmPwdEyeToggle}" Value="True">
-                                                    <Setter Property="Visibility" Value="Visible"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Border.Style>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="46"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="44"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Column="0" Text="&#xE72E;"
-                                                   FontFamily="Segoe MDL2 Assets" FontSize="16"
-                                                   Foreground="#74C69D"
-                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                        <TextBox Grid.Column="1"
-                                                 Style="{StaticResource RevealTextBoxStyle}"
-                                                 Text="{Binding ElementName=ConfirmPwdBox, Path=Password, Mode=OneWay}"
-                                                 IsReadOnly="True"/>
-                                        <ToggleButton Grid.Column="2"
-                                                      IsChecked="{Binding IsChecked, ElementName=ConfirmPwdEyeToggle, Mode=TwoWay}"
-                                                      Style="{StaticResource EyeToggleStyle}"
-                                                      VerticalAlignment="Center"
-                                                      HorizontalAlignment="Center"/>
-                                    </Grid>
-                                </Border>
-                            </Grid>
+                            <Border CornerRadius="10" Background="#F2F7F4"
+                                    BorderBrush="#D0E8DA" BorderThickness="1.5"
+                                    Height="50" Margin="0,0,0,14">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="46"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="44"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="&#xE72E;"
+                                               FontFamily="Segoe MDL2 Assets" FontSize="16"
+                                               Foreground="#74C69D"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <!-- PasswordBox: visible when eye is OFF -->
+                                    <PasswordBox x:Name="ConfirmPwdBox" Grid.Column="1"
+                                                 Background="Transparent" BorderThickness="0"
+                                                 FontSize="13" Foreground="#1B4332"
+                                                 VerticalContentAlignment="Center"
+                                                 PasswordChanged="ConfirmPwdBox_PasswordChanged">
+                                        <PasswordBox.Style>
+                                            <Style TargetType="PasswordBox">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsChecked, ElementName=ConfirmPwdEyeToggle}" Value="True">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </PasswordBox.Style>
+                                    </PasswordBox>
+                                    <!-- TextBox: visible when eye is ON -->
+                                    <TextBox x:Name="RevealConfirmPwdBox" Grid.Column="1"
+                                             Background="Transparent" BorderThickness="0"
+                                             FontSize="13" Foreground="#1B4332"
+                                             VerticalContentAlignment="Center"
+                                             IsReadOnly="True">
+                                        <TextBox.Style>
+                                            <Style TargetType="TextBox">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsChecked, ElementName=ConfirmPwdEyeToggle}" Value="True">
+                                                        <Setter Property="Visibility" Value="Visible"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                    <ToggleButton x:Name="ConfirmPwdEyeToggle" Grid.Column="2"
+                                                  Style="{StaticResource EyeToggleStyle}"
+                                                  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Grid>
+                            </Border>
 
                             <!-- Error -->
                             <Border CornerRadius="10" Padding="12,9" Margin="0,0,0,8"

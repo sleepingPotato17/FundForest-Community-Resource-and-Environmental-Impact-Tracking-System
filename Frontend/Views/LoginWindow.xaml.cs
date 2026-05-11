@@ -1,5 +1,4 @@
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media.Animation;
 
 namespace FundForest.Views
@@ -9,48 +8,41 @@ namespace FundForest.Views
         public LoginWindow()
         {
             InitializeComponent();
-            Loaded += OnLoaded;
+            this.Loaded += LoginWindow_Loaded;
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        private void LoginWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            ((Storyboard)Resources["BlobFloat1"]).Begin();
-            ((Storyboard)Resources["BlobFloat2"]).Begin();
-            ((Storyboard)Resources["BlobFloat3"]).Begin();
-            ((Storyboard)Resources["LeafFall1"]).Begin();
-            ((Storyboard)Resources["LeafFall2"]).Begin();
-            ((Storyboard)Resources["LeafFall3"]).Begin();
-            ((Storyboard)Resources["Particle1"]).Begin();
-            ((Storyboard)Resources["Particle2"]).Begin();
-            ((Storyboard)Resources["Particle3"]).Begin();
-            ((Storyboard)Resources["LogoPulse"]).Begin();
-            ((Storyboard)Resources["TaglineFadeIn"]).Begin();
-            ((Storyboard)Resources["FormFadeIn"]).Begin();
+            // Start all animations
+            (Resources["BlobFloat1"] as Storyboard)?.Begin();
+            (Resources["BlobFloat2"] as Storyboard)?.Begin();
+            (Resources["BlobFloat3"] as Storyboard)?.Begin();
+            (Resources["LeafFall1"]  as Storyboard)?.Begin();
+            (Resources["LeafFall2"]  as Storyboard)?.Begin();
+            (Resources["LeafFall3"]  as Storyboard)?.Begin();
+            (Resources["Particle1"]  as Storyboard)?.Begin();
+            (Resources["Particle2"]  as Storyboard)?.Begin();
+            (Resources["Particle3"]  as Storyboard)?.Begin();
+            (Resources["LogoPulse"]  as Storyboard)?.Begin();
+            (Resources["TaglineFadeIn"] as Storyboard)?.Begin();
+            (Resources["FormFadeIn"]    as Storyboard)?.Begin(); // ← this makes the form visible
         }
 
-        private void CloseWindow_Click(object sender, RoutedEventArgs e)
-            => Application.Current.Shutdown();
+        private void CloseWindow_Click(object sender, RoutedEventArgs e) => this.Close();
 
-        private void ForgotPassword_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show(
-                "Please contact your system administrator to reset your password.\n\n" +
-                "Email: admin@fundforest.com",
-                "Forgot Password",
-                MessageBoxButton.OK,
-                MessageBoxImage.Information);
-        }
+        private void ForgotPassword_Click(object sender, RoutedEventArgs e) { }
 
         private void CreateAccount_Click(object sender, RoutedEventArgs e)
         {
-            var registerWindow = new RegisterWindow();
-            registerWindow.Show();
+            var register = new RegisterWindow();
+            register.Show();
+            this.Close();
         }
 
-        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            base.OnMouseLeftButtonDown(e);
-            DragMove();
+            if (RevealPasswordBox != null)
+                RevealPasswordBox.Text = PasswordBox.Password;
         }
     }
 }

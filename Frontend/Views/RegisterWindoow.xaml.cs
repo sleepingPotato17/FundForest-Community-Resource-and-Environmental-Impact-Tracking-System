@@ -1,7 +1,4 @@
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using FundForest.ViewModels;
 
 namespace FundForest.Views
 {
@@ -13,7 +10,9 @@ namespace FundForest.Views
         }
 
         private void CloseWindow_Click(object sender, RoutedEventArgs e)
-            => this.Close();
+        {
+            this.Close();
+        }
 
         private void BackToLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -24,26 +23,25 @@ namespace FundForest.Views
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            if (DataContext is RegisterViewModel vm)
+            if (DataContext is FundForest.ViewModels.RegisterViewModel vm)
             {
-                if (RoleComboBox.SelectedItem is ComboBoxItem item)
-                    vm.SelectedRole = item.Content.ToString() ?? "Local";
+                var role = (RoleComboBox.SelectedItem as System.Windows.Controls.ComboBoxItem)
+                        ?.Content?.ToString() ?? string.Empty;
 
-                vm.ExecuteRegister(PwdBox.Password, ConfirmPwdBox.Password);
-
-                if (vm.RegistrationSuccessful)
-                {
-                    MessageBox.Show("Account created successfully! You can now sign in.",
-                        "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-                    this.Close();
-                }
+                vm.Register(PwdBox.Password, ConfirmPwdBox.Password, role);
             }
         }
 
-        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        private void PwdBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            base.OnMouseLeftButtonDown(e);
-            DragMove();
+            if (RevealPwdBox != null)
+                RevealPwdBox.Text = PwdBox.Password;
+        }
+
+        private void ConfirmPwdBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (RevealConfirmPwdBox != null)
+                RevealConfirmPwdBox.Text = ConfirmPwdBox.Password;
         }
     }
 }
