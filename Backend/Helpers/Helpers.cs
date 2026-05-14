@@ -186,9 +186,11 @@ namespace FundForest.Helpers
     }
 
     // =============================================
-    // RowNumberConverter
+    // RowNumberConverter  — FIXED
+    // Uses Items.IndexOf() instead of GetIndex()
+    // so row numbers stay correct while scrolling
     // =============================================
-    [ValueConversion(typeof(DataGridRow), typeof(int))]
+    [ValueConversion(typeof(DataGridRow), typeof(string))]
     public class RowNumberConverter : MarkupExtension, IValueConverter
     {
         private static RowNumberConverter? _instance;
@@ -197,7 +199,12 @@ namespace FundForest.Helpers
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is DataGridRow row)
-                return row.GetIndex() + 1;
+            {
+                var dataGrid = ItemsControl.ItemsControlFromItemContainer(row) as DataGrid;
+                if (dataGrid == null) return string.Empty;
+                int index = dataGrid.Items.IndexOf(row.Item);
+                return index >= 0 ? (index + 1).ToString() : string.Empty;
+            }
             return string.Empty;
         }
 

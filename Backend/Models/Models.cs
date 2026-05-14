@@ -13,13 +13,13 @@ namespace FundForest.Models
         public bool      IsApproved { get; set; } = false;
         public DateTime? CreatedAt  { get; set; }
 
-        // Display helpers used in ManageUsersView
         public string StatusLabel  => IsApproved ? "Approved" : "Pending";
         public string StatusBadge  => IsApproved ? "✅" : "⏳";
     }
 
     public class Beneficiary : BaseViewModel
     {
+        private int       _rowNumber;
         private int       _beneficiaryID;
         private string    _beneficiaryType    = "Person";
         private string    _fullName           = string.Empty;
@@ -33,6 +33,7 @@ namespace FundForest.Models
         private string    _contactInfo        = string.Empty;
         private DateTime? _contactDate;
 
+        public int       RowNumber           { get => _rowNumber;           set => SetProperty(ref _rowNumber, value); }
         public int       BeneficiaryID       { get => _beneficiaryID;       set => SetProperty(ref _beneficiaryID, value); }
         public string    BeneficiaryType     { get => _beneficiaryType;     set => SetProperty(ref _beneficiaryType, value); }
         public string    FullName            { get => _fullName;            set => SetProperty(ref _fullName, value); }
@@ -50,12 +51,14 @@ namespace FundForest.Models
 
     public class Donor : BaseViewModel
     {
+        private int    _rowNumber;
         private int    _donorID;
         private string _donorName    = string.Empty;
         private string _donationType = "Individual";
         private string _contactInfo  = string.Empty;
         private string _address      = string.Empty;
 
+        public int    RowNumber    { get => _rowNumber;    set => SetProperty(ref _rowNumber, value); }
         public int    DonorID      { get => _donorID;      set => SetProperty(ref _donorID, value); }
         public string DonorName    { get => _donorName;    set => SetProperty(ref _donorName, value); }
         public string DonationType { get => _donationType; set => SetProperty(ref _donationType, value); }
@@ -65,6 +68,7 @@ namespace FundForest.Models
 
     public class Donation : BaseViewModel
     {
+        private int      _rowNumber;
         private int      _donationID;
         private int      _donorID;
         private string   _donorName        = string.Empty;
@@ -74,6 +78,7 @@ namespace FundForest.Models
         private DateTime _donationDate     = DateTime.Today;
         private string   _notes            = string.Empty;
 
+        public int      RowNumber        { get => _rowNumber;        set => SetProperty(ref _rowNumber, value); }
         public int      DonationID       { get => _donationID;       set => SetProperty(ref _donationID, value); }
         public int      DonorID          { get => _donorID;          set => SetProperty(ref _donorID, value); }
         public string   DonorName        { get => _donorName;        set => SetProperty(ref _donorName, value); }
@@ -86,6 +91,7 @@ namespace FundForest.Models
 
     public class Program : BaseViewModel
     {
+        private int       _rowNumber;
         private int       _programID;
         private string    _programName    = string.Empty;
         private DateTime? _startDate;
@@ -95,6 +101,7 @@ namespace FundForest.Models
         private string    _description    = string.Empty;
         private string    _status         = "Active";
 
+        public int       RowNumber      { get => _rowNumber;      set => SetProperty(ref _rowNumber, value); }
         public int       ProgramID      { get => _programID;      set => SetProperty(ref _programID, value); }
         public string    ProgramName    { get => _programName;    set => SetProperty(ref _programName, value); }
         public DateTime? StartDate      { get => _startDate;      set => SetProperty(ref _startDate, value); }
@@ -107,6 +114,7 @@ namespace FundForest.Models
 
     public class Distribution : BaseViewModel
     {
+        private int      _rowNumber;
         private int      _distributionID;
         private int      _beneficiaryID;
         private string   _beneficiaryName  = string.Empty;
@@ -119,6 +127,7 @@ namespace FundForest.Models
         private string   _status           = "Pending";
         private string   _notes            = string.Empty;
 
+        public int      RowNumber        { get => _rowNumber;        set => SetProperty(ref _rowNumber, value); }
         public int      DistributionID   { get => _distributionID;   set => SetProperty(ref _distributionID, value); }
         public int      BeneficiaryID    { get => _beneficiaryID;    set => SetProperty(ref _beneficiaryID, value); }
         public string   BeneficiaryName  { get => _beneficiaryName;  set => SetProperty(ref _beneficiaryName, value); }

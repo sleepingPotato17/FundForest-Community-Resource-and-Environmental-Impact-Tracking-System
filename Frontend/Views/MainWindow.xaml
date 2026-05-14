@@ -39,12 +39,13 @@
             BorderBrush="{StaticResource BorderMediumBrush}" BorderThickness="1">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="220"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <!-- SIDEBAR -->
-            <Border Grid.Column="0" ClipToBounds="True">
+            <!-- FIX 1: was missing the closing '>' on this tag -->
+            <Border Grid.Column="0" ClipToBounds="True" MinWidth="220" MaxWidth="220">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                         <GradientStop Color="#E8F5E9" Offset="0"/>
@@ -110,51 +111,100 @@
 
                         <!-- Logo Card -->
                         <Border DockPanel.Dock="Top" Margin="12,16,12,8"
-                                CornerRadius="14" Padding="12,10">
+                                CornerRadius="14" Padding="14,12">
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                    <GradientStop Color="#D8F3DC" Offset="0"/>
-                                    <GradientStop Color="#B7E4C7" Offset="1"/>
+                                    <GradientStop Color="#0D2B1E" Offset="0"/>
+                                    <GradientStop Color="#1B4332" Offset="1"/>
                                 </LinearGradientBrush>
                             </Border.Background>
                             <Border.Effect>
-                                <DropShadowEffect Color="#52B788" BlurRadius="16"
-                                                  ShadowDepth="0" Opacity="0.25"/>
+                                <DropShadowEffect Color="#52B788" BlurRadius="20"
+                                                ShadowDepth="0" Opacity="0.35"/>
                             </Border.Effect>
-                            <StackPanel Orientation="Horizontal">
-                                <Border Width="36" Height="36" CornerRadius="10"
-                                        Background="#52B788">
-                                    <Border.Effect>
-                                        <DropShadowEffect Color="#2D6A4F" BlurRadius="10"
-                                                          ShadowDepth="0" Opacity="0.4"/>
-                                    </Border.Effect>
-                                    <Border.RenderTransform>
-                                        <ScaleTransform x:Name="LogoScale" ScaleX="1" ScaleY="1"
-                                                        CenterX="18" CenterY="18"/>
-                                    </Border.RenderTransform>
-                                    <Border.Triggers>
-                                        <EventTrigger RoutedEvent="Loaded">
-                                            <BeginStoryboard>
-                                                <Storyboard RepeatBehavior="Forever" AutoReverse="True">
-                                                    <DoubleAnimation Storyboard.TargetName="LogoScale"
-                                                                     Storyboard.TargetProperty="ScaleX"
-                                                                     From="1" To="1.1" Duration="0:0:2"/>
-                                                    <DoubleAnimation Storyboard.TargetName="LogoScale"
-                                                                     Storyboard.TargetProperty="ScaleY"
-                                                                     From="1" To="1.1" Duration="0:0:2"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
-                                    </Border.Triggers>
-                                    <TextBlock Text="🌿" FontSize="18"
-                                               HorizontalAlignment="Center"
-                                               VerticalAlignment="Center"/>
-                                </Border>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                                <!-- Dual-Leaf SVG Icon -->
+                                <Viewbox Width="44" Height="44">
+                                    <Canvas Width="100" Height="100">
+                                        <Canvas.RenderTransform>
+                                            <ScaleTransform x:Name="LogoScale" ScaleX="1" ScaleY="1"
+                                                            CenterX="50" CenterY="50"/>
+                                        </Canvas.RenderTransform>
+                                        <Canvas.Triggers>
+                                            <EventTrigger RoutedEvent="Loaded">
+                                                <BeginStoryboard>
+                                                    <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                                                        <DoubleAnimation Storyboard.TargetName="LogoScale"
+                                                                        Storyboard.TargetProperty="ScaleX"
+                                                                        From="1" To="1.08" Duration="0:0:2"/>
+                                                        <DoubleAnimation Storyboard.TargetName="LogoScale"
+                                                                        Storyboard.TargetProperty="ScaleY"
+                                                                        From="1" To="1.08" Duration="0:0:2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Canvas.Triggers>
+
+                                        <Ellipse Canvas.Left="20" Canvas.Top="15"
+                                                Width="60" Height="55" Opacity="0.25">
+                                            <Ellipse.Fill>
+                                                <RadialGradientBrush>
+                                                    <GradientStop Color="#52B788" Offset="0"/>
+                                                    <GradientStop Color="Transparent" Offset="1"/>
+                                                </RadialGradientBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+
+                                        <Path Fill="Transparent" StrokeThickness="5" StrokeLineJoin="Round">
+                                            <Path.Stroke>
+                                                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                                    <GradientStop Color="#1B4332" Offset="0"/>
+                                                    <GradientStop Color="#52B788" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Path.Stroke>
+                                            <Path.Data>M50,75 C50,75 18,60 20,30 C20,30 35,35 50,75 Z</Path.Data>
+                                        </Path>
+
+                                        <Path Fill="Transparent" StrokeThickness="5" StrokeLineJoin="Round">
+                                            <Path.Stroke>
+                                                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                                    <GradientStop Color="#52B788" Offset="0"/>
+                                                    <GradientStop Color="#95D5B2" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Path.Stroke>
+                                            <Path.Data>M50,75 C50,75 82,55 78,20 C78,20 58,28 50,75 Z</Path.Data>
+                                            <Path.Effect>
+                                                <DropShadowEffect Color="#52B788" BlurRadius="8"
+                                                                ShadowDepth="0" Opacity="0.8"/>
+                                            </Path.Effect>
+                                        </Path>
+
+                                        <Path StrokeThickness="4" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                            <Path.Stroke>
+                                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                    <GradientStop Color="#52B788" Offset="0"/>
+                                                    <GradientStop Color="#1B4332" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Path.Stroke>
+                                            <Path.Data>M50,75 Q50,85 50,90</Path.Data>
+                                        </Path>
+                                    </Canvas>
+                                </Viewbox>
+
+                                <!-- Two-tone FundForest text -->
                                 <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
-                                    <TextBlock Text="FundForest" FontSize="15" FontWeight="Bold"
-                                               Foreground="#1B4332"/>
-                                    <TextBlock Text="v1.0" FontSize="9" Foreground="#52B788"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Fund" FontSize="19" FontWeight="Bold" Foreground="White"/>
+                                        <TextBlock Text="Forest" FontSize="19" FontWeight="Bold" Foreground="#52B788">
+                                            <TextBlock.Effect>
+                                                <DropShadowEffect Color="#52B788" BlurRadius="6"
+                                                                ShadowDepth="0" Opacity="0.7"/>
+                                            </TextBlock.Effect>
+                                        </TextBlock>
+                                    </StackPanel>
                                 </StackPanel>
+
                             </StackPanel>
                         </Border>
 
@@ -170,98 +220,225 @@
                         </Rectangle>
 
                         <!-- Bottom Section -->
-                        <Border DockPanel.Dock="Bottom" Margin="10,0,10,12">
-                            <StackPanel>
+                        <Border DockPanel.Dock="Bottom" Margin="8,0,8,10" VerticalAlignment="Bottom">
+                            <!-- FIX 2: ScrollViewer had a stray orphan tag
+                                 <HorizontalScrollBarVisibility="Disabled"> which is invalid XML.
+                                 Both properties belong on the ScrollViewer opening tag. -->
+                            <ScrollViewer VerticalScrollBarVisibility="Hidden"
+                                          HorizontalScrollBarVisibility="Disabled">
+                                <StackPanel>
 
-                                <!-- Stats Card -->
-                                <Border CornerRadius="12" Padding="12,10" Margin="0,0,0,8">
-                                    <Border.Background>
-                                        <SolidColorBrush Color="#B7E4C7" Opacity="0.3"/>
-                                    </Border.Background>
-                                    <Border.Effect>
-                                        <DropShadowEffect Color="#52B788" BlurRadius="8"
-                                                        ShadowDepth="0" Opacity="0.15"/>
-                                    </Border.Effect>
-                                    <StackPanel>
-                                        <TextBlock FontSize="10" Foreground="#2D6A4F" FontWeight="SemiBold">
-                                            <Run Text="🌱 Every donation grows a future."/>
-                                        </TextBlock>
-                                        <Rectangle Height="1" Margin="0,6,0,6" Opacity="0.3" Fill="#52B788"/>
+                                    <!-- Stats Card -->
+                                    <Border CornerRadius="12" Padding="10,9" Margin="0,0,0,6"
+                                            MaxHeight="90">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#D8F3DC" Offset="0"/>
+                                                <GradientStop Color="#B7E4C7" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        <Border.BorderBrush>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#74C69D" Offset="0"/>
+                                                <GradientStop Color="#52B788" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.BorderBrush>
+                                        <Border.BorderThickness>1</Border.BorderThickness>
+                                        <Border.Effect>
+                                            <DropShadowEffect Color="#2D6A4F" BlurRadius="8"
+                                                              ShadowDepth="1" Opacity="0.10" Direction="270"/>
+                                        </Border.Effect>
+                                        <StackPanel>
+
+                                            <!-- Tagline row -->
+                                            <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                                                <Border Width="18" Height="18" CornerRadius="5" Margin="0,0,6,0">
+                                                    <Border.Background>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                            <GradientStop Color="#40916C" Offset="0"/>
+                                                            <GradientStop Color="#52B788" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Border.Background>
+                                                    <Viewbox Width="12" Height="12">
+                                                        <Canvas Width="100" Height="100">
+                                                            <Path Fill="Transparent" StrokeThickness="8" StrokeLineJoin="Round">
+                                                                <Path.Stroke>
+                                                                    <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                                                        <GradientStop Color="#D8F3DC" Offset="0"/>
+                                                                        <GradientStop Color="#FFFFFF" Offset="1"/>
+                                                                    </LinearGradientBrush>
+                                                                </Path.Stroke>
+                                                                <Path.Data>M50,78 C50,78 16,62 18,28 C18,28 36,34 50,78 Z</Path.Data>
+                                                            </Path>
+                                                            <Path Fill="Transparent" StrokeThickness="8" StrokeLineJoin="Round">
+                                                                <Path.Stroke>
+                                                                    <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                                                        <GradientStop Color="#FFFFFF" Offset="0"/>
+                                                                        <GradientStop Color="#D8F3DC" Offset="1"/>
+                                                                    </LinearGradientBrush>
+                                                                </Path.Stroke>
+                                                                <Path.Data>M50,78 C50,78 84,58 80,18 C80,18 60,26 50,78 Z</Path.Data>
+                                                            </Path>
+                                                        </Canvas>
+                                                    </Viewbox>
+                                                </Border>
+                                                <TextBlock Text="Every donation grows a future."
+                                                           FontSize="10" FontWeight="SemiBold"
+                                                           Foreground="#1B4332" VerticalAlignment="Center"
+                                                           TextWrapping="Wrap"/>
+                                            </StackPanel>
+
+                                            <!-- Divider -->
+                                            <Rectangle Height="1" Margin="0,0,0,6" Opacity="0.35">
+                                                <Rectangle.Fill>
+                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                        <GradientStop Color="Transparent" Offset="0"/>
+                                                        <GradientStop Color="#52B788" Offset="0.5"/>
+                                                        <GradientStop Color="Transparent" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+
+                                            <!-- Stats row -->
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="1"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                                                    <TextBlock Text="{Binding TotalDonations}"
+                                                               FontSize="17" FontWeight="Bold"
+                                                               Foreground="#1B4332" HorizontalAlignment="Center"/>
+                                                    <TextBlock Text="Donations" FontSize="9"
+                                                               Foreground="#40916C" HorizontalAlignment="Center"/>
+                                                </StackPanel>
+                                                <Rectangle Grid.Column="1" Width="1" Opacity="0.3" Fill="#52B788"/>
+                                                <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+                                                    <TextBlock Text="{Binding TotalPrograms}"
+                                                               FontSize="17" FontWeight="Bold"
+                                                               Foreground="#1B4332" HorizontalAlignment="Center"/>
+                                                    <TextBlock Text="Programs" FontSize="9"
+                                                               Foreground="#40916C" HorizontalAlignment="Center"/>
+                                                </StackPanel>
+                                            </Grid>
+
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- User Card -->
+                                    <Border CornerRadius="12" Padding="9,8" Margin="0,0,0,6"
+                                            MaxHeight="58">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#1B4332" Offset="0"/>
+                                                <GradientStop Color="#2D6A4F" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        <Border.BorderBrush>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                <GradientStop Color="#52B788" Offset="0"/>
+                                                <GradientStop Color="#40916C" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.BorderBrush>
+                                        <Border.BorderThickness>1</Border.BorderThickness>
+                                        <Border.Effect>
+                                            <DropShadowEffect Color="#1B4332" BlurRadius="10"
+                                                              ShadowDepth="2" Opacity="0.15" Direction="270"/>
+                                        </Border.Effect>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <StackPanel>
-                                                <TextBlock Text="{Binding TotalDonations}"
-                                                        FontSize="16" FontWeight="Bold"
-                                                        Foreground="#2D6A4F"/>
-                                                <TextBlock Text="Donations" FontSize="9" Foreground="#74C69D"/>
-                                            </StackPanel>
-                                            <StackPanel Grid.Column="1">
-                                                <TextBlock Text="{Binding TotalPrograms}"
-                                                        FontSize="16" FontWeight="Bold"
-                                                        Foreground="#2D6A4F"/>
-                                                <TextBlock Text="Programs" FontSize="9" Foreground="#74C69D"/>
-                                            </StackPanel>
-                                        </Grid>
-                                    </StackPanel>
-                                </Border>                                <!-- User Card -->
-                                <Border CornerRadius="10" Padding="10,8" Margin="0,0,0,8">
-                                    <Border.Background>
-                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                            <GradientStop Color="#D8F3DC" Offset="0"/>
-                                            <GradientStop Color="#B7E4C7" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Border.Background>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Border Width="32" Height="32" CornerRadius="16"
-                                                Background="#52B788">
-                                            <TextBlock Text="👤" FontSize="15"
-                                                       HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"/>
-                                        </Border>
-                                        <StackPanel Grid.Column="1" Margin="8,0,0,0"
-                                                    VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding AdminName}"
-                                                       FontWeight="SemiBold" FontSize="12"
-                                                       Foreground="#1B4332"
-                                                       TextTrimming="CharacterEllipsis"/>
-                                            <TextBlock Text="{Binding AdminRole}"
-                                                       FontSize="9" Foreground="#52B788"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </Border>
 
-                                <!-- Logout Button -->
-                                <Button Height="34" Cursor="Hand"
-                                        Command="{Binding LogoutCommand}">
-                                    <Button.Template>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border x:Name="LogoutBd" CornerRadius="8"
-                                                    BorderThickness="1"
-                                                    BorderBrush="#B7E4C7"
-                                                    Background="Transparent">
-                                                <TextBlock Text="Log Out" FontSize="12"
-                                                           Foreground="#40916C"
+                                            <!-- Avatar -->
+                                            <Border Width="32" Height="32" CornerRadius="16">
+                                                <Border.Background>
+                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                        <GradientStop Color="#40916C" Offset="0"/>
+                                                        <GradientStop Color="#52B788" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </Border.Background>
+                                                <Border.Effect>
+                                                    <DropShadowEffect Color="#52B788" BlurRadius="6"
+                                                                      ShadowDepth="0" Opacity="0.4"/>
+                                                </Border.Effect>
+                                                <TextBlock Text="&#xE77B;" FontFamily="Segoe MDL2 Assets"
+                                                           FontSize="14" Foreground="White"
                                                            HorizontalAlignment="Center"
                                                            VerticalAlignment="Center"/>
                                             </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="LogoutBd" Property="Background" Value="#E63946"/>
-                                                    <Setter TargetName="LogoutBd" Property="BorderBrush" Value="#E63946"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Button.Template>
-                                </Button>
 
-                            </StackPanel>
+                                            <!-- Name + Role -->
+                                            <StackPanel Grid.Column="1" Margin="8,0,0,0" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding AdminName}"
+                                                           FontWeight="SemiBold" FontSize="11"
+                                                           Foreground="White"
+                                                           TextTrimming="CharacterEllipsis"/>
+                                                <!-- FIX 3: #2052B788 and #4052B788 are invalid WPF color hex.
+                                                     WPF uses #AARRGGBB format. Replaced with Opacity property. -->
+                                                <Border CornerRadius="4" Padding="5,1" Margin="0,3,0,0"
+                                                        HorizontalAlignment="Left">
+                                                    <Border.Background>
+                                                        <SolidColorBrush Color="#52B788" Opacity="0.13"/>
+                                                    </Border.Background>
+                                                    <Border.BorderBrush>
+                                                        <SolidColorBrush Color="#52B788" Opacity="0.25"/>
+                                                    </Border.BorderBrush>
+                                                    <Border.BorderThickness>1</Border.BorderThickness>
+                                                    <TextBlock Text="{Binding AdminRole}"
+                                                               FontSize="9" Foreground="#74C69D"/>
+                                                </Border>
+                                            </StackPanel>
+
+                                        </Grid>
+                                    </Border>
+
+                                    <!-- Log Out Button -->
+                                    <Button Height="32" Cursor="Hand" Command="{Binding LogoutCommand}">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border x:Name="LogoutBd" CornerRadius="9"
+                                                        BorderThickness="1.5" BorderBrush="#B7E4C7"
+                                                        Background="Transparent">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock x:Name="LogoutIcon"
+                                                                   Text="&#xF3B1;" FontFamily="Segoe MDL2 Assets"
+                                                                   FontSize="11" Foreground="#40916C"
+                                                                   Margin="12,0,4,0"
+                                                                   VerticalAlignment="Center"/>
+                                                        <TextBlock x:Name="LogoutText"
+                                                                   Grid.Column="1"
+                                                                   Text="Log Out" FontSize="11"
+                                                                   FontWeight="SemiBold"
+                                                                   Foreground="#40916C"
+                                                                   HorizontalAlignment="Center"
+                                                                   VerticalAlignment="Center"
+                                                                   Margin="0,0,12,0"/>
+                                                    </Grid>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="LogoutBd" Property="Background" Value="#E63946"/>
+                                                        <Setter TargetName="LogoutBd" Property="BorderBrush" Value="#E63946"/>
+                                                        <Setter TargetName="LogoutIcon" Property="Foreground" Value="White"/>
+                                                        <Setter TargetName="LogoutText" Property="Foreground" Value="White"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter TargetName="LogoutBd" Property="Opacity" Value="0.85"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+
+                                </StackPanel>
+                            </ScrollViewer>
                         </Border>
 
                         <!-- Nav Items -->
@@ -291,8 +468,6 @@
                                              Content="Distribution" Tag="&#xE72C;"
                                              GroupName="Nav"
                                              Command="{Binding NavDistributionCommand}"/>
-
-                                <!-- ✅ Manage Users — Admin only -->
                                 <RadioButton Style="{StaticResource NavButtonStyle}"
                                              Content="Manage Users" Tag="&#xE713;"
                                              GroupName="Nav"
@@ -313,26 +488,124 @@
                 </Grid.RowDefinitions>
 
                 <!-- Top Header Bar -->
-                <Border Grid.Row="0" Background="{StaticResource SurfaceBrush}"
-                        BorderBrush="{StaticResource BorderLightBrush}" BorderThickness="0,0,0,1">
-                    <Grid Margin="24,0">
-                        <TextBlock Text="{Binding CurrentPageName}" VerticalAlignment="Center"
-                                   Style="{StaticResource SectionHeaderStyle}" FontSize="16"/>
-                        <Border Background="Transparent"
+                <Border Grid.Row="0" BorderThickness="0,0,0,1">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#F4FBF7" Offset="0"/>
+                            <GradientStop Color="#FFFFFF" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Border.BorderBrush>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Color="#D8F3DC" Offset="0"/>
+                            <GradientStop Color="#B7E4C7" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
+
+                    <Grid Margin="20,0,16,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- LEFT: accent bar + page name -->
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                            <Border Width="4" Height="20" CornerRadius="2" Margin="0,0,10,0">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#52B788" Offset="0"/>
+                                        <GradientStop Color="#1B4332" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                            <TextBlock Text="{Binding CurrentPageName}"
+                                    FontSize="15" FontWeight="Bold"
+                                    Foreground="#1B4332"
+                                    VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <!-- CENTER: drag handle -->
+                        <Border Grid.Column="1" Background="Transparent"
                                 MouseLeftButtonDown="Header_MouseDown"
                                 Cursor="SizeAll"/>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Content="&#xE921;" FontFamily="Segoe MDL2 Assets"
-                                    Style="{StaticResource IconButtonStyle}" FontSize="14"
-                                    Click="Minimize_Click" ToolTip="Minimize"/>
-                            <Button Content="&#xE923;" FontFamily="Segoe MDL2 Assets"
-                                    Style="{StaticResource IconButtonStyle}" FontSize="14"
-                                    Click="Maximize_Click" ToolTip="Maximize" Margin="4,0"/>
-                            <Button Content="&#xE8BB;" FontFamily="Segoe MDL2 Assets"
-                                    Style="{StaticResource IconButtonStyle}" FontSize="14"
-                                    Click="Close_Click" ToolTip="Close"
-                                    Foreground="{StaticResource DangerBrush}"/>
+
+                        <!-- RIGHT: window controls -->
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0">
+
+                            <!-- Minimize -->
+                            <Button Click="Minimize_Click" ToolTip="Minimize"
+                                    Width="32" Height="32" Cursor="Hand">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="Bd" CornerRadius="8" Background="Transparent">
+                                            <TextBlock Text="&#xE921;" FontFamily="Segoe MDL2 Assets"
+                                                    FontSize="11" Foreground="#74C69D"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Bd" Property="Background" Value="#D8F3DC"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="Bd" Property="Opacity" Value="0.7"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
+                            <!-- Maximize -->
+                            <Button Click="Maximize_Click" ToolTip="Maximize"
+                                    Width="32" Height="32" Cursor="Hand" Margin="2,0">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="Bd" CornerRadius="8" Background="Transparent">
+                                            <TextBlock Text="&#xE923;" FontFamily="Segoe MDL2 Assets"
+                                                    FontSize="11" Foreground="#74C69D"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Bd" Property="Background" Value="#D8F3DC"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="Bd" Property="Opacity" Value="0.7"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
+                            <!-- Close -->
+                            <Button Click="Close_Click" ToolTip="Close"
+                                    Width="32" Height="32" Cursor="Hand">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="Bd" CornerRadius="8" Background="Transparent">
+                                            <TextBlock x:Name="CloseIcon"
+                                                    Text="&#xE8BB;" FontFamily="Segoe MDL2 Assets"
+                                                    FontSize="11" Foreground="#74C69D"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="Bd" Property="Background" Value="#FFE5E5"/>
+                                                <Setter TargetName="CloseIcon" Property="Foreground" Value="#E63946"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="Bd" Property="Opacity" Value="0.7"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+
                         </StackPanel>
+
                     </Grid>
                 </Border>
 

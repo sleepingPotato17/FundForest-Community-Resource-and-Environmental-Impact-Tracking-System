@@ -46,7 +46,7 @@ namespace FundForest.ViewModels
         public bool IsPersonType => EditingBeneficiary.BeneficiaryType == "Person";
         public bool IsGroupType  => EditingBeneficiary.BeneficiaryType == "Group";
         public bool IsEditMode   { get => _isEditMode; set => SetProperty(ref _isEditMode, value); }
-        public string FormTitle  => IsEditMode ? "Edit Beneficiary" : "Add Beneficiary";
+        public string FormTitle  => IsEditMode ? "Update Beneficiary" : "Add Beneficiary";
         public string SearchText
         {
             get => _searchText;
@@ -72,8 +72,8 @@ namespace FundForest.ViewModels
         public BeneficiariesViewModel()
         {
             AddCommand    = new RelayCommand(OpenAddForm);
-            EditCommand   = new RelayCommand(OpenEditForm,   _ => SelectedBeneficiary != null);
-            DeleteCommand = new RelayCommand(DeleteSelected, _ => SelectedBeneficiary != null);
+            EditCommand   = new RelayCommand(OpenEditForm);   // accepts CommandParameter
+            DeleteCommand = new RelayCommand(DeleteSelected); // accepts CommandParameter
             SaveCommand   = new RelayCommand(Save);
             CancelCommand = new RelayCommand(() => IsFormVisible = false);
             SearchCommand = new RelayCommand(LoadData);
@@ -94,10 +94,13 @@ namespace FundForest.ViewModels
         {
             try
             {
-                // ASC order — ID 1 at top
                 var list = _db.GetBeneficiaries(SearchText)
                               .OrderBy(b => b.BeneficiaryID)
                               .ToList();
+
+                for (int i = 0; i < list.Count; i++)
+                    list[i].RowNumber = i + 1;
+
                 Beneficiaries = new ObservableCollection<Beneficiary>(list);
             }
             catch (Exception ex) { ErrorMessage = ex.Message; }
@@ -109,41 +112,48 @@ namespace FundForest.ViewModels
             IsEditMode    = false;
             IsFormVisible = true;
             ErrorMessage  = string.Empty;
+            OnPropertyChanged(nameof(FormTitle));
         }
 
-        private void OpenEditForm(object? _)
+        private void OpenEditForm(object? parameter)
         {
-            if (SelectedBeneficiary == null) return;
+            // Accept the row's bound item directly from CommandParameter
+            var target = (parameter as Beneficiary) ?? SelectedBeneficiary;
+            if (target == null) return;
+
             EditingBeneficiary = new Beneficiary
             {
-                BeneficiaryID       = SelectedBeneficiary.BeneficiaryID,
-                BeneficiaryType     = SelectedBeneficiary.BeneficiaryType,
-                FullName            = SelectedBeneficiary.FullName,
-                Gender              = SelectedBeneficiary.Gender,
-                Age                 = SelectedBeneficiary.Age,
-                GroupName           = SelectedBeneficiary.GroupName,
-                NumberOfMembers     = SelectedBeneficiary.NumberOfMembers,
-                GroupRepresentative = SelectedBeneficiary.GroupRepresentative,
-                VulnerabilityType   = SelectedBeneficiary.VulnerabilityType,
-                Address             = SelectedBeneficiary.Address,
-                ContactInfo         = SelectedBeneficiary.ContactInfo,
-                ContactDate         = SelectedBeneficiary.ContactDate,
+                BeneficiaryID       = target.BeneficiaryID,
+                BeneficiaryType     = target.BeneficiaryType,
+                FullName            = target.FullName,
+                Gender              = target.Gender,
+                Age                 = target.Age,
+                GroupName           = target.GroupName,
+                NumberOfMembers     = target.NumberOfMembers,
+                GroupRepresentative = target.GroupRepresentative,
+                VulnerabilityType   = target.VulnerabilityType,
+                Address             = target.Address,
+                ContactInfo         = target.ContactInfo,
+                ContactDate         = target.ContactDate,
             };
             IsEditMode    = true;
             IsFormVisible = true;
             ErrorMessage  = string.Empty;
+            OnPropertyChanged(nameof(FormTitle));
         }
 
-        private void DeleteSelected(object? _)
+        private void DeleteSelected(object? parameter)
         {
-            if (SelectedBeneficiary == null) return;
+            var target = (parameter as Beneficiary) ?? SelectedBeneficiary;
+            if (target == null) return;
+
             var confirm = MessageBox.Show(
-                $"Delete beneficiary '{SelectedBeneficiary.DisplayName}'?",
+                $"Delete beneficiary '{target.DisplayName}'?",
                 "Confirm Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (confirm != MessageBoxResult.Yes) return;
             try
             {
-                _db.DeleteBeneficiary(SelectedBeneficiary.BeneficiaryID);
+                _db.DeleteBeneficiary(target.BeneficiaryID);
                 LoadData();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error"); }

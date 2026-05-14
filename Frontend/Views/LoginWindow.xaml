@@ -164,51 +164,6 @@
             </Setter>
         </Style>
 
-        <Style x:Key="GlassTextBoxStyle" TargetType="TextBox">
-            <Setter Property="Background" Value="#22FFFFFF"/>
-            <Setter Property="Foreground" Value="#1B4332"/>
-            <Setter Property="BorderBrush" Value="#50B7E4C7"/>
-            <Setter Property="BorderThickness" Value="1.5"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Height" Value="50"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="TextBox">
-                        <Border x:Name="Bd"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="12">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="44"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{TemplateBinding Tag}"
-                                           FontFamily="Segoe MDL2 Assets" FontSize="16"
-                                           Foreground="#52B788"
-                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                <ScrollViewer x:Name="PART_ContentHost" Grid.Column="1"
-                                              Margin="0,0,12,0" VerticalAlignment="Center"/>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsFocused" Value="True">
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#52B788"/>
-                                <Setter TargetName="Bd" Property="Background" Value="#33FFFFFF"/>
-                                <Setter TargetName="Bd" Property="Effect">
-                                    <Setter.Value>
-                                        <DropShadowEffect Color="#52B788" BlurRadius="14" ShadowDepth="0" Opacity="0.35"/>
-                                    </Setter.Value>
-                                </Setter>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
         <Style x:Key="EyeToggleStyle" TargetType="ToggleButton">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
@@ -248,7 +203,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- LEFT PANEL -->
+            <!-- LEFT PANEL (all animations preserved) -->
             <Border Grid.Column="0" ClipToBounds="True">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0.8,1">
@@ -380,23 +335,73 @@
                     </Ellipse>
 
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="48,0">
+
+                        <!-- UPDATED: Dual-leaf logo icon with pulse animation -->
                         <Border x:Name="LogoBorder" Width="76" Height="76"
-                                CornerRadius="20" HorizontalAlignment="Center" Margin="0,0,0,20">
-                            <Border.Background>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                    <GradientStop Color="#52B788" Offset="0"/>
-                                    <GradientStop Color="#1B4332" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
+                                CornerRadius="20" HorizontalAlignment="Center" Margin="0,0,0,20"
+                                Background="Transparent">
                             <Border.Effect>
                                 <DropShadowEffect Color="#52B788" BlurRadius="28" ShadowDepth="0" Opacity="0.7"/>
                             </Border.Effect>
                             <Border.RenderTransform><ScaleTransform CenterX="38" CenterY="38"/></Border.RenderTransform>
-                            <TextBlock Text="🌿" FontSize="38" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Viewbox Width="76" Height="76">
+                                <Canvas Width="100" Height="100">
+                                    <Ellipse Canvas.Left="15" Canvas.Top="10"
+                                             Width="70" Height="65" Opacity="0.3">
+                                        <Ellipse.Fill>
+                                            <RadialGradientBrush>
+                                                <GradientStop Color="#52B788" Offset="0"/>
+                                                <GradientStop Color="Transparent" Offset="1"/>
+                                            </RadialGradientBrush>
+                                        </Ellipse.Fill>
+                                        <Ellipse.Effect><BlurEffect Radius="8"/></Ellipse.Effect>
+                                    </Ellipse>
+                                    <Path Fill="Transparent" StrokeThickness="5"
+                                          StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                        <Path.Stroke>
+                                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                                <GradientStop Color="#1B4332" Offset="0"/>
+                                                <GradientStop Color="#52B788" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Path.Stroke>
+                                        <Path.Data>M50,78 C50,78 16,62 18,28 C18,28 36,34 50,78 Z</Path.Data>
+                                    </Path>
+                                    <Path Fill="Transparent" StrokeThickness="5"
+                                          StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                        <Path.Stroke>
+                                            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                                                <GradientStop Color="#52B788" Offset="0"/>
+                                                <GradientStop Color="#95D5B2" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Path.Stroke>
+                                        <Path.Data>M50,78 C50,78 84,58 80,18 C80,18 60,26 50,78 Z</Path.Data>
+                                        <Path.Effect>
+                                            <DropShadowEffect Color="#52B788" BlurRadius="10" ShadowDepth="0" Opacity="0.9"/>
+                                        </Path.Effect>
+                                    </Path>
+                                    <Path StrokeThickness="4"
+                                          StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                        <Path.Stroke>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="#74C69D" Offset="0"/>
+                                                <GradientStop Color="#1B4332" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Path.Stroke>
+                                        <Path.Data>M50,78 Q50,88 50,93</Path.Data>
+                                    </Path>
+                                </Canvas>
+                            </Viewbox>
                         </Border>
 
-                        <TextBlock Text="FundForest" FontSize="38" FontWeight="Bold"
-                                   Foreground="White" HorizontalAlignment="Center"/>
+                        <!-- UPDATED: Two-tone FundForest text -->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="Fund" FontSize="38" FontWeight="Bold" Foreground="White"/>
+                            <TextBlock Text="Forest" FontSize="38" FontWeight="Bold" Foreground="#52B788">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect Color="#52B788" BlurRadius="10" ShadowDepth="0" Opacity="0.8"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
+                        </StackPanel>
 
                         <Border Height="1.5" Width="100" HorizontalAlignment="Center" Margin="0,14,0,14" Opacity="0.4">
                             <Border.Background>
@@ -488,60 +493,132 @@
                             Foreground="#74C69D" FontSize="13"
                             Cursor="Hand" Click="CloseWindow_Click"/>
 
+                    <!-- UPDATED: Improved Form Card -->
                     <Border x:Name="FormCard"
                             VerticalAlignment="Center" HorizontalAlignment="Center"
-                            Width="360" CornerRadius="20" Padding="36,30" Opacity="0">
-                        <Border.Background><SolidColorBrush Color="#FAFFFE"/></Border.Background>
+                            Width="370" CornerRadius="24" Padding="38,32" Opacity="0">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#FFFFFF" Offset="0"/>
+                                <GradientStop Color="#F4FBF7" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
                         <Border.BorderBrush>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                <GradientStop Color="#B7E4C7" Offset="0"/>
-                                <GradientStop Color="#D8F3DC" Offset="1"/>
+                                <GradientStop Color="#74C69D" Offset="0"/>
+                                <GradientStop Color="#B7E4C7" Offset="0.5"/>
+                                <GradientStop Color="#52B788" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.BorderBrush>
                         <Border.BorderThickness>1.5</Border.BorderThickness>
                         <Border.Effect>
-                            <DropShadowEffect Color="#1B4332" BlurRadius="44" ShadowDepth="10" Opacity="0.1" Direction="270"/>
+                            <DropShadowEffect Color="#1B4332" BlurRadius="60" ShadowDepth="14" Opacity="0.13" Direction="270"/>
                         </Border.Effect>
                         <Border.RenderTransform><TranslateTransform/></Border.RenderTransform>
 
                         <StackPanel>
-                            <TextBlock Text="Welcome back 👋" FontSize="26" FontWeight="Bold"
-                                       Foreground="#1B4332" Margin="0,0,0,4"/>
-                            <TextBlock Text="Sign in to continue to FundForest"
-                                       FontSize="12" Foreground="#74C69D" Margin="0,0,0,26"/>
 
-                            <!-- Username -->
+                            <!-- Accent bar -->
+                            <Border Width="36" Height="4" CornerRadius="2"
+                                    HorizontalAlignment="Left" Margin="0,0,0,20">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="#1B4332" Offset="0"/>
+                                        <GradientStop Color="#52B788" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+
+                            <!-- Header -->
+                            <TextBlock Text="Welcome back"
+                                    FontSize="28" FontWeight="Bold"
+                                    Foreground="#1B4332" Margin="0,0,0,6"
+                                    FontFamily="Segoe UI"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,28">
+                                <Border Width="3" Height="14" CornerRadius="2" Margin="0,0,8,0" VerticalAlignment="Center">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                            <GradientStop Color="#52B788" Offset="0"/>
+                                            <GradientStop Color="#1B4332" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                </Border>
+                                <TextBlock Text="Sign in to continue to FundForest"
+                                        FontSize="12" Foreground="#52B788"
+                                        FontFamily="Segoe UI" VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                            <!-- USERNAME -->
                             <TextBlock Text="USERNAME" FontSize="10" FontWeight="SemiBold"
-                                       Foreground="#4A6741" Margin="0,0,0,5"/>
-                            <TextBox Style="{StaticResource GlassTextBoxStyle}"
-                                     Tag="&#xE77B;"
-                                     Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"
-                                     Margin="0,0,0,14"/>
-
-                            <!-- Password -->
-                            <TextBlock Text="PASSWORD" FontSize="10" FontWeight="SemiBold"
-                                       Foreground="#4A6741" Margin="0,0,0,5"/>
-                            <Border CornerRadius="12" Background="#22FFFFFF"
-                                    BorderBrush="#50B7E4C7" BorderThickness="1.5"
-                                    Height="50" Margin="0,0,0,8">
+                                    Foreground="#2D6A4F" Margin="0,0,0,6" FontFamily="Segoe UI"/>
+                            <Border CornerRadius="14" BorderThickness="1.5" Height="50" Margin="0,0,0,16">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="#B7E4C7"/>
+                                </Border.BorderBrush>
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="#F4FBF7" Offset="0"/>
+                                        <GradientStop Color="#FFFFFF" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="44"/>
+                                        <ColumnDefinition Width="48"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" Width="1" HorizontalAlignment="Right" Background="#D8F3DC"/>
+                                    <TextBlock Grid.Column="0" Text="&#xE77B;"
+                                            FontFamily="Segoe MDL2 Assets" FontSize="15"
+                                            Foreground="#52B788"
+                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBox Grid.Column="1"
+                                            Background="Transparent" BorderThickness="0"
+                                            FontSize="13" Foreground="#1B4332"
+                                            FontFamily="Segoe UI"
+                                            CaretBrush="#1B4332"
+                                            VerticalContentAlignment="Center"
+                                            Padding="12,0,12,0"
+                                            Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}">
+                                        <TextBox.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="0,14,14,0"/>
+                                            </Style>
+                                        </TextBox.Resources>
+                                    </TextBox>
+                                </Grid>
+                            </Border>
+
+                            <!-- PASSWORD -->
+                            <TextBlock Text="PASSWORD" FontSize="10" FontWeight="SemiBold"
+                                    Foreground="#2D6A4F" Margin="0,0,0,6" FontFamily="Segoe UI"/>
+                            <Border CornerRadius="14" BorderThickness="1.5" Height="50" Margin="0,0,0,8">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="#B7E4C7"/>
+                                </Border.BorderBrush>
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="#F4FBF7" Offset="0"/>
+                                        <GradientStop Color="#FFFFFF" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="48"/>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="44"/>
                                     </Grid.ColumnDefinitions>
-
+                                    <Border Grid.Column="0" Width="1" HorizontalAlignment="Right" Background="#D8F3DC"/>
                                     <TextBlock Grid.Column="0" Text="&#xE72E;"
-                                               FontFamily="Segoe MDL2 Assets" FontSize="16"
-                                               Foreground="#52B788"
-                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                                    <!-- PasswordBox: visible when eye is OFF -->
+                                            FontFamily="Segoe MDL2 Assets" FontSize="15"
+                                            Foreground="#52B788"
+                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     <PasswordBox x:Name="PasswordBox" Grid.Column="1"
-                                                 Background="Transparent" BorderThickness="0"
-                                                 FontSize="14" Foreground="#1B4332"
-                                                 VerticalContentAlignment="Center"
-                                                 PasswordChanged="PasswordBox_PasswordChanged">
+                                                Background="Transparent" BorderThickness="0"
+                                                FontSize="13" Foreground="#1B4332"
+                                                FontFamily="Segoe UI"
+                                                Padding="12,0,0,0"
+                                                VerticalContentAlignment="Center"
+                                                PasswordChanged="PasswordBox_PasswordChanged">
                                         <PasswordBox.Style>
                                             <Style TargetType="PasswordBox">
                                                 <Setter Property="Visibility" Value="Visible"/>
@@ -553,13 +630,14 @@
                                             </Style>
                                         </PasswordBox.Style>
                                     </PasswordBox>
-
-                                    <!-- TextBox: visible when eye is ON -->
                                     <TextBox x:Name="RevealPasswordBox" Grid.Column="1"
-                                             Background="Transparent" BorderThickness="0"
-                                             FontSize="14" Foreground="#1B4332"
-                                             VerticalContentAlignment="Center"
-                                             IsReadOnly="True">
+                                            Background="Transparent" BorderThickness="0"
+                                            FontSize="13" Foreground="#1B4332"
+                                            FontFamily="Segoe UI"
+                                            CaretBrush="#1B4332"
+                                            Padding="12,0,0,0"
+                                            VerticalContentAlignment="Center"
+                                            IsReadOnly="True">
                                         <TextBox.Style>
                                             <Style TargetType="TextBox">
                                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -571,54 +649,60 @@
                                             </Style>
                                         </TextBox.Style>
                                     </TextBox>
-
                                     <ToggleButton x:Name="LoginEyeToggle" Grid.Column="2"
-                                                  Style="{StaticResource EyeToggleStyle}"
-                                                  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                Style="{StaticResource EyeToggleStyle}"
+                                                VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </Grid>
                             </Border>
 
                             <!-- Forgot password -->
-                            <TextBlock HorizontalAlignment="Right" Margin="0,0,0,20">
-                                <Hyperlink Foreground="#52B788" TextDecorations="None"
-                                           FontSize="11" Click="ForgotPassword_Click">
+                            <TextBlock HorizontalAlignment="Right" Margin="0,0,2,24">
+                                <Hyperlink Foreground="#40916C" TextDecorations="None"
+                                        FontSize="11" FontWeight="SemiBold"
+                                        FontFamily="Segoe UI" Click="ForgotPassword_Click">
                                     Forgot Password?
                                 </Hyperlink>
                             </TextBlock>
 
                             <!-- Error -->
-                            <Border CornerRadius="8" Padding="12,8" Margin="0,0,0,14"
+                            <Border CornerRadius="10" Padding="12,9" Margin="0,0,0,14"
                                     Background="#FFF0EE" BorderBrush="#FFD0CC" BorderThickness="1"
                                     Visibility="{Binding ErrorMessage, Converter={StaticResource StrVis}}">
-                                <TextBlock Text="{Binding ErrorMessage}"
-                                           Foreground="#C0392B" FontSize="12" TextWrapping="Wrap"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="⚠ " Foreground="#C0392B" FontSize="12"/>
+                                    <TextBlock Text="{Binding ErrorMessage}"
+                                            Foreground="#C0392B" FontSize="12"
+                                            FontFamily="Segoe UI" TextWrapping="Wrap"/>
+                                </StackPanel>
                             </Border>
 
-                            <!-- Sign In -->
+                            <!-- Sign In Button -->
                             <Button Content="Sign In  →"
                                     Style="{StaticResource GradientButtonStyle}"
                                     Command="{Binding LoginCommand}"
                                     CommandParameter="{Binding ElementName=PasswordBox}"
-                                    Margin="0,0,0,18"/>
+                                    Margin="0,0,0,20"/>
 
                             <!-- Divider -->
-                            <Grid Margin="0,0,0,16">
+                            <Grid Margin="0,0,0,18">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Border Grid.Column="0" Height="1" Background="#DDE8E0" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Column="1" Text="or" FontSize="11" Foreground="#8FAF8A" Margin="10,0"/>
+                                <TextBlock Grid.Column="1" Text="or" FontSize="11"
+                                        Foreground="#8FAF8A" Margin="12,0" FontFamily="Segoe UI"/>
                                 <Border Grid.Column="2" Height="1" Background="#DDE8E0" VerticalAlignment="Center"/>
                             </Grid>
 
                             <!-- Create account -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <TextBlock Text="New to FundForest?  " FontSize="12" Foreground="#8FAF8A"/>
-                                <TextBlock FontSize="12">
-                                    <Hyperlink Foreground="#2D6A4F" FontWeight="SemiBold"
-                                               TextDecorations="None" Click="CreateAccount_Click">
+                                <TextBlock Text="New to FundForest?  " FontSize="12"
+                                        Foreground="#8FAF8A" FontFamily="Segoe UI"/>
+                                <TextBlock FontSize="12" FontFamily="Segoe UI">
+                                    <Hyperlink Foreground="#1B4332" FontWeight="Bold"
+                                            TextDecorations="None" Click="CreateAccount_Click">
                                         Create Account
                                     </Hyperlink>
                                 </TextBlock>
@@ -626,14 +710,16 @@
 
                             <!-- Loading -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
-                                        Margin="0,10,0,0"
+                                        Margin="0,12,0,0"
                                         Visibility="{Binding IsLoading, Converter={StaticResource BoolVis}}">
                                 <Ellipse Width="6" Height="6" Fill="#52B788" Margin="3,0"/>
                                 <Ellipse Width="6" Height="6" Fill="#52B788" Margin="3,0"/>
                                 <Ellipse Width="6" Height="6" Fill="#52B788" Margin="3,0"/>
                                 <TextBlock Text="  Signing in..." FontSize="12"
-                                           Foreground="#8FAF8A" VerticalAlignment="Center"/>
+                                        Foreground="#8FAF8A" FontFamily="Segoe UI"
+                                        VerticalAlignment="Center"/>
                             </StackPanel>
+
                         </StackPanel>
                     </Border>
                 </Grid>
