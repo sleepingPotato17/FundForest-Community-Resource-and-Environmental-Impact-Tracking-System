@@ -127,6 +127,7 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Height" Value="48"/>
             <Setter Property="Template">
@@ -203,7 +204,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- LEFT PANEL (all animations preserved) -->
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- LEFT PANEL                                  -->
+            <!-- ═══════════════════════════════════════════ -->
             <Border Grid.Column="0" ClipToBounds="True">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0.8,1">
@@ -214,6 +217,7 @@
                     </LinearGradientBrush>
                 </Border.Background>
                 <Grid>
+                    <!-- Tree silhouettes -->
                     <Path Data="M 60,580 L 60,350 L 30,350 L 80,200 L 130,350 L 100,350 L 100,580 Z"
                           Fill="#0D2B1A" Opacity="0.9" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0,0,0"/>
                     <Path Data="M 160,580 L 160,380 L 125,380 L 185,210 L 245,380 L 210,380 L 210,580 Z"
@@ -240,6 +244,7 @@
                         <Rectangle.Effect><BlurEffect Radius="20"/></Rectangle.Effect>
                     </Rectangle>
 
+                    <!-- Blobs -->
                     <Ellipse x:Name="Blob1" Width="350" Height="350"
                              HorizontalAlignment="Left" VerticalAlignment="Top"
                              Margin="-120,-120,0,0" Opacity="0.18">
@@ -277,29 +282,7 @@
                         <Ellipse.Effect><BlurEffect Radius="30"/></Ellipse.Effect>
                     </Ellipse>
 
-                    <Rectangle Width="2" Height="300" HorizontalAlignment="Left" VerticalAlignment="Top"
-                               Margin="180,0,0,0" Opacity="0.06" RenderTransformOrigin="0.5,0">
-                        <Rectangle.Fill>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                <GradientStop Color="#B7E4C7" Offset="0"/>
-                                <GradientStop Color="Transparent" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Rectangle.Fill>
-                        <Rectangle.RenderTransform><RotateTransform Angle="15"/></Rectangle.RenderTransform>
-                        <Rectangle.Effect><BlurEffect Radius="8"/></Rectangle.Effect>
-                    </Rectangle>
-                    <Rectangle Width="2" Height="250" HorizontalAlignment="Left" VerticalAlignment="Top"
-                               Margin="280,0,0,0" Opacity="0.05" RenderTransformOrigin="0.5,0">
-                        <Rectangle.Fill>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                <GradientStop Color="#D8F3DC" Offset="0"/>
-                                <GradientStop Color="Transparent" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Rectangle.Fill>
-                        <Rectangle.RenderTransform><RotateTransform Angle="-10"/></Rectangle.RenderTransform>
-                        <Rectangle.Effect><BlurEffect Radius="10"/></Rectangle.Effect>
-                    </Rectangle>
-
+                    <!-- Falling leaves -->
                     <TextBlock x:Name="Leaf1" Text="🍃" FontSize="24"
                                HorizontalAlignment="Left" VerticalAlignment="Top"
                                Margin="80,0,0,0" Opacity="0">
@@ -316,6 +299,7 @@
                         <TextBlock.RenderTransform><TranslateTransform/></TextBlock.RenderTransform>
                     </TextBlock>
 
+                    <!-- Particles -->
                     <Ellipse x:Name="P1" Width="5" Height="5" Fill="#80B7E4C7"
                              HorizontalAlignment="Left" VerticalAlignment="Bottom"
                              Margin="100,0,0,0" Opacity="0">
@@ -336,7 +320,7 @@
 
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="48,0">
 
-                        <!-- UPDATED: Dual-leaf logo icon with pulse animation -->
+                        <!-- Logo -->
                         <Border x:Name="LogoBorder" Width="76" Height="76"
                                 CornerRadius="20" HorizontalAlignment="Center" Margin="0,0,0,20"
                                 Background="Transparent">
@@ -393,7 +377,7 @@
                             </Viewbox>
                         </Border>
 
-                        <!-- UPDATED: Two-tone FundForest text -->
+                        <!-- Two-tone text -->
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <TextBlock Text="Fund" FontSize="38" FontWeight="Bold" Foreground="White"/>
                             <TextBlock Text="Forest" FontSize="38" FontWeight="Bold" Foreground="#52B788">
@@ -417,7 +401,8 @@
                                    Text="Transparency that Roots,&#x0a;Impact that Grows"
                                    FontSize="15" FontWeight="Medium" Foreground="#95D5B2"
                                    HorizontalAlignment="Center" TextAlignment="Center"
-                                   LineHeight="24" Opacity="0" Margin="0,0,0,32">
+                                   LineHeight="24" Opacity="0" Margin="0,0,0,32"
+                                   FontFamily="Segoe UI">
                             <TextBlock.RenderTransform><TranslateTransform/></TextBlock.RenderTransform>
                         </TextBlock>
 
@@ -453,11 +438,14 @@
                             <Border.BorderThickness>1</Border.BorderThickness>
                             <TextBlock Text="🌍  Community Impact Dashboard" FontSize="12" Foreground="#B7E4C7"/>
                         </Border>
+
                     </StackPanel>
                 </Grid>
             </Border>
 
-            <!-- RIGHT PANEL -->
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- RIGHT PANEL                                 -->
+            <!-- ═══════════════════════════════════════════ -->
             <Border Grid.Column="1" ClipToBounds="True">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -487,13 +475,14 @@
                         <Ellipse.Effect><BlurEffect Radius="35"/></Ellipse.Effect>
                     </Ellipse>
 
+                    <!-- Close button -->
                     <Button Content="✕" HorizontalAlignment="Right" VerticalAlignment="Top"
                             Margin="0,14,14,0" Width="30" Height="30"
                             Background="Transparent" BorderThickness="0"
                             Foreground="#74C69D" FontSize="13"
                             Cursor="Hand" Click="CloseWindow_Click"/>
 
-                    <!-- UPDATED: Improved Form Card -->
+                    <!-- Form Card -->
                     <Border x:Name="FormCard"
                             VerticalAlignment="Center" HorizontalAlignment="Center"
                             Width="370" CornerRadius="24" Padding="38,32" Opacity="0">
@@ -531,11 +520,12 @@
 
                             <!-- Header -->
                             <TextBlock Text="Welcome back"
-                                    FontSize="28" FontWeight="Bold"
-                                    Foreground="#1B4332" Margin="0,0,0,6"
-                                    FontFamily="Segoe UI"/>
+                                       FontSize="28" FontWeight="Bold"
+                                       Foreground="#1B4332" FontFamily="Segoe UI"
+                                       Margin="0,0,0,6"/>
                             <StackPanel Orientation="Horizontal" Margin="0,0,0,28">
-                                <Border Width="3" Height="14" CornerRadius="2" Margin="0,0,8,0" VerticalAlignment="Center">
+                                <Border Width="3" Height="14" CornerRadius="2"
+                                        Margin="0,0,8,0" VerticalAlignment="Center">
                                     <Border.Background>
                                         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                                             <GradientStop Color="#52B788" Offset="0"/>
@@ -544,13 +534,13 @@
                                     </Border.Background>
                                 </Border>
                                 <TextBlock Text="Sign in to continue to FundForest"
-                                        FontSize="12" Foreground="#52B788"
-                                        FontFamily="Segoe UI" VerticalAlignment="Center"/>
+                                           FontSize="12" Foreground="#52B788"
+                                           FontFamily="Segoe UI" VerticalAlignment="Center"/>
                             </StackPanel>
 
                             <!-- USERNAME -->
                             <TextBlock Text="USERNAME" FontSize="10" FontWeight="SemiBold"
-                                    Foreground="#2D6A4F" Margin="0,0,0,6" FontFamily="Segoe UI"/>
+                                       Foreground="#2D6A4F" Margin="0,0,0,6" FontFamily="Segoe UI"/>
                             <Border CornerRadius="14" BorderThickness="1.5" Height="50" Margin="0,0,0,16">
                                 <Border.BorderBrush>
                                     <SolidColorBrush Color="#B7E4C7"/>
@@ -568,29 +558,22 @@
                                     </Grid.ColumnDefinitions>
                                     <Border Grid.Column="0" Width="1" HorizontalAlignment="Right" Background="#D8F3DC"/>
                                     <TextBlock Grid.Column="0" Text="&#xE77B;"
-                                            FontFamily="Segoe MDL2 Assets" FontSize="15"
-                                            Foreground="#52B788"
-                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                               FontFamily="Segoe MDL2 Assets" FontSize="15"
+                                               Foreground="#52B788"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     <TextBox Grid.Column="1"
-                                            Background="Transparent" BorderThickness="0"
-                                            FontSize="13" Foreground="#1B4332"
-                                            FontFamily="Segoe UI"
-                                            CaretBrush="#1B4332"
-                                            VerticalContentAlignment="Center"
-                                            Padding="12,0,12,0"
-                                            Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}">
-                                        <TextBox.Resources>
-                                            <Style TargetType="Border">
-                                                <Setter Property="CornerRadius" Value="0,14,14,0"/>
-                                            </Style>
-                                        </TextBox.Resources>
-                                    </TextBox>
+                                             Background="Transparent" BorderThickness="0"
+                                             FontSize="13" Foreground="#1B4332"
+                                             FontFamily="Segoe UI" CaretBrush="#1B4332"
+                                             VerticalContentAlignment="Center"
+                                             Padding="12,0,12,0"
+                                             Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
                             </Border>
 
                             <!-- PASSWORD -->
                             <TextBlock Text="PASSWORD" FontSize="10" FontWeight="SemiBold"
-                                    Foreground="#2D6A4F" Margin="0,0,0,6" FontFamily="Segoe UI"/>
+                                       Foreground="#2D6A4F" Margin="0,0,0,6" FontFamily="Segoe UI"/>
                             <Border CornerRadius="14" BorderThickness="1.5" Height="50" Margin="0,0,0,8">
                                 <Border.BorderBrush>
                                     <SolidColorBrush Color="#B7E4C7"/>
@@ -609,16 +592,16 @@
                                     </Grid.ColumnDefinitions>
                                     <Border Grid.Column="0" Width="1" HorizontalAlignment="Right" Background="#D8F3DC"/>
                                     <TextBlock Grid.Column="0" Text="&#xE72E;"
-                                            FontFamily="Segoe MDL2 Assets" FontSize="15"
-                                            Foreground="#52B788"
-                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                               FontFamily="Segoe MDL2 Assets" FontSize="15"
+                                               Foreground="#52B788"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     <PasswordBox x:Name="PasswordBox" Grid.Column="1"
-                                                Background="Transparent" BorderThickness="0"
-                                                FontSize="13" Foreground="#1B4332"
-                                                FontFamily="Segoe UI"
-                                                Padding="12,0,0,0"
-                                                VerticalContentAlignment="Center"
-                                                PasswordChanged="PasswordBox_PasswordChanged">
+                                                 Background="Transparent" BorderThickness="0"
+                                                 FontSize="13" Foreground="#1B4332"
+                                                 FontFamily="Segoe UI"
+                                                 Padding="12,0,0,0"
+                                                 VerticalContentAlignment="Center"
+                                                 PasswordChanged="PasswordBox_PasswordChanged">
                                         <PasswordBox.Style>
                                             <Style TargetType="PasswordBox">
                                                 <Setter Property="Visibility" Value="Visible"/>
@@ -631,13 +614,12 @@
                                         </PasswordBox.Style>
                                     </PasswordBox>
                                     <TextBox x:Name="RevealPasswordBox" Grid.Column="1"
-                                            Background="Transparent" BorderThickness="0"
-                                            FontSize="13" Foreground="#1B4332"
-                                            FontFamily="Segoe UI"
-                                            CaretBrush="#1B4332"
-                                            Padding="12,0,0,0"
-                                            VerticalContentAlignment="Center"
-                                            IsReadOnly="True">
+                                             Background="Transparent" BorderThickness="0"
+                                             FontSize="13" Foreground="#1B4332"
+                                             FontFamily="Segoe UI" CaretBrush="#1B4332"
+                                             Padding="12,0,0,0"
+                                             VerticalContentAlignment="Center"
+                                             IsReadOnly="True">
                                         <TextBox.Style>
                                             <Style TargetType="TextBox">
                                                 <Setter Property="Visibility" Value="Collapsed"/>
@@ -650,16 +632,16 @@
                                         </TextBox.Style>
                                     </TextBox>
                                     <ToggleButton x:Name="LoginEyeToggle" Grid.Column="2"
-                                                Style="{StaticResource EyeToggleStyle}"
-                                                VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                  Style="{StaticResource EyeToggleStyle}"
+                                                  VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </Grid>
                             </Border>
 
                             <!-- Forgot password -->
                             <TextBlock HorizontalAlignment="Right" Margin="0,0,2,24">
                                 <Hyperlink Foreground="#40916C" TextDecorations="None"
-                                        FontSize="11" FontWeight="SemiBold"
-                                        FontFamily="Segoe UI" Click="ForgotPassword_Click">
+                                           FontSize="11" FontWeight="SemiBold"
+                                           FontFamily="Segoe UI" Click="ForgotPassword_Click">
                                     Forgot Password?
                                 </Hyperlink>
                             </TextBlock>
@@ -668,11 +650,20 @@
                             <Border CornerRadius="10" Padding="12,9" Margin="0,0,0,14"
                                     Background="#FFF0EE" BorderBrush="#FFD0CC" BorderThickness="1"
                                     Visibility="{Binding ErrorMessage, Converter={StaticResource StrVis}}">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="⚠ " Foreground="#C0392B" FontSize="12"/>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                    <TextBlock Text="⚠ " Foreground="#C0392B" FontSize="12"
+                                            VerticalAlignment="Top" Margin="0,1,0,0"/>
                                     <TextBlock Text="{Binding ErrorMessage}"
                                             Foreground="#C0392B" FontSize="12"
-                                            FontFamily="Segoe UI" TextWrapping="Wrap"/>
+                                            FontFamily="Segoe UI"
+                                            TextWrapping="Wrap"
+                                            HorizontalAlignment="Left">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Width" Value="240"/>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
                                 </StackPanel>
                             </Border>
 
@@ -692,17 +683,17 @@
                                 </Grid.ColumnDefinitions>
                                 <Border Grid.Column="0" Height="1" Background="#DDE8E0" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="1" Text="or" FontSize="11"
-                                        Foreground="#8FAF8A" Margin="12,0" FontFamily="Segoe UI"/>
+                                           Foreground="#8FAF8A" Margin="12,0" FontFamily="Segoe UI"/>
                                 <Border Grid.Column="2" Height="1" Background="#DDE8E0" VerticalAlignment="Center"/>
                             </Grid>
 
                             <!-- Create account -->
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                 <TextBlock Text="New to FundForest?  " FontSize="12"
-                                        Foreground="#8FAF8A" FontFamily="Segoe UI"/>
+                                           Foreground="#8FAF8A" FontFamily="Segoe UI"/>
                                 <TextBlock FontSize="12" FontFamily="Segoe UI">
                                     <Hyperlink Foreground="#1B4332" FontWeight="Bold"
-                                            TextDecorations="None" Click="CreateAccount_Click">
+                                               TextDecorations="None" Click="CreateAccount_Click">
                                         Create Account
                                     </Hyperlink>
                                 </TextBlock>
@@ -716,8 +707,8 @@
                                 <Ellipse Width="6" Height="6" Fill="#52B788" Margin="3,0"/>
                                 <Ellipse Width="6" Height="6" Fill="#52B788" Margin="3,0"/>
                                 <TextBlock Text="  Signing in..." FontSize="12"
-                                        Foreground="#8FAF8A" FontFamily="Segoe UI"
-                                        VerticalAlignment="Center"/>
+                                           Foreground="#8FAF8A" FontFamily="Segoe UI"
+                                           VerticalAlignment="Center"/>
                             </StackPanel>
 
                         </StackPanel>

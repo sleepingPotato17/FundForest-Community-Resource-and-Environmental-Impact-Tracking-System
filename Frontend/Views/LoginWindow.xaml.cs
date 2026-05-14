@@ -30,7 +30,14 @@ namespace FundForest.Views
 
         private void CloseWindow_Click(object sender, RoutedEventArgs e) => this.Close();
 
-        private void ForgotPassword_Click(object sender, RoutedEventArgs e) { }
+        private void ForgotPassword_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(
+                "If you have forgotten your password, please contact your system administrator to reset it.",
+                "Forgot Password",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+        }
 
         private void CreateAccount_Click(object sender, RoutedEventArgs e)
         {

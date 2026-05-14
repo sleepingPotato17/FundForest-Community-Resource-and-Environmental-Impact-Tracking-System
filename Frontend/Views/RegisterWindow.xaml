@@ -21,6 +21,7 @@
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Foreground" Value="#2D6A4F"/>
             <Setter Property="Margin" Value="0,0,0,6"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
         </Style>
 
         <Style x:Key="GradientButtonStyle" TargetType="Button">
@@ -28,6 +29,7 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Height" Value="52"/>
             <Setter Property="Template">
@@ -37,8 +39,7 @@
                             <Border.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                                     <GradientStop Color="#1B4332" Offset="0"/>
-                                    <GradientStop Color="#2D6A4F" Offset="0.5"/>
-                                    <GradientStop Color="#40916C" Offset="1"/>
+                                    <GradientStop Color="#52B788" Offset="1"/>
                                 </LinearGradientBrush>
                             </Border.Background>
                             <Border.Effect>
@@ -69,13 +70,15 @@
         <Style x:Key="GlassComboBoxStyle" TargetType="ComboBox">
             <Setter Property="Foreground" Value="#1B4332"/>
             <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="Height" Value="50"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBox">
                         <Grid>
-                            <Border x:Name="Bd" CornerRadius="14" BorderThickness="1.5" IsHitTestVisible="False">
+                            <Border x:Name="Bd" CornerRadius="14"
+                                    BorderThickness="1.5" IsHitTestVisible="False">
                                 <Border.BorderBrush>
                                     <SolidColorBrush Color="#B7E4C7"/>
                                 </Border.BorderBrush>
@@ -108,7 +111,8 @@
                                 </Grid>
                             </Border>
                             <ToggleButton Focusable="False"
-                                          IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                          IsChecked="{Binding IsDropDownOpen,
+                                              RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                                           OverridesDefaultStyle="True"
                                           Background="Transparent" BorderThickness="0">
                                 <ToggleButton.Template>
@@ -147,6 +151,7 @@
                     <Style TargetType="ComboBoxItem">
                         <Setter Property="Foreground" Value="#1B4332"/>
                         <Setter Property="FontSize" Value="13"/>
+                        <Setter Property="FontFamily" Value="Segoe UI"/>
                         <Setter Property="Padding" Value="16,10"/>
                         <Setter Property="Cursor" Value="Hand"/>
                         <Setter Property="Template">
@@ -212,7 +217,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- LEFT PANEL -->
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- LEFT PANEL                                  -->
+            <!-- ═══════════════════════════════════════════ -->
             <Border Grid.Column="0" ClipToBounds="True">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0.8,1">
@@ -226,13 +233,13 @@
 
                     <!-- Tree silhouettes -->
                     <Path Data="M 60,640 L 60,350 L 30,350 L 80,200 L 130,350 L 100,350 L 100,640 Z"
-                        Fill="#0D2B1A" Opacity="0.9" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,0"/>
+                          Fill="#0D2B1A" Opacity="0.9" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,0"/>
                     <Path Data="M 160,640 L 160,380 L 125,380 L 185,210 L 245,380 L 210,380 L 210,640 Z"
-                        Fill="#0A2318" Opacity="0.85" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="40,0,0,0"/>
+                          Fill="#0A2318" Opacity="0.85" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="40,0,0,0"/>
                     <Path Data="M 100,640 L 100,420 L 70,420 L 120,280 L 170,420 L 140,420 L 140,640 Z"
-                        Fill="#122D1E" Opacity="0.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="200,0,0,0"/>
+                          Fill="#122D1E" Opacity="0.8" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="200,0,0,0"/>
                     <Path Data="M 60,640 L 60,460 L 40,460 L 75,360 L 110,460 L 90,460 L 90,640 Z"
-                        Fill="#0D2B1A" Opacity="0.75" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="310,0,0,0"/>
+                          Fill="#0D2B1A" Opacity="0.75" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="310,0,0,0"/>
                     <Rectangle Height="60" VerticalAlignment="Bottom" Opacity="0.6">
                         <Rectangle.Fill>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -244,7 +251,7 @@
 
                     <!-- Ambient blobs -->
                     <Ellipse Width="320" Height="420" HorizontalAlignment="Left"
-                            VerticalAlignment="Top" Margin="-120,-100,0,0" Opacity="0.10">
+                             VerticalAlignment="Top" Margin="-120,-100,0,0" Opacity="0.10">
                         <Ellipse.Fill>
                             <RadialGradientBrush>
                                 <GradientStop Color="#52B788" Offset="0"/>
@@ -254,7 +261,7 @@
                         <Ellipse.Effect><BlurEffect Radius="50"/></Ellipse.Effect>
                     </Ellipse>
                     <Ellipse Width="280" Height="360" HorizontalAlignment="Right"
-                            VerticalAlignment="Bottom" Margin="0,0,-80,-100" Opacity="0.10">
+                             VerticalAlignment="Bottom" Margin="0,0,-80,-100" Opacity="0.10">
                         <Ellipse.Fill>
                             <RadialGradientBrush>
                                 <GradientStop Color="#40916C" Offset="0"/>
@@ -266,7 +273,7 @@
 
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="40,0">
 
-                        <!-- Dual-leaf logo icon -->
+                        <!-- Dual-leaf logo -->
                         <Border Width="76" Height="76" CornerRadius="20"
                                 HorizontalAlignment="Center" Margin="0,0,0,20"
                                 Background="Transparent">
@@ -276,7 +283,7 @@
                             <Viewbox Width="76" Height="76">
                                 <Canvas Width="100" Height="100">
                                     <Ellipse Canvas.Left="15" Canvas.Top="10"
-                                            Width="70" Height="65" Opacity="0.3">
+                                             Width="70" Height="65" Opacity="0.3">
                                         <Ellipse.Fill>
                                             <RadialGradientBrush>
                                                 <GradientStop Color="#52B788" Offset="0"/>
@@ -286,7 +293,7 @@
                                         <Ellipse.Effect><BlurEffect Radius="8"/></Ellipse.Effect>
                                     </Ellipse>
                                     <Path Fill="Transparent" StrokeThickness="5"
-                                        StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                          StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
                                         <Path.Stroke>
                                             <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
                                                 <GradientStop Color="#1B4332" Offset="0"/>
@@ -296,7 +303,7 @@
                                         <Path.Data>M50,78 C50,78 16,62 18,28 C18,28 36,34 50,78 Z</Path.Data>
                                     </Path>
                                     <Path Fill="Transparent" StrokeThickness="5"
-                                        StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                          StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
                                         <Path.Stroke>
                                             <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
                                                 <GradientStop Color="#52B788" Offset="0"/>
@@ -309,7 +316,7 @@
                                         </Path.Effect>
                                     </Path>
                                     <Path StrokeThickness="4"
-                                        StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                          StrokeStartLineCap="Round" StrokeEndLineCap="Round">
                                         <Path.Stroke>
                                             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                                                 <GradientStop Color="#74C69D" Offset="0"/>
@@ -344,10 +351,10 @@
                         </Border>
 
                         <TextBlock Text="ACCOUNT ROLES" FontSize="10" FontWeight="SemiBold"
-                                Foreground="#74C69D" HorizontalAlignment="Center"
-                                Margin="0,0,0,16"/>
+                                   Foreground="#74C69D" HorizontalAlignment="Center"
+                                   Margin="0,0,0,16"/>
 
-                        <!-- Admin role card -->
+                        <!-- Admin -->
                         <Border Background="#16FFFFFF" CornerRadius="14" Padding="14,11"
                                 Margin="0,0,0,8" BorderBrush="#20FFFFFF" BorderThickness="1">
                             <StackPanel Orientation="Horizontal">
@@ -359,19 +366,19 @@
                                         </LinearGradientBrush>
                                     </Border.Background>
                                     <TextBlock Text="&#xE72E;" FontFamily="Segoe MDL2 Assets"
-                                            FontSize="14" Foreground="#D8F3DC"
-                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                               FontSize="14" Foreground="#D8F3DC"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <StackPanel VerticalAlignment="Center">
                                     <TextBlock Text="Admin" FontSize="13" FontWeight="Bold" Foreground="White"/>
                                     <TextBlock Text="Full access to all system features and user management"
-                                            FontSize="11" Foreground="#95D5B2"
-                                            TextWrapping="Wrap" Margin="0,2,0,0" MaxWidth="220"/>
+                                               FontSize="11" Foreground="#95D5B2"
+                                               TextWrapping="Wrap" Margin="0,2,0,0" MaxWidth="220"/>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
 
-                        <!-- Staff role card -->
+                        <!-- Staff -->
                         <Border Background="#16FFFFFF" CornerRadius="14" Padding="14,11"
                                 Margin="0,0,0,8" BorderBrush="#20FFFFFF" BorderThickness="1">
                             <StackPanel Orientation="Horizontal">
@@ -383,19 +390,19 @@
                                         </LinearGradientBrush>
                                     </Border.Background>
                                     <TextBlock Text="&#xE70F;" FontFamily="Segoe MDL2 Assets"
-                                            FontSize="14" Foreground="#D8F3DC"
-                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                               FontSize="14" Foreground="#D8F3DC"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <StackPanel VerticalAlignment="Center">
                                     <TextBlock Text="Staff" FontSize="13" FontWeight="Bold" Foreground="White"/>
                                     <TextBlock Text="Edit, update, and manage financial records and projects"
-                                            FontSize="11" Foreground="#95D5B2"
-                                            TextWrapping="Wrap" Margin="0,2,0,0" MaxWidth="220"/>
+                                               FontSize="11" Foreground="#95D5B2"
+                                               TextWrapping="Wrap" Margin="0,2,0,0" MaxWidth="220"/>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
 
-                        <!-- Local role card -->
+                        <!-- Local -->
                         <Border Background="#16FFFFFF" CornerRadius="14" Padding="14,11"
                                 BorderBrush="#20FFFFFF" BorderThickness="1">
                             <StackPanel Orientation="Horizontal">
@@ -407,14 +414,14 @@
                                         </LinearGradientBrush>
                                     </Border.Background>
                                     <TextBlock Text="&#xE7B3;" FontFamily="Segoe MDL2 Assets"
-                                            FontSize="14" Foreground="#FFF8E7"
-                                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                               FontSize="14" Foreground="#FFF8E7"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <StackPanel VerticalAlignment="Center">
                                     <TextBlock Text="Local" FontSize="13" FontWeight="Bold" Foreground="White"/>
                                     <TextBlock Text="View-only access for reporting and oversight"
-                                            FontSize="11" Foreground="#95D5B2"
-                                            TextWrapping="Wrap" Margin="0,2,0,0" MaxWidth="220"/>
+                                               FontSize="11" Foreground="#95D5B2"
+                                               TextWrapping="Wrap" Margin="0,2,0,0" MaxWidth="220"/>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
@@ -423,300 +430,369 @@
                 </Grid>
             </Border>
 
-            <!-- RIGHT PANEL — Design 2 fields, filling full panel like Design 1 -->
-            <Border Grid.Column="1" ClipToBounds="True" Background="#FBFEFC">
+            <!-- ═══════════════════════════════════════════ -->
+            <!-- RIGHT PANEL                                 -->
+            <!-- ═══════════════════════════════════════════ -->
+            <Border Grid.Column="1" ClipToBounds="True">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#EEF7F1" Offset="0"/>
+                        <GradientStop Color="#E0F0E8" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
                 <Grid>
+
+                    <!-- Ambient corner glows -->
+                    <Ellipse Width="280" Height="280" HorizontalAlignment="Right" VerticalAlignment="Top"
+                             Margin="0,-80,-80,0" Opacity="0.13">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#52B788" Offset="0"/>
+                                <GradientStop Color="Transparent" Offset="1"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+                        <Ellipse.Effect><BlurEffect Radius="40"/></Ellipse.Effect>
+                    </Ellipse>
+                    <Ellipse Width="220" Height="220" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                             Margin="-60,0,0,-60" Opacity="0.10">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#40916C" Offset="0"/>
+                                <GradientStop Color="Transparent" Offset="1"/>
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+                        <Ellipse.Effect><BlurEffect Radius="35"/></Ellipse.Effect>
+                    </Ellipse>
+
                     <!-- Close button -->
-                    <Button HorizontalAlignment="Right" VerticalAlignment="Top"
-                            Margin="0,14,16,0" Width="32" Height="32"
-                            Cursor="Hand" Click="CloseWindow_Click">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border x:Name="Bd" CornerRadius="8" Background="Transparent">
-                                    <TextBlock Text="&#xE8BB;" FontFamily="Segoe MDL2 Assets"
-                                               FontSize="12" Foreground="#74C69D"
-                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button Content="✕" HorizontalAlignment="Right" VerticalAlignment="Top"
+                            Margin="0,14,14,0" Width="30" Height="30"
+                            Background="Transparent" BorderThickness="0"
+                            Foreground="#74C69D" FontSize="13"
+                            Cursor="Hand" Click="CloseWindow_Click"/>
+
+                    <!-- Form card -->
+                    <Border VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Width="420" CornerRadius="24" Padding="42,36">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#FFFFFF" Offset="0"/>
+                                <GradientStop Color="#F4FBF7" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#74C69D" Offset="0"/>
+                                <GradientStop Color="#B7E4C7" Offset="0.5"/>
+                                <GradientStop Color="#52B788" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        <Border.BorderThickness>1.5</Border.BorderThickness>
+                        <Border.Effect>
+                            <DropShadowEffect Color="#1B4332" BlurRadius="60"
+                                              ShadowDepth="14" Opacity="0.13" Direction="270"/>
+                        </Border.Effect>
+
+                        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                      HorizontalScrollBarVisibility="Disabled"
+                                      MaxHeight="520">
+                            <StackPanel>
+
+                                <!-- Accent bar -->
+                                <Border Width="36" Height="4" CornerRadius="2"
+                                        HorizontalAlignment="Left" Margin="0,0,0,20">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#1B4332" Offset="0"/>
+                                            <GradientStop Color="#52B788" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
                                 </Border>
-                                <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="Bd" Property="Background" Value="#D8F3DC"/>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
 
-                    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                                  HorizontalScrollBarVisibility="Disabled"
-                                  VerticalAlignment="Stretch">
-                        <StackPanel Margin="52,36,52,36" VerticalAlignment="Center">
+                                <!-- Header -->
+                                <TextBlock Text="Create Account"
+                                           FontSize="28" FontWeight="Bold"
+                                           Foreground="#1B4332" FontFamily="Segoe UI"
+                                           Margin="0,0,0,6"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,28">
+                                    <Border Width="3" Height="14" CornerRadius="2"
+                                            Margin="0,0,8,0" VerticalAlignment="Center">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                                <GradientStop Color="#52B788" Offset="0"/>
+                                                <GradientStop Color="#1B4332" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                    <TextBlock Text="Enter your details to register and get started."
+                                               FontSize="12" Foreground="#52B788"
+                                               FontFamily="Segoe UI" VerticalAlignment="Center"/>
+                                </StackPanel>
 
-                            <!-- Accent bar -->
-                            <Border Width="36" Height="4" CornerRadius="2"
-                                    HorizontalAlignment="Left" Margin="0,0,0,16">
-                                <Border.Background>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                        <GradientStop Color="#1B4332" Offset="0"/>
-                                        <GradientStop Color="#52B788" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                            </Border>
-
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-                                <TextBlock Text="Create Account" FontSize="28"
-                                           FontWeight="Bold" Foreground="#1B4332" FontFamily="Segoe UI"/>
-                            </StackPanel>
-                            <TextBlock Text="Enter your details to register and get started."
-                                       FontSize="12" Foreground="#74C69D" Margin="0,0,0,24"/>
-
-                            <!-- FULL NAME -->
-                            <TextBlock Text="FULL NAME" Style="{StaticResource FieldLabel}"/>
-                            <Border CornerRadius="14" BorderThickness="1.5" Height="50" Margin="0,0,0,14">
-                                <Border.BorderBrush>
-                                    <SolidColorBrush Color="#B7E4C7"/>
-                                </Border.BorderBrush>
-                                <Border.Background>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                        <GradientStop Color="#F4FBF7" Offset="0"/>
-                                        <GradientStop Color="#FFFFFF" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="48"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Border Grid.Column="0" Width="1" HorizontalAlignment="Right" Background="#D8F3DC"/>
-                                    <TextBlock Grid.Column="0" Text="&#xE77B;"
-                                               FontFamily="Segoe MDL2 Assets" FontSize="15"
-                                               Foreground="#52B788"
-                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    <TextBox Grid.Column="1"
-                                             Background="Transparent" BorderThickness="0"
-                                             FontSize="13" Foreground="#1B4332"
-                                             VerticalContentAlignment="Center"
-                                             Padding="12,0,12,0"
-                                             Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"/>
-                                </Grid>
-                            </Border>
-
-                            <!-- USERNAME -->
-                            <TextBlock Text="USERNAME" Style="{StaticResource FieldLabel}"/>
-                            <Border CornerRadius="14" BorderThickness="1.5" Height="50" Margin="0,0,0,14">
-                                <Border.BorderBrush>
-                                    <SolidColorBrush Color="#B7E4C7"/>
-                                </Border.BorderBrush>
-                                <Border.Background>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                        <GradientStop Color="#F4FBF7" Offset="0"/>
-                                        <GradientStop Color="#FFFFFF" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="48"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Border Grid.Column="0" Width="1" HorizontalAlignment="Right" Background="#D8F3DC"/>
-                                    <TextBlock Grid.Column="0" Text="&#xE77B;"
-                                               FontFamily="Segoe MDL2 Assets" FontSize="15"
-                                               Foreground="#52B788"
-                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    <TextBox Grid.Column="1"
-                                             Background="Transparent" BorderThickness="0"
-                                             FontSize="13" Foreground="#1B4332"
-                                             VerticalContentAlignment="Center"
-                                             Padding="12,0,12,0"
-                                             Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
-                                </Grid>
-                            </Border>
-
-                            <!-- ROLE -->
-                            <TextBlock Text="ROLE" Style="{StaticResource FieldLabel}"/>
-                            <ComboBox x:Name="RoleComboBox"
-                                      Style="{StaticResource GlassComboBoxStyle}"
-                                      Margin="0,0,0,14">
-                                <ComboBoxItem Content="Staff"/>
-                                <ComboBoxItem Content="Local" IsSelected="True"/>
-                            </ComboBox>
-
-                            <!-- PASSWORD -->
-                            <TextBlock Text="PASSWORD" Style="{StaticResource FieldLabel}"/>
-                            <Border CornerRadius="14" BorderThickness="1.5" Height="50" Margin="0,0,0,14">
-                                <Border.BorderBrush>
-                                    <SolidColorBrush Color="#B7E4C7"/>
-                                </Border.BorderBrush>
-                                <Border.Background>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                        <GradientStop Color="#F4FBF7" Offset="0"/>
-                                        <GradientStop Color="#FFFFFF" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="48"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="44"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Border Grid.Column="0" Width="1" HorizontalAlignment="Right" Background="#D8F3DC"/>
-                                    <TextBlock Grid.Column="0" Text="&#xE72E;"
-                                               FontFamily="Segoe MDL2 Assets" FontSize="15"
-                                               Foreground="#52B788"
-                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    <PasswordBox x:Name="PwdBox" Grid.Column="1"
+                                <!-- FULL NAME -->
+                                <TextBlock Text="FULL NAME" Style="{StaticResource FieldLabel}"/>
+                                <Border CornerRadius="14" BorderThickness="1.5" Height="50" Margin="0,0,0,16">
+                                    <Border.BorderBrush>
+                                        <SolidColorBrush Color="#B7E4C7"/>
+                                    </Border.BorderBrush>
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#F4FBF7" Offset="0"/>
+                                            <GradientStop Color="#FFFFFF" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="48"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0" Width="1" HorizontalAlignment="Right" Background="#D8F3DC"/>
+                                        <TextBlock Grid.Column="0" Text="&#xE77B;"
+                                                   FontFamily="Segoe MDL2 Assets" FontSize="15"
+                                                   Foreground="#52B788"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <TextBox Grid.Column="1"
                                                  Background="Transparent" BorderThickness="0"
                                                  FontSize="13" Foreground="#1B4332"
-                                                 Padding="12,0,0,0"
+                                                 FontFamily="Segoe UI" CaretBrush="#1B4332"
                                                  VerticalContentAlignment="Center"
-                                                 PasswordChanged="PwdBox_PasswordChanged">
-                                        <PasswordBox.Style>
-                                            <Style TargetType="PasswordBox">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding IsChecked, ElementName=PwdEyeToggle}" Value="True">
-                                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </PasswordBox.Style>
-                                    </PasswordBox>
-                                    <TextBox x:Name="RevealPwdBox" Grid.Column="1"
-                                             Background="Transparent" BorderThickness="0"
-                                             FontSize="13" Foreground="#1B4332"
-                                             Padding="12,0,0,0"
-                                             VerticalContentAlignment="Center"
-                                             IsReadOnly="True">
-                                        <TextBox.Style>
-                                            <Style TargetType="TextBox">
-                                                <Setter Property="Visibility" Value="Collapsed"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding IsChecked, ElementName=PwdEyeToggle}" Value="True">
-                                                        <Setter Property="Visibility" Value="Visible"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBox.Style>
-                                    </TextBox>
-                                    <ToggleButton x:Name="PwdEyeToggle" Grid.Column="2"
-                                                  Style="{StaticResource EyeToggleStyle}"
-                                                  VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                </Grid>
-                            </Border>
+                                                 Padding="12,0,12,0"
+                                                 Text="{Binding FullName, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </Grid>
+                                </Border>
 
-                            <!-- CONFIRM PASSWORD -->
-                            <TextBlock Text="CONFIRM PASSWORD" Style="{StaticResource FieldLabel}"/>
-                            <Border CornerRadius="14" BorderThickness="1.5" Height="50" Margin="0,0,0,14">
-                                <Border.BorderBrush>
-                                    <SolidColorBrush Color="#B7E4C7"/>
-                                </Border.BorderBrush>
-                                <Border.Background>
-                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                        <GradientStop Color="#F4FBF7" Offset="0"/>
-                                        <GradientStop Color="#FFFFFF" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Border.Background>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="48"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="44"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Border Grid.Column="0" Width="1" HorizontalAlignment="Right" Background="#D8F3DC"/>
-                                    <TextBlock Grid.Column="0" Text="&#xE72E;"
-                                               FontFamily="Segoe MDL2 Assets" FontSize="15"
-                                               Foreground="#52B788"
-                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    <PasswordBox x:Name="ConfirmPwdBox" Grid.Column="1"
+                                <!-- USERNAME -->
+                                <TextBlock Text="USERNAME" Style="{StaticResource FieldLabel}"/>
+                                <Border CornerRadius="14" BorderThickness="1.5" Height="50" Margin="0,0,0,16">
+                                    <Border.BorderBrush>
+                                        <SolidColorBrush Color="#B7E4C7"/>
+                                    </Border.BorderBrush>
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#F4FBF7" Offset="0"/>
+                                            <GradientStop Color="#FFFFFF" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="48"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0" Width="1" HorizontalAlignment="Right" Background="#D8F3DC"/>
+                                        <TextBlock Grid.Column="0" Text="&#xE77B;"
+                                                   FontFamily="Segoe MDL2 Assets" FontSize="15"
+                                                   Foreground="#52B788"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <TextBox Grid.Column="1"
                                                  Background="Transparent" BorderThickness="0"
                                                  FontSize="13" Foreground="#1B4332"
+                                                 FontFamily="Segoe UI" CaretBrush="#1B4332"
+                                                 VerticalContentAlignment="Center"
+                                                 Padding="12,0,12,0"
+                                                 Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </Grid>
+                                </Border>
+
+                                <!-- ROLE -->
+                                <TextBlock Text="ROLE" Style="{StaticResource FieldLabel}"/>
+                                <ComboBox x:Name="RoleComboBox"
+                                          Style="{StaticResource GlassComboBoxStyle}"
+                                          Margin="0,0,0,16">
+                                    <ComboBoxItem Content="Staff"/>
+                                    <ComboBoxItem Content="Local" IsSelected="True"/>
+                                </ComboBox>
+
+                                <!-- PASSWORD -->
+                                <TextBlock Text="PASSWORD" Style="{StaticResource FieldLabel}"/>
+                                <Border CornerRadius="14" BorderThickness="1.5" Height="50" Margin="0,0,0,16">
+                                    <Border.BorderBrush>
+                                        <SolidColorBrush Color="#B7E4C7"/>
+                                    </Border.BorderBrush>
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#F4FBF7" Offset="0"/>
+                                            <GradientStop Color="#FFFFFF" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="48"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="44"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0" Width="1" HorizontalAlignment="Right" Background="#D8F3DC"/>
+                                        <TextBlock Grid.Column="0" Text="&#xE72E;"
+                                                   FontFamily="Segoe MDL2 Assets" FontSize="15"
+                                                   Foreground="#52B788"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <PasswordBox x:Name="PwdBox" Grid.Column="1"
+                                                     Background="Transparent" BorderThickness="0"
+                                                     FontSize="13" Foreground="#1B4332"
+                                                     FontFamily="Segoe UI"
+                                                     Padding="12,0,0,0"
+                                                     VerticalContentAlignment="Center"
+                                                     PasswordChanged="PwdBox_PasswordChanged">
+                                            <PasswordBox.Style>
+                                                <Style TargetType="PasswordBox">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsChecked, ElementName=PwdEyeToggle}" Value="True">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </PasswordBox.Style>
+                                        </PasswordBox>
+                                        <TextBox x:Name="RevealPwdBox" Grid.Column="1"
+                                                 Background="Transparent" BorderThickness="0"
+                                                 FontSize="13" Foreground="#1B4332"
+                                                 FontFamily="Segoe UI" CaretBrush="#1B4332"
                                                  Padding="12,0,0,0"
                                                  VerticalContentAlignment="Center"
-                                                 PasswordChanged="ConfirmPwdBox_PasswordChanged">
-                                        <PasswordBox.Style>
-                                            <Style TargetType="PasswordBox">
-                                                <Setter Property="Visibility" Value="Visible"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding IsChecked, ElementName=ConfirmPwdEyeToggle}" Value="True">
-                                                        <Setter Property="Visibility" Value="Collapsed"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </PasswordBox.Style>
-                                    </PasswordBox>
-                                    <TextBox x:Name="RevealConfirmPwdBox" Grid.Column="1"
-                                             Background="Transparent" BorderThickness="0"
-                                             FontSize="13" Foreground="#1B4332"
-                                             Padding="12,0,0,0"
-                                             VerticalContentAlignment="Center"
-                                             IsReadOnly="True">
-                                        <TextBox.Style>
-                                            <Style TargetType="TextBox">
-                                                <Setter Property="Visibility" Value="Collapsed"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding IsChecked, ElementName=ConfirmPwdEyeToggle}" Value="True">
-                                                        <Setter Property="Visibility" Value="Visible"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBox.Style>
-                                    </TextBox>
-                                    <ToggleButton x:Name="ConfirmPwdEyeToggle" Grid.Column="2"
-                                                  Style="{StaticResource EyeToggleStyle}"
-                                                  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                 IsReadOnly="True">
+                                            <TextBox.Style>
+                                                <Style TargetType="TextBox">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsChecked, ElementName=PwdEyeToggle}" Value="True">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBox.Style>
+                                        </TextBox>
+                                        <ToggleButton x:Name="PwdEyeToggle" Grid.Column="2"
+                                                      Style="{StaticResource EyeToggleStyle}"
+                                                      VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+
+                                <!-- CONFIRM PASSWORD -->
+                                <TextBlock Text="CONFIRM PASSWORD" Style="{StaticResource FieldLabel}"/>
+                                <Border CornerRadius="14" BorderThickness="1.5" Height="50" Margin="0,0,0,20">
+                                    <Border.BorderBrush>
+                                        <SolidColorBrush Color="#B7E4C7"/>
+                                    </Border.BorderBrush>
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#F4FBF7" Offset="0"/>
+                                            <GradientStop Color="#FFFFFF" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="48"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="44"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Grid.Column="0" Width="1" HorizontalAlignment="Right" Background="#D8F3DC"/>
+                                        <TextBlock Grid.Column="0" Text="&#xE72E;"
+                                                   FontFamily="Segoe MDL2 Assets" FontSize="15"
+                                                   Foreground="#52B788"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <PasswordBox x:Name="ConfirmPwdBox" Grid.Column="1"
+                                                     Background="Transparent" BorderThickness="0"
+                                                     FontSize="13" Foreground="#1B4332"
+                                                     FontFamily="Segoe UI"
+                                                     Padding="12,0,0,0"
+                                                     VerticalContentAlignment="Center"
+                                                     PasswordChanged="ConfirmPwdBox_PasswordChanged">
+                                            <PasswordBox.Style>
+                                                <Style TargetType="PasswordBox">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsChecked, ElementName=ConfirmPwdEyeToggle}" Value="True">
+                                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </PasswordBox.Style>
+                                        </PasswordBox>
+                                        <TextBox x:Name="RevealConfirmPwdBox" Grid.Column="1"
+                                                 Background="Transparent" BorderThickness="0"
+                                                 FontSize="13" Foreground="#1B4332"
+                                                 FontFamily="Segoe UI" CaretBrush="#1B4332"
+                                                 Padding="12,0,0,0"
+                                                 VerticalContentAlignment="Center"
+                                                 IsReadOnly="True">
+                                            <TextBox.Style>
+                                                <Style TargetType="TextBox">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsChecked, ElementName=ConfirmPwdEyeToggle}" Value="True">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBox.Style>
+                                        </TextBox>
+                                        <ToggleButton x:Name="ConfirmPwdEyeToggle" Grid.Column="2"
+                                                      Style="{StaticResource EyeToggleStyle}"
+                                                      VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+
+                                <!-- Error -->
+                                <Border CornerRadius="10" Padding="12,9" Margin="0,0,0,8"
+                                        Background="#FFF0EE" BorderBrush="#FFD0CC" BorderThickness="1"
+                                        Visibility="{Binding ErrorMessage, Converter={StaticResource StrVis}}">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                        <TextBlock Text="⚠ " Foreground="#C0392B" FontSize="12"
+                                                   VerticalAlignment="Top"/>
+                                        <TextBlock Text="{Binding ErrorMessage}" Foreground="#C0392B"
+                                                   FontSize="12" FontFamily="Segoe UI"
+                                                   TextWrapping="Wrap" MaxWidth="290"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Success -->
+                                <Border CornerRadius="10" Padding="12,9" Margin="0,0,0,12"
+                                        Background="#F0FFF4" BorderBrush="#B7E4C7" BorderThickness="1"
+                                        Visibility="{Binding SuccessMessage, Converter={StaticResource StrVis}}">
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                        <TextBlock Text="✓  " Foreground="#2D6A4F" FontSize="12"
+                                                   VerticalAlignment="Top"/>
+                                        <TextBlock Text="{Binding SuccessMessage}" Foreground="#2D6A4F"
+                                                   FontSize="12" FontFamily="Segoe UI"
+                                                   TextWrapping="Wrap" MaxWidth="290"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Create Account button -->
+                                <Button Content="Create Account  →"
+                                        Style="{StaticResource GradientButtonStyle}"
+                                        Margin="0,0,0,20"
+                                        Click="RegisterButton_Click"/>
+
+                                <!-- Divider -->
+                                <Grid Margin="0,0,0,18">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" Height="1" Background="#DDE8E0" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="1" Text="or" FontSize="11"
+                                               Foreground="#8FAF8A" Margin="12,0" FontFamily="Segoe UI"/>
+                                    <Border Grid.Column="2" Height="1" Background="#DDE8E0" VerticalAlignment="Center"/>
                                 </Grid>
-                            </Border>
 
-                            <!-- Error -->
-                            <Border CornerRadius="10" Padding="12,9" Margin="0,0,0,8"
-                                    Background="#FFF0EE" BorderBrush="#FFD0CC" BorderThickness="1"
-                                    Visibility="{Binding ErrorMessage, Converter={StaticResource StrVis}}">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="⚠  " Foreground="#C0392B" FontSize="12"/>
-                                    <TextBlock Text="{Binding ErrorMessage}" Foreground="#C0392B"
-                                               FontSize="12" TextWrapping="Wrap"/>
+                                <!-- Back to login -->
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <TextBlock Text="Already have an account?  " FontSize="12"
+                                               Foreground="#8FAF8A" FontFamily="Segoe UI"/>
+                                    <TextBlock FontSize="12" FontFamily="Segoe UI">
+                                        <Hyperlink Foreground="#1B4332" FontWeight="Bold"
+                                                   TextDecorations="None" Click="BackToLogin_Click">
+                                            Sign In
+                                        </Hyperlink>
+                                    </TextBlock>
                                 </StackPanel>
-                            </Border>
 
-                            <!-- Success -->
-                            <Border CornerRadius="10" Padding="12,9" Margin="0,0,0,12"
-                                    Background="#F0FFF4" BorderBrush="#B7E4C7" BorderThickness="1"
-                                    Visibility="{Binding SuccessMessage, Converter={StaticResource StrVis}}">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="✓  " Foreground="#2D6A4F" FontSize="12"/>
-                                    <TextBlock Text="{Binding SuccessMessage}" Foreground="#2D6A4F"
-                                               FontSize="12" TextWrapping="Wrap"/>
-                                </StackPanel>
-                            </Border>
-
-                            <Button Content="Create Account  →"
-                                    Style="{StaticResource GradientButtonStyle}"
-                                    Margin="0,0,0,20"
-                                    Click="RegisterButton_Click"/>
-
-                            <!-- Divider -->
-                            <Grid Margin="0,0,0,18">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Border Grid.Column="0" Height="1" Background="#DDE8E0" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Column="1" Text="or" FontSize="11" Foreground="#8FAF8A" Margin="12,0"/>
-                                <Border Grid.Column="2" Height="1" Background="#DDE8E0" VerticalAlignment="Center"/>
-                            </Grid>
-
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <TextBlock Text="Already have an account?  " FontSize="12" Foreground="#8FAF8A"/>
-                                <TextBlock FontSize="12">
-                                    <Hyperlink Foreground="#1B4332" FontWeight="Bold"
-                                               TextDecorations="None" Click="BackToLogin_Click">
-                                        Sign In
-                                    </Hyperlink>
-                                </TextBlock>
                             </StackPanel>
+                        </ScrollViewer>
+                    </Border>
 
-                        </StackPanel>
-                    </ScrollViewer>
                 </Grid>
             </Border>
 
