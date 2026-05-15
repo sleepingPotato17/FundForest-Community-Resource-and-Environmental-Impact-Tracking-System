@@ -1,22 +1,20 @@
 CREATE DATABASE IF NOT EXISTS fundforest CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE fundforest;
 
--- Fix the Role column to include Staff and Local
-ALTER TABLE Admins MODIFY COLUMN Role ENUM('Admin','Staff','Local') NOT NULL DEFAULT 'Local';
-
 CREATE TABLE IF NOT EXISTS Admins (
     AdminID     INT AUTO_INCREMENT PRIMARY KEY,
     Username    VARCHAR(100) NOT NULL UNIQUE,
     Password    VARCHAR(255) NOT NULL,
     FullName    VARCHAR(200),
     Role        ENUM('Admin','Staff','Local') NOT NULL DEFAULT 'Local',
+    IsApproved  TINYINT(1) NOT NULL DEFAULT 0,
     CreatedAt   DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Only one Admin, seeded here. Password = admin123
 -- Replace the hash below using BCrypt.Net.BCrypt.HashPassword("admin123")
-INSERT IGNORE INTO Admins (Username, Password, FullName, Role)
-VALUES ('admin', '$2a$11$hashed_value_here', 'System Administrator', 'Admin');
+INSERT IGNORE INTO Admins (Username, Password, FullName, Role, IsApproved)
+VALUES ('admin', '$2a$11$hashed_value_here', 'System Administrator', 'Admin', 1);
 
 CREATE TABLE IF NOT EXISTS Programs (
     ProgramID       INT AUTO_INCREMENT PRIMARY KEY,
