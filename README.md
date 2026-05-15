@@ -665,15 +665,15 @@ cmd.Parameters.AddWithValue("@contact", donor.ContactInfo);
 
 | Screen | Description | Preview |
 |--------|-------------|---------|
-| Login | Credential entry with role-aware error messaging | ![Login](screenshots/login.png) |
-| Register | Account creation with role information panel | ![Register](screenshots/register.png) |
-| Dashboard | Summary statistics and quick navigation | ![Dashboard](screenshots/dashboard.png) |
-| Beneficiaries | Beneficiary list with search and side-panel form | ![Beneficiaries](screenshots/beneficiaries.png) |
-| Donors | Donor registry with CRUD operations | ![Donors](screenshots/donors.png) |
-| Donations | Donation records with date filtering and PDF export | ![Donations](screenshots/donations.png) |
-| Programs | Program list with archive functionality | ![Programs](screenshots/programs.png) |
-| Distribution | Distribution tracking linked to programs and beneficiaries | ![Distribution](screenshots/distribution.png) |
-| Manage Users | Admin-only user approval and management panel | ![Users](screenshots/users.png) |
+| Login | Credential entry with role-aware error messaging |
+| Register | Account creation with role information panel | 
+| Dashboard | Summary statistics and quick navigation | 
+| Beneficiaries | Beneficiary list with search and side-panel form |
+| Donors | Donor registry with CRUD operations | ![Donors]
+| Donations | Donation records with date filtering and PDF export | 
+| Programs | Program list with archive functionality | 
+| Distribution | Distribution tracking linked to programs and beneficiaries | 
+| Manage Users | Admin-only user approval and management panel | 
 
 <br>
 
