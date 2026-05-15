@@ -478,7 +478,7 @@ FundForest/
 <br>
 
 ## Flowchart
-![Flowchart](Flowchart.pdf)
+[![PDF Preview](./images/pdf-preview.png)](Flowchart.pdf)
 
 ---
 
