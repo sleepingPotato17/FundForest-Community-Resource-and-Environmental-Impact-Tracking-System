@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS fundforest CHARACTER SET utf8mb4 COLLATE utf8mb4_u
 USE fundforest;
 
 -- Fix the Role column to include Staff and Local
-ALTER TABLE Admins MODIFY COLUMN Role ENUM('Admin','Staff','Local') NOT NULL DEFAULT 'Local';
+ALTER TABLE admins MODIFY COLUMN Role ENUM('Admin','Staff','Local') NOT NULL DEFAULT 'Local';
 
 CREATE TABLE IF NOT EXISTS Admins (
     AdminID     INT AUTO_INCREMENT PRIMARY KEY,
