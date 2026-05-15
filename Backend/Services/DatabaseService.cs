@@ -10,7 +10,7 @@ namespace FundForest.Services
     {
         private readonly string _connectionString =
             "Server=localhost;Port=3306;Database=fundforest;" +
-            "Uid=root;Pwd=YOUR_ACTUAL_PASSWORD_HERE;CharSet=utf8mb4;";
+            "Uid=fundforest;Pwd=ff_pass_2024;CharSet=utf8mb4;";
 
                 private MySqlConnection GetConnection()
         {

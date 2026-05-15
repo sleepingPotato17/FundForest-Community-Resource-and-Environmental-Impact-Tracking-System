@@ -107,6 +107,14 @@ namespace FundForest.ViewModels
             var target = (parameter as Models.Program) ?? SelectedProgram;
             if (target == null) return;
             if (!SessionService.Instance.CanEdit) return;
+            if (target.Status == "Archived")
+            {
+                MessageBox.Show("This program is already archived.", "Info",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            if (MessageBox.Show($"Archive '{target.ProgramName}'?", "Confirm",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
             target.Status = "Archived";
             try { _db.UpdateProgram(target); LoadData(); }
             catch (Exception ex) { ErrorMessage = ex.Message; }

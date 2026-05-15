@@ -79,20 +79,6 @@
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                        <Button Margin="0,0,10,0" Command="{Binding ArchiveCommand}"
-                                Visibility="{Binding CanEdit, Converter={StaticResource BoolVis}}">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button">
-                                    <Border x:Name="Bd" CornerRadius="12" Padding="16,12" Cursor="Hand"
-                                            BorderBrush="#52B788" BorderThickness="1.5" Background="Transparent">
-                                        <TextBlock Text="📦 Archive Selected" FontSize="13" FontWeight="SemiBold" Foreground="#1B4332"/>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Bd" Property="Background" Value="#D8F3DC"/></Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
                         <Button Command="{Binding AddCommand}" Visibility="{Binding CanAdd, Converter={StaticResource BoolVis}}">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
@@ -173,13 +159,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Border Grid.Row="0" CornerRadius="14,14,0,0" Padding="0,12">
-                            <Border.Background>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                    <GradientStop Color="#E8F5E9" Offset="0"/>
-                                    <GradientStop Color="#F0FAF4" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
+                        <Border Grid.Row="0" CornerRadius="14,14,0,0" Padding="0,12" Background="#E8F5E9">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="66"/>
@@ -189,7 +169,7 @@
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="100"/>
                                     <ColumnDefinition Width="110"/>
-                                    <ColumnDefinition Width="110"/>
+                                    <ColumnDefinition Width="140"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="#"            FontSize="11" FontWeight="Bold" Foreground="#52B788" Margin="16,0,0,0"/>
                                 <TextBlock Grid.Column="1" Text="PROGRAM NAME" FontSize="11" FontWeight="Bold" Foreground="#1B4332" Margin="8,0,0,0"/>
@@ -334,14 +314,14 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
 
-                                <DataGridTemplateColumn Width="110">
+                                <DataGridTemplateColumn Width="140">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                        Visibility="{Binding DataContext.CanEdit, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolVis}}">
                                                 <Button ToolTip="Edit" Width="32" Height="32" Margin="3,0" Cursor="Hand"
                                                         Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                        CommandParameter="{Binding}"
-                                                        Visibility="{Binding DataContext.CanEdit, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BoolVis}}">
+                                                        CommandParameter="{Binding}">
                                                     <Button.Template>
                                                         <ControlTemplate TargetType="Button">
                                                             <Border x:Name="Bd" CornerRadius="9" Background="#D8F3DC" BorderBrush="#52B788" BorderThickness="1.5">
@@ -349,6 +329,20 @@
                                                             </Border>
                                                             <ControlTemplate.Triggers>
                                                                 <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Bd" Property="Background" Value="#B7E4C7"/></Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Button.Template>
+                                                </Button>
+                                                <Button ToolTip="Archive" Width="32" Height="32" Margin="3,0" Cursor="Hand"
+                                                        Command="{Binding DataContext.ArchiveCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                        CommandParameter="{Binding}">
+                                                    <Button.Template>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Border x:Name="Bd" CornerRadius="9" Background="#FFF8E1" BorderBrush="#FFD54F" BorderThickness="1.5">
+                                                                <TextBlock Text="📦" FontSize="13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                            </Border>
+                                                            <ControlTemplate.Triggers>
+                                                                <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Bd" Property="Background" Value="#FFE082"/></Trigger>
                                                             </ControlTemplate.Triggers>
                                                         </ControlTemplate>
                                                     </Button.Template>
