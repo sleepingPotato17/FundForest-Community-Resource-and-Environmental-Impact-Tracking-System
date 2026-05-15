@@ -32,13 +32,14 @@
 8. [Flowchart](#flowchart)
 9. [Installation Guide](#installation-guide)
 10. [Database Setup](#database-setup)
-11. [Authentication and Security](#authentication-and-security)
-12. [User Interface Preview](#user-interface-preview)
-13. [Future Improvements](#future-improvements)
-14. [Developers](#developers)
-15. [Lessons Learned](#lessons-learned)
-16. [License](#license)
-17. [Acknowledgements](#acknowledgements)
+11. [Troubleshooting](#troubleshooting)
+12. [Authentication and Security](#authentication-and-security)
+13. [User Interface Preview](#user-interface-preview)
+14. [Future Improvements](#future-improvements)
+15. [Developers](#developers)
+16. [Lessons Learned](#lessons-learned)
+17. [License](#license)
+18. [Acknowledgements](#acknowledgements)
 
 ---
 
@@ -604,6 +605,94 @@ ENUM('Group', 'Barangay')
 
 -- Distributions.Status
 ENUM('Completed', 'Pending')
+```
+
+<br>
+
+---
+
+## Troubleshooting
+
+### MySQL Access Denied Error
+
+If you see `Access denied for user 'root'@'localhost'` when launching the app, your MySQL root password needs to be reset. Follow these steps if you are using **XAMPP**.
+
+**Step 1 — Open a terminal and navigate to the XAMPP MySQL bin folder:**
+
+```bash
+cd C:\xampp\mysql\bin
+```
+
+**Step 2 — Stop any running MySQL process, then start MySQL in safe mode** (skip grant tables allows login without a password):
+
+```bash
+mysqld --skip-grant-tables --console
+```
+
+Leave this terminal window open.
+
+**Step 3 — Open a second terminal window and connect to MySQL:**
+
+```bash
+cd C:\xampp\mysql\bin
+mysql -u root
+```
+
+**Step 4 — At the `mysql>` prompt, reset the root password:**
+
+```sql
+FLUSH PRIVILEGES;
+ALTER USER 'root'@'localhost' IDENTIFIED BY '';
+EXIT;
+```
+
+This sets the root password to blank (empty string), which is the XAMPP default.
+
+**Step 5 — Close the safe mode terminal** (press `Ctrl + C`), then restart MySQL normally from the XAMPP Control Panel.
+
+**Step 6 — Update the connection string** in `Backend/Services/DatabaseService.cs` to use a blank password:
+
+```csharp
+private readonly string _connectionString =
+    "Server=localhost;Port=3306;Database=fundforest;Uid=root;Pwd=;CharSet=utf8mb4;";
+```
+
+**Step 7 — Import the database schema:**
+
+```bash
+cd C:\xampp\mysql\bin
+mysql -u root fundforest < "C:\path\to\FundForest\Database\database_schema.sql"
+```
+
+**Step 8 — Run the application:**
+
+```bash
+cd "C:\path\to\FundForest"
+dotnet run
+```
+
+---
+
+### Unknown Column Error
+
+If you see `Unknown column 'IsApproved' in field list`, the database schema was not imported correctly. Connect to MySQL and run:
+
+```sql
+ALTER TABLE Admins ADD COLUMN IF NOT EXISTS IsApproved TINYINT(1) NOT NULL DEFAULT 0;
+UPDATE Admins SET IsApproved = 1 WHERE Role = 'Admin';
+```
+
+Then restart the application.
+
+---
+
+### `dotnet run` Cannot Find Project
+
+Make sure you are inside the correct folder before running:
+
+```bash
+cd "C:\Users\YourName\Downloads\FundForest_WPF_Complete\FundForest"
+dotnet run
 ```
 
 <br>
