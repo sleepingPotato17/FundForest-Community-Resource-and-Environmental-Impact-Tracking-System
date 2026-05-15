@@ -14,7 +14,7 @@
 
 </div>
 
-![FundForest](FundForest.jpg)
+![FundForest](fundforest.jpg)
 
 <br>
 
