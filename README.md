@@ -467,6 +467,7 @@ FundForest/
 ---
 
 ## UML Diagram
+<img width="3470" height="5713" alt="image" src="https://github.com/user-attachments/assets/4c742a44-c244-438c-a27c-1914dd514d47" />
 
 ---
 
