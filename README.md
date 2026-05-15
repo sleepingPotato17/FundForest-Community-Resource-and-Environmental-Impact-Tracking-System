@@ -669,7 +669,7 @@ cmd.Parameters.AddWithValue("@contact", donor.ContactInfo);
 | Register | Account creation with role information panel | 
 | Dashboard | Summary statistics and quick navigation | 
 | Beneficiaries | Beneficiary list with search and side-panel form |
-| Donors | Donor registry with CRUD operations | ![Donors]
+| Donors | Donor registry with CRUD operations |
 | Donations | Donation records with date filtering and PDF export | 
 | Programs | Program list with archive functionality | 
 | Distribution | Distribution tracking linked to programs and beneficiaries | 
