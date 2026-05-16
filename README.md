@@ -472,13 +472,12 @@ FundForest/
 ## UML Diagram
 <img width="1735" height="2675" alt="diagram-export-5-15-2026-2_03_31-PM" src="https://github.com/user-attachments/assets/be213051-e39e-4df2-a125-ad5b1f894185" />
 
-
 ---
 
 <br>
 
 ## Flowchart
-[![Flowchart](FlowchartPreview.png)](Flowchart.pdf)
+<img width="720" height="393" alt="image" src="https://github.com/user-attachments/assets/d18d0537-105b-4435-b67b-02894bc24349" />
 
 ---
 
